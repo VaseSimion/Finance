@@ -2,16 +2,17 @@ import AnalysisModule as Ass
 import GraphFunctions as Gfs
 import yfinance as yf
 
-listOfStocksToAnalyze = ["AAPL", "ACIW", "ADS.DE", "ADSK", "ALO", "AMD", "AZPN", "BA", "BABA", "BAYN.DE", "BLL",
-                         "BYND", "BMW.DE", "CVNA", "DDOG", "DIS", "EQT", "F", "FB", "FCEL", "GE", "GOOG", "GPRO",
+listOfStocksToAnalyze = ["AAPL", "ACIW", "ADS.DE", "ADSK", "ALO", "AMD", "AZPN", "BA", "BABA", "BLL",
+                         "BYND", "CVNA", "DDOG", "DIS", "EQT", "F", "FB", "FCEL", "GE", "GOOG", "GPRO",
                          "GRMN",
-                         "INCY", "JD", "KEX", "KO", "MA", "MSFT", "MAERSK-B.CO", "MCD", "NFLX", "NIO", "NKE", "NLOK",
-                         "NVDA", "NOVO-B.CO", "NZYM-B.CO", "OKTA", "ON", "PCG", "ROKU", "SHOP", "SNAP", "SPCE", "SPOT",
-                         "SQ", "SQQQ",
-                         "STM", "SU.PA", "SYY", "TEVA", "TSLA", "TWTR", "UBER", "ULTA", "UPS", "V", "VLO", "VWS.CO",
+                         "INCY", "JD", "KEX", "KO", "MA", "MSFT", "MCD", "NFLX", "NIO", "NKE", "NLOK",
+                         "NVDA", "OKTA", "ON", "PCG", "ROKU", "SHOP", "SNAP", "SPCE", "SPOT",
+                         "SQ",
+                         "STM", "SU.PA", "SYY", "TEVA", "TSLA", "TWTR", "UBER", "ULTA", "UPS", "V", "VLO",
                          "VZ",
                          "WB", "WORK", "ZM"]
 
+european_stocks = ["BAYN.DE", "BMW.DE", "MAERSK-B.CO", "NOVO-B.CO", "NZYM-B.CO",  "VWS.CO"]
 
 proposedbuylist = []
 proposedselllist = []
