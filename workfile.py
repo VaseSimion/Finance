@@ -2,22 +2,32 @@ import AnalysisModule as Ass
 import GraphFunctions as Gfs
 import yfinance as yf
 
-listOfStocksToAnalyze = ["AAPL", "ACIW", "ADS.DE", "ADSK", "ALO", "AMD", "AZPN", "BA", "BABA", "BLL",
-                         "BYND", "CVNA", "DDOG", "DIS", "EQT", "F", "FB", "FCEL", "GE", "GOOG", "GPRO",
-                         "GRMN",
-                         "INCY", "JD", "KEX", "KO", "MA", "MSFT", "MCD", "NFLX", "NIO", "NKE", "NLOK",
-                         "NVDA", "OKTA", "ON", "PCG", "ROKU", "SHOP", "SNAP", "SPCE", "SPOT",
-                         "SQ",
-                         "STM", "SU.PA", "SYY", "TEVA", "TSLA", "TWTR", "UBER", "ULTA", "UPS", "V", "VLO",
-                         "VZ",
-                         "WB", "WORK", "ZM"]
+listOfStocksToAnalyze = ["AAPL", "ACIW", "ACN", "ADBE", "ADI", "ADP", "ADSK", "ALO", "AKAM", "AMD", "AMAT",
+                         "ANET", "ANSS", "ARW", "ATVI", "AVGO", "AVT", "AZPN", "BA", "BABA", "BB", "BLL",
+                         "BYND", "BLKB", "BR", "CDK", "CDNS", "CERN", "CHKP", "CIEN", "COMM", "COUP",
+                         "CREE", "CRM", "CRUS", "CRWD", "CSCO", "CVLT", "CVNA",
+                         "CY", "CYBR", "DBX", "DDD", "DDOG", "DIS", "DLB", "DOCU", "DOX", "DXC",
+                         "EA", "EFX", "EQT", "F", "FB",
+                         "FCEL", "FDS", "FEYE", "FIT", "FTNT", "FVRR", "G", "GE", "GLW", "GOOG", "GPRO",
+                         "GRMN", "GRPN", "HIMX", "HPE", "HPQ", "IAC", "IBM",
+                         "INCY", "INFO", "INTC", "IPGP", "IT", "JBL", "JCOM", "JD", "KEX", "KO", "LOGI",
+                         "MA", "MCHP", "MSFT", "MCD", "MCO", "MDB", "MDRX", "MOMO", "MSCI", "MSI", "MU", "NCR",
+                         "NFLX", "NIO", "NKE", "NLOK", "NLSN", "NOW", "NUAN",
+                         "NVDA", "NTAP", "NTGR",  "NXP", "OKTA", "ON", "PANW", "PAYX", "PBI",
+                         "PCG", "PFPT", "PING", "PTC", "PINS", "QCOM", "ORCL", "QRVO", "OTEX", "ROKU", "SABR", "SHOP",
+                         "SNAP", "SPCE", "SPGI", "SPLK", "SPOT", "SQ", "SSNC",
+                         "STM", "STX", "SYY", "SWKS", "TEAM", "TER", "TEVA", "TLND",
+                         "TSLA", "TSM", "TTWO", "TWLO", "TWTR", "UBER", "ULTA", "UPS",
+                         "V", "VEEV", "VLO", "VMW", "VRSK", "VSAT", "VZ",
+                         "WB", "WDC", "WIX", "WORK", "ZM", "XRX", "ZBRA", "ZEN", "ZNGA", "ZS"]
 
-european_stocks = ["BAYN.DE", "BMW.DE", "MAERSK-B.CO", "NOVO-B.CO", "NZYM-B.CO",  "VWS.CO"]
+european_stocks = ["ADS.DE", "BAYN.DE", "BMW.DE", "IFX.DE", "LHA.DE", "MAERSK-B.CO", "NOVO-B.CO",
+                   "NZYM-B.CO", "SU.PA", "VWS.CO"]
 
 proposedbuylist = []
 proposedselllist = []
 
-for stock in listOfStocksToAnalyze:
+for stock in listOfStocksToAnalyze + european_stocks:
     StockData = yf.Ticker(stock).history(period="1y")
     if Ass.macd_potential_buy(StockData):
         proposedbuylist.append(stock)
