@@ -3,8 +3,8 @@ import yfinance as yf
 
 
 print_yesterday = False
-one_stock_to_analyze = "SPOT"
-stocks_in_portofolio = ["BYND", "GRMN", "CVNA", "FB", "F", "SPOT"]
+one_stock_to_analyze = "BAYN.DE"
+stocks_in_portofolio = ["BYND",  "CVNA", "NFLX", "F", "SPOT"]
 
 Gfs.draw_macd_buy(yf.Ticker(one_stock_to_analyze).history(period="1y"), one_stock_to_analyze)
 

@@ -27,14 +27,14 @@ european_stocks = ["ADS.DE", "BAYN.DE", "BMW.DE", "IFX.DE", "LHA.DE", "MAERSK-B.
 proposedbuylist = []
 proposedselllist = []
 
-for stock in listOfStocksToAnalyze + european_stocks:
+for stock in listOfStocksToAnalyze:
     StockData = yf.Ticker(stock).history(period="1y")
-    if Ass.macd_potential_buy(StockData):
+    if Ass.macd_potential_buy(StockData) and Ass.is_today_rising(StockData) and Ass.is_stock_rising(StockData):
         proposedbuylist.append(stock)
         print("Something you might wanna buy because of MACD is " + stock)
         continue
 
-    if Ass.macd_potential_sell(StockData):
+    if Ass.macd_potential_sell(StockData) and (not Ass.is_today_rising(StockData)) and Ass.is_stock_falling(StockData):
         proposedselllist.append(stock)
         print("Something you might wanna sell because of MACD is " + stock)
 
