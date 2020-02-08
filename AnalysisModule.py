@@ -9,7 +9,7 @@ def macd_potential_buy(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 8, 17, 9)  # for buy signals it should be 8,17,9
 
-    if macdhistogram[-1] > -0.002 and macdhistogram[-1] >= macdhistogram[-3] < 0.002:
+    if macdhistogram[-1] > 0.03 and macdhistogram[-1] >= macdhistogram[-3] < -0.03:
         return True
     else:
         return False
@@ -20,7 +20,7 @@ def macd_potential_sell(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 12, 26, 9)  # for sell signals it should be 12, 26, 9
 
-    if macdhistogram[-1] < 0.002 and macdhistogram[-1] <= macdhistogram[-3] > -0.002:
+    if macdhistogram[-1] < -0.03 and macdhistogram[-1] <= macdhistogram[-3] > 0.03:
         return True
     else:
         return False
@@ -29,7 +29,16 @@ def macd_potential_sell(stock):
 def is_today_rising(stock):
     current_value = stock['Close'].tolist()[-1]
     open_value = stock['Open'].tolist()[-1]
-    if current_value > open_value:
+    if current_value >= open_value:
+        return True
+    else:
+        return False
+
+
+def is_today_falling(stock):
+    current_value = stock['Close'].tolist()[-1]
+    open_value = stock['Open'].tolist()[-1]
+    if current_value <= open_value:
         return True
     else:
         return False
@@ -51,6 +60,18 @@ def is_stock_falling(stock):
         return False
 
 
+def return_open_close(stock):
+    current_value = stock['Close'].tolist()[-1]
+    open_value = stock['Open'].tolist()[-1]
+    return [open_value, current_value]
+
+
+def return_open_close_first_day(stock):
+    current_value = stock['Close'].tolist()[0]
+    open_value = stock['Open'].tolist()[0]
+    return [open_value, current_value]
+
+
 def return_last_minimums(stock):
     firstminim = 0
     firstindex = 0
@@ -69,7 +90,7 @@ def return_last_minimums(stock):
                 minimlist.append(firstminim)
                 continue
             else:
-                if abs((value - firstminim) / firstminim) < 0.02 and (index - firstindex) < 15:
+                if abs((value - firstminim) / firstminim) < 0.05 and (index - firstindex) < 15:
                     firstminim = value
                     firstindex = index
                     continue
@@ -79,3 +100,11 @@ def return_last_minimums(stock):
                     minimlist.append(firstminim)
 
     return minimlist
+
+
+def return_last_weeks_macd_histogram_and_closing_prices(stock):
+    closing_price_list = stock['Close'].tolist()
+    numpyclose = np.asarray(closing_price_list)
+    macd1, macd2, macdhistogram = ti.macd(numpyclose, 12, 26, 9)  # for sell signals it should be 12, 26, 9
+
+    return [macdhistogram[-5:],closing_price_list[-5:]]
