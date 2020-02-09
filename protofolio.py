@@ -1,14 +1,22 @@
 import GraphFunctions as Gfs
 import yfinance as yf
+import AnalysisModule as Ass
 
+bought_list = []
+sold_list = []
 
-print_yesterday = False
-one_stock_to_analyze = "BAYN.DE"
-stocks_in_portofolio = ["BYND",  "CVNA", "NFLX", "F", "SPOT"]
+for stock in bought_list:
+    CheckSellData = yf.Ticker(stock).history(period="1y")
+    [macd_temp, closing] = Ass.return_macd_histogram_and_closing_prices_buy(CheckSellData)
+    if macd_temp[-1] < 0.2:
+        Gfs.draw_macd_buy(CheckSellData, "You should CLOSE " + stock)
+    else:
+        Gfs.draw_macd_buy(CheckSellData, "You should look at " + stock)
 
-Gfs.draw_macd_buy(yf.Ticker(one_stock_to_analyze).history(period="1y"), one_stock_to_analyze)
-
-if print_yesterday:
-    for stock in stocks_in_portofolio:
-        StockData = yf.Ticker(stock).history(period="1y")
-        Gfs.draw_macd_buy(StockData, "BUY " + stock)
+for stock in sold_list:
+    CheckSellData = yf.Ticker(stock).history(period="1y")
+    [macd_temp, closing] = Ass.return_macd_histogram_and_closing_prices_sell(CheckSellData)
+    if macd_temp[-1] > 0.2:
+        Gfs.draw_macd_sell(CheckSellData, "You should CLOSE " + stock)
+    else:
+        Gfs.draw_macd_sell(CheckSellData, "You should look at " + stock)

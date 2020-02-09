@@ -26,52 +26,25 @@ european_stocks = ["ADS.DE", "ALO.PA", "BAYN.DE", "BMW.DE", "IFX.DE", "LHA.DE", 
 
 proposedbuylist = []
 proposedselllist = []
-run_daily: bool = True
-run_hourly: bool = False
 
-if run_daily:
-    for stock in listOfTechStocksToAnalyze:
-        StockData = yf.Ticker(stock).history(period="1y")
-        if Ass.macd_potential_buy(StockData) and Ass.is_today_rising(StockData) and Ass.is_stock_rising(StockData):
-            proposedbuylist.append(stock)
-            print("Something you might wanna buy is " + stock)
-            continue
+for stock in listOfTechStocksToAnalyze:
+    StockData = yf.Ticker(stock).history(period="1y")
+    if Ass.macd_potential_buy(StockData) and Ass.is_stock_rising(StockData):
+        proposedbuylist.append(stock)
+        print("Something you might wanna buy is " + stock)
+        continue
 
-        if Ass.macd_potential_sell(StockData) and Ass.is_today_falling(StockData) and Ass.is_stock_falling(StockData):
-            proposedselllist.append(stock)
-            print("Something you might wanna sell is " + stock)
+    if Ass.macd_potential_sell(StockData) and Ass.is_stock_falling(StockData):
+        proposedselllist.append(stock)
+        print("Something you might wanna sell is " + stock)
 
-    for stock in proposedbuylist:
-        StockData = yf.Ticker(stock).history(period="1y")
-        Gfs.draw_macd_buy(StockData, "BUY " + stock)
+for stock in proposedbuylist:
+    StockData = yf.Ticker(stock).history(period="1y")
+    Gfs.draw_macd_buy(StockData, "BUY " + stock)
 
-    for stock in proposedselllist:
-        StockData = yf.Ticker(stock).history(period="1y")
-        Gfs.draw_macd_sell(StockData, "SELL " + stock)
-
-    print(proposedselllist)
-    print(proposedbuylist)
-
-
-if run_hourly:
-    for stock in listOfTechStocksToAnalyze:
-        StockData = yf.Ticker(stock).history(period="3mo", interval="1h")
-        if Ass.macd_potential_buy(StockData) and Ass.is_today_rising(StockData) and Ass.is_stock_rising(StockData):
-            proposedbuylist.append(stock)
-            print("Something you might wanna buy is {} which opened at {} and is now {}".format(stock,Ass.return_open_close(StockData)[0],Ass.return_open_close(StockData)[1]))
-            continue
-
-        if Ass.macd_potential_sell(StockData) and Ass.is_today_falling(StockData) and Ass.is_stock_falling(StockData):
-            proposedselllist.append(stock)
-            print("Something you might wanna sell is {} which opened at {} and is now {}".format(stock,Ass.return_open_close(StockData)[0],Ass.return_open_close(StockData)[1]))
-
-    for stock in proposedbuylist:
-        StockData = yf.Ticker(stock).history(period="3mo", interval="1h")
-        Gfs.draw_macd_buy(StockData, "BUY " + stock)
-
-    for stock in proposedselllist:
-        StockData = yf.Ticker(stock).history(period="3mo", interval="1h")
-        Gfs.draw_macd_sell(StockData, "SELL " + stock)
+for stock in proposedselllist:
+    StockData = yf.Ticker(stock).history(period="1y")
+    Gfs.draw_macd_sell(StockData, "SELL " + stock)
 
     print(proposedselllist)
     print(proposedbuylist)
