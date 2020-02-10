@@ -1,6 +1,7 @@
 import AnalysisModule as Ass
 import GraphFunctions as Gfs
 import yfinance as yf
+import DatabaseStocks as Ds
 
 weeks_list = [("2019-11-04", "2019-11-15"),("2019-11-11", "2019-11-22"),("2019-11-18", "2019-11-29"),
             ("2019-11-25", "2019-12-06"),("2019-12-02", "2019-12-13"),("2019-12-09", "2019-12-20"),
@@ -20,33 +21,16 @@ third_ten_week_list = [("2019-05-20", "2019-05-31"),("2019-05-27", "2019-06-07")
 
 oneweek = [("2020-01-20", "2020-01-31")]
 
-listOfTechStocksToAnalyze = ["AAPL", "ACIW", "ACN", "ADBE", "ADI", "ADP", "ADSK", "AKAM", "AMD", "AMAT",
-                             "ANET", "ANSS", "ARW", "ATVI", "AVGO", "AVT", "AZPN", "BA", "BABA", "BB", "BLL",
-                             "BYND", "BLKB", "BR", "CDK", "CDNS", "CERN", "CHKP", "CIEN", "COMM", "COUP",
-                             "CREE", "CRM", "CRUS", "CRWD", "CSCO", "CVLT", "CVNA",
-                             "CY", "CYBR", "DBX", "DDD", "DDOG", "DIS", "DLB", "DOCU", "DOX", "DXC",
-                             "EA", "EFX", "EQT", "F", "FB",
-                             "FCEL", "FDS", "FEYE", "FIT", "FTNT", "FVRR", "G", "GE", "GLW", "GOOG", "GPRO",
-                             "GRMN", "GRPN", "HIMX", "HPE", "HPQ", "IAC", "IBM",
-                             "INCY", "INFO", "INTC", "IPGP", "IT", "JBL", "JCOM", "JD", "KEX", "KO", "LOGI",
-                             "MA", "MCHP", "MSFT", "MCD", "MCO", "MDB", "MDRX", "MOMO", "MSCI", "MSI", "MU", "NCR",
-                             "NFLX", "NIO", "NKE", "NLOK", "NLSN", "NOW", "NUAN",
-                             "NVDA", "NTAP", "NTGR",  "NXPI", "OKTA", "ON", "PANW", "PAYX", "PBI",
-                             "PCG", "PFPT", "PING", "PTC", "PINS", "QCOM", "ORCL", "QRVO", "OTEX", "ROKU", "SABR",
-                             "SHOP", "SNAP", "SPCE", "SPGI", "SPLK", "SPOT", "SQ", "SSNC",
-                             "STM", "STX", "SYY", "SWKS", "TEAM", "TER", "TEVA", "TLND",
-                             "TSLA", "TSM", "TTWO", "TWLO", "TWTR", "UBER", "ULTA", "UPS",
-                             "V", "VEEV", "VLO", "VMW", "VRSK", "VSAT", "VZ",
-                             "WB", "WDC", "WIX", "WORK", "ZM", "XRX", "ZBRA", "ZEN", "ZNGA", "ZS"]
 
+listOfStocksToAnalyze = Ds.get_lists()
 
 profit_10_saptamani = 1
-
+total_number_of_actions = 0
 for period in third_ten_week_list + second_ten_weeks_list + weeks_list:   # runs through different periods of 10 days
     average_profit = 0
     proposedbuylist = []
     proposedselllist = []
-    for stock in listOfTechStocksToAnalyze:   # runs through all stocks in tech
+    for stock in listOfStocksToAnalyze:   # runs through all stocks in tech
         try:
             StockData = yf.Ticker(stock).history(start="2018"+period[0][-6:], end=period[0]) # gets history before the week I analyze
             if Ass.macd_potential_buy(StockData) and Ass.is_stock_rising(StockData):   # checks if it's a good buy
@@ -107,12 +91,12 @@ for period in third_ten_week_list + second_ten_weeks_list + weeks_list:   # runs
         average_profit = ((5 - (len(proposedbuylist) + len(proposedselllist))) + average_profit)/5
     else:
         average_profit = 1
-
+    total_number_of_actions += len(proposedbuylist) + len(proposedselllist)
     print("                                                           Profitul Average per tranzactie e {}".format(
         average_profit))
     profit_10_saptamani *= (average_profit)
 
-    print("***************************************************************" + str(period) +"*******************'Profitul dupa 10 saptamani ar fi: {}".format(profit_10_saptamani))
+    print("***************************************************************" + str(period) +"*******************'Profitul dupa 10 saptamani ar fi: {} cu {} tranzactii".format(profit_10_saptamani,total_number_of_actions))
 
 
 

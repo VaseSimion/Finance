@@ -10,8 +10,8 @@ def macd_potential_buy(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 8, 17, 9)  # for buy signals it should be 8,17,9
 
-    if macdhistogram[-1] > 0.01 and macdhistogram[-1] >= macdhistogram[-2] >= macdhistogram[-3] >= macdhistogram[-4] \
-            and macdhistogram[-2] < -0.01:
+    if macdhistogram[-1] > 0 and macdhistogram[-1] >= macdhistogram[-2] >= macdhistogram[-3] >= macdhistogram[-4] \
+            and macdhistogram[-2] < -closing_price_list[-1]/1000:
         return True
     else:
         return False
@@ -23,8 +23,8 @@ def macd_potential_sell(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 12, 26, 9)  # for sell signals it should be 12, 26, 9
 
-    if macdhistogram[-1] < -0.001 and macdhistogram[-1] <= macdhistogram[-2] <= macdhistogram[-3] <= macdhistogram[-4] \
-            and macdhistogram[-2] > 0.01:
+    if macdhistogram[-1] < 0 and macdhistogram[-1] <= macdhistogram[-2] <= macdhistogram[-3] <= macdhistogram[-4] \
+            and macdhistogram[-2] > closing_price_list[-1]/1000:
         return True
     else:
         return False
@@ -53,7 +53,7 @@ def is_today_falling(stock):
 # checks if the last sma is bigger than the one before it and also that the last two lows are in ascending value
 def is_stock_rising(stock):
     [minimlist, list_of_sma] = return_last_minimums_buy(stock)
-    if minimlist[0] > minimlist[1] > minimlist[2] and (list_of_sma[0] > list_of_sma[1]):
+    if minimlist[0] > minimlist[1] > minimlist[2]: # and (list_of_sma[0] > list_of_sma[1]):
         return True
     else:
         return False
@@ -62,7 +62,7 @@ def is_stock_rising(stock):
 # checks if the last sma is smaller than the one before it and also that the last two lows are in descending value
 def is_stock_falling(stock):
     [minimlist, list_of_sma] = return_last_minimums_sell(stock)
-    if minimlist[0] < minimlist[1] < minimlist[2] and list_of_sma[0] < list_of_sma[1]:
+    if minimlist[0] < minimlist[1] < minimlist[2]: # and list_of_sma[0] < list_of_sma[1]:
         return True
     else:
         return False
