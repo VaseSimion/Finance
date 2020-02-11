@@ -9,7 +9,7 @@ proposedbuylist = []
 proposedselllist = []
 
 for stock in listOfStocksToAnalyze:
-    print(stock)
+    # print(stock)
     StockData = yf.Ticker(stock).history(period="1y")
     if Ass.macd_potential_buy(StockData) and Ass.is_stock_rising(StockData):
         proposedbuylist.append(stock)
@@ -28,5 +28,5 @@ for stock in proposedselllist:
     StockData = yf.Ticker(stock).history(period="1y")
     Gfs.draw_macd_sell(StockData, "SELL " + stock)
 
-    print(proposedselllist)
-    print(proposedbuylist)
+print(proposedselllist)
+print(proposedbuylist)
