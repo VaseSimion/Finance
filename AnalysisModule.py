@@ -10,8 +10,8 @@ def macd_potential_buy(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 8, 17, 9)  # for buy signals it should be 8,17,9
 
-    if macdhistogram[-1] > 0 and macdhistogram[-1] >= macdhistogram[-2] >= macdhistogram[-3] >= macdhistogram[-4] \
-            and macdhistogram[-2] < -closing_price_list[-1]/1000:
+    if macdhistogram[-1] > 0 > macdhistogram[-2] and \
+            macdhistogram[-1] >= macdhistogram[-2] >= macdhistogram[-3] >= macdhistogram[-4]:
         return True
     else:
         return False
@@ -23,8 +23,8 @@ def macd_potential_sell(stock):
     numpyclose = np.asarray(closing_price_list)
     macd1, macd2, macdhistogram = ti.macd(numpyclose, 12, 26, 9)  # for sell signals it should be 12, 26, 9
 
-    if macdhistogram[-1] < 0 and macdhistogram[-1] <= macdhistogram[-2] <= macdhistogram[-3] <= macdhistogram[-4] \
-            and macdhistogram[-2] > closing_price_list[-1]/1000:
+    if macdhistogram[-1] < 0 < macdhistogram[-2] and \
+            macdhistogram[-1] <= macdhistogram[-2] <= macdhistogram[-3] <= macdhistogram[-4]:
         return True
     else:
         return False
@@ -121,7 +121,7 @@ def return_last_minimums_buy(stock):
                 minimlist.append(firstminim)
                 continue
             else:
-                if abs((value - firstminim) / firstminim) < 0.02 and (index - firstindex) < 20:
+                if abs((value - firstminim) / firstminim) < 0.02 and (index - firstindex) < 10:
                     firstminim = value
                     firstindex = index
                     continue
@@ -152,7 +152,7 @@ def return_last_minimums_sell(stock):
                 minimlist.append(firstminim)
                 continue
             else:
-                if abs((value - firstminim) / firstminim) < 0.02 and (index - firstindex) < 20:
+                if abs((value - firstminim) / firstminim) < 0.02 and (index - firstindex) < 10:
                     firstminim = value
                     firstindex = index
                     continue

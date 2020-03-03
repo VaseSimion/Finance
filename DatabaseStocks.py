@@ -9,7 +9,7 @@ list_of_technology = ["AAPL", "ACIW", "ACN", "ADBE", "ADI", "ADP", "ADSK", "AKAM
                       "MCHP", "MSFT", "MCO", "MDB", "MDRX", "MOMO", "MSCI", "MSI", "MU", "NCR",
                       "NFLX", "NLOK", "NLSN", "NOW", "NUAN",
                       "NVDA", "NTAP", "NTGR",  "NXPI", "OKTA", "ON", "PANW", "PAYX", "PBI",
-                      "PCG", "PFPT", "PING", "PTC", "PINS", "QCOM", "ORCL", "QRVO", "OTEX", "ROKU", "SABR",
+                      "PCG", "PFPT", "PING", "PTC", "PINS", "QCOM", "ORCL", "QRVO", "OTEX", "SABR",
                       "SHOP", "SNAP", "SPCE", "SPGI", "SPLK", "SQ", "SSNC",
                       "STM", "STX", "SYY", "SWKS", "TEAM", "TER", "TEVA", "TLND",
                       "TSM", "TTWO", "TWLO", "VEEV", "VLO", "VMW", "VRSK", "VSAT",
