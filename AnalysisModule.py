@@ -196,3 +196,14 @@ def return_sma_and_closing_prices_buy(stock):
     numpyclose = np.asarray(closing_price_list)
     sma = ti.sma(numpyclose, 17)
     return [list(sma)[-10:], closing_price_list[-10:]]
+
+#  This is how a stock looks like after gets out of the yfinance
+#               Open    High     Low   Close    Volume  Dividends  Stock Splits
+# Date
+# 2019-03-05  110.78  110.92  109.78  110.24  19538300        0.0             0
+# 2019-03-06  110.41  111.19  109.97  110.29  17687000        0.0             0
+# 2019-03-07  109.95  110.09  108.44  108.95  25339000        0.0             0
+# 2019-03-08  107.73  109.26  107.38  109.07  22818400        0.0             0
+# 2019-03-11  109.54  111.48  109.53  111.36  26491600        0.0             0
+# ...            ...     ...     ...     ...       ...        ...           ...
+# 2020-02-27  163.32  167.03  157.98  158.18  93174900        0.0             0

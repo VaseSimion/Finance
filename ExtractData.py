@@ -1,62 +1,51 @@
-# this extracts data from an API for finance, but this API was lagging so I switched to yfinance
 from urllib.request import urlopen
 import json
 import pandas as pd
+import numpy as np
 
 
-class DayResults:
-    def __init__(self, dateday, openprice, closeprice, lowprice, highprice, tradevolume):
-        self.date = dateday
-        self.open = openprice
-        self.close = closeprice
-        self.low = lowprice
-        self.high = highprice
-        self.volume = tradevolume
+def get_financial_data(stock):
+    date = []
+    revenue = []  # nu scrie nimic de el in carte dar mi se pare relevant
+    EPS = []
+    profitMargin = []
+    netIncome = []  # also known as shares
+    shareholderEquity = []
+    returnOnEquity = []
+    url = ("https://financialmodelingprep.com/api/v3/financials/income-statement/" + stock + "?period=quarter")
+    response = urlopen(url)
+    results = json.loads(response.read().decode("utf-8"))
 
-    def print_day(self):
-        print("On {} the price opened at {} and closed at {}".format(self.date, self.open, self.close))
+    for quarter in results["financials"]:
+        date.append(quarter["date"])
+        revenue.append(float(quarter["Revenue"]))
+        EPS.append(float(quarter["EPS"]))
+        profitMargin.append(float(quarter["Net Profit Margin"]))
+        netIncome.append(float(quarter["Net Income"]))
 
+    # print(date)
+    # print(revenue)
+    # print(EPS)
+    # print(profitMargin)
+    # print(netIncome)
 
-class MarketIndex:
-    def __init__(self, stockname):
-        self.history = []
-        self.day = DayResults(0, 0, 0, 0, 0, 0)
-        self.name = stockname
+    url = ("https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/" + stock + "?period=quarter")
+    response = urlopen(url)
+    results = json.loads(response.read().decode("utf-8"))
 
-    def reset(self):
-        self.history = []
+    for quarter in results["financials"]:
+        shareholderEquity.append(float(quarter["Total shareholders equity"]))
 
-    def update(self, start_data, end_data):
-        self.reset()
-        url = ("https://financialmodelingprep.com/api/v3/historical-price-full/" + self.name + "?from=" + start_data
-               + "&to=" + end_data)
-        response = urlopen(url)
-        results = json.loads(response.read().decode("utf-8"))
-        for day in results['historical']:
-            self.history.append(DayResults(day['date'], day['open'], day['close'], day['low'],
-                                           day['high'], day['volume']))
+    # print(shareholderEquity)
+    roetuple = zip(netIncome, shareholderEquity)
+    for element in roetuple:
+        returnOnEquity.append(element[0] / element[1])
+    # print(returnOnEquity)
 
-    def get_data_as_dataframe(self):
-        datelist, opendata, closedata, lowdata, highdata, volumedata = [], [], [], [], [], []
-        for day in self.history:
-            datelist.append(day.date)
-            opendata.append(day.open)
-            closedata.append(day.close)
-            highdata.append(day.high)
-            lowdata.append(day.low)
-            volumedata.append(day.volume)
-        dataframe = pd.DataFrame(list(zip(opendata, highdata, lowdata, closedata, volumedata)),
-                                 columns=["Open", "High", "Low", "Close", "Volume"], index=pd.to_datetime(datelist))
-        #        print(df)
-        return dataframe
-
-    def print_last_days(self):
-        for self.day in self.history:
-            self.day.print_day()
-        print()
-
-#   Apple = MarketIndex("AAPL")
-#   Apple.update("2020-01-10", "2020-01-23")
-#   Apple.print_last_days()
-
-#   print()
+    dataframeFinancialStatus = pd.DataFrame(
+        np.array([revenue, EPS, profitMargin, netIncome, returnOnEquity]).transpose(),
+        columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
+    dataframeFinancialStatus.index = date
+    return dataframeFinancialStatus
+# print(dataframeFinancialStatus)
+# print(list(dataframeFinancialStatus["EPS"]))

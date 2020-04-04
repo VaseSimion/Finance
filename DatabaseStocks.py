@@ -7,7 +7,7 @@ list_of_technology = ["AAPL", "ACIW", "ACN", "ADBE", "ADI", "ADP", "ADSK", "AKAM
                       "GRMN", "GRPN", "HIMX", "HPE", "HPQ", "IAC", "IBM",
                       "INFO", "INTC", "IPGP", "IT", "JBL", "JCOM", "KEX", "LOGI",
                       "MCHP", "MSFT", "MCO", "MDB", "MDRX", "MOMO", "MSCI", "MSI", "MU", "NCR",
-                      "NFLX", "NLOK", "NLSN", "NOW", "NUAN",
+                      "NLOK", "NLSN", "NOW", "NUAN",
                       "NVDA", "NTAP", "NTGR",  "NXPI", "OKTA", "ON", "PANW", "PAYX", "PBI",
                       "PCG", "PFPT", "PING", "PTC", "PINS", "QCOM", "ORCL", "QRVO", "OTEX", "SABR",
                       "SHOP", "SNAP", "SPCE", "SPGI", "SPLK", "SQ", "SSNC",
