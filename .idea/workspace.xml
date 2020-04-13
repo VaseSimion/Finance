@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33660d3d-1137-433b-8f62-aa9860556cad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ValidationSMA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnalysisModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnalysisModule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protofolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/protofolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/workfile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLtraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/MLtraining.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +35,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sular\PycharmProjects\Finance" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ValidationSMA">
-    <configuration name="Validation-hourly" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.MLtraining">
+    <configuration name="LongTermWorkFile" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -57,7 +55,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation-hourly.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LongTermWorkFile.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -66,7 +64,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Validation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="MLDownloadScript" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -78,7 +76,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Validation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MLDownloadScript.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -87,7 +85,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ValidationSMA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="MLtraining" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -99,7 +97,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ValidationSMA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MLtraining.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -129,7 +127,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="protofolio" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,7 +139,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/protofolio.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ValidationSMA" />
+        <item itemvalue="Python.MLtraining" />
+        <item itemvalue="Python.MLDownloadScript" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.LongTermWorkFile" />
         <item itemvalue="Python.workfile" />
-        <item itemvalue="Python.protofolio" />
-        <item itemvalue="Python.Validation" />
-        <item itemvalue="Python.Validation-hourly" />
       </list>
     </recent_temporary>
   </component>
@@ -253,7 +251,35 @@
       <option name="project" value="LOCAL" />
       <updated>1581443401651</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="stocks buy/sell based on ma crossing">
+      <created>1582146300354</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1582146300355</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added MA recommandations">
+      <created>1583256719367</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1583256719367</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added extraction data for the long term script. This gives me the EPS, Profit margin, sales, return on equity and revenue numbers in a the quarterly format">
+      <created>1586025465407</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586025465407</updated>
+    </task>
+    <task id="LOCAL-00011" summary="The machine learning stuff">
+      <created>1586795629919</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586795629919</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -287,74 +313,93 @@
     <MESSAGE value="Corrected validation and changed some analysis" />
     <MESSAGE value="added database and reduced the sma is rising in the analysis module" />
     <MESSAGE value="All US stocks added" />
-    <option name="LAST_COMMIT_MESSAGE" value="All US stocks added" />
+    <MESSAGE value="stocks buy/sell based on ma crossing" />
+    <MESSAGE value="added MA recommandations" />
+    <MESSAGE value="Added extraction data for the long term script. This gives me the EPS, Profit margin, sales, return on equity and revenue numbers in a the quarterly format" />
+    <MESSAGE value="The machine learning stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="The machine learning stuff" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579811176519">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586766502444">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579811176519" />
-    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2" timestamp="1581443401064">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586766502444" />
+    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2" timestamp="1586795627689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="203" y="30" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581443401064" />
-    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581276697420" />
+    <state x="203" y="30" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256718531" />
+    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586795627689" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1580912380523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580912380523" />
-    <state width="1899" height="283" key="GridCell.Tab.0.bottom" timestamp="1582139205110">
+    <state width="1899" height="280" key="GridCell.Tab.0.bottom" timestamp="1586802113828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582139205110" />
-    <state width="1899" height="287" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581352213533" />
-    <state width="1899" height="283" key="GridCell.Tab.0.center" timestamp="1582139205109">
+    <state width="1899" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017224" />
+    <state width="1899" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
+    <state width="1899" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
+    <state width="1899" height="280" key="GridCell.Tab.0.center" timestamp="1586802113828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="283" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582139205109" />
-    <state width="1899" height="287" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581352213533" />
-    <state width="1899" height="283" key="GridCell.Tab.0.left" timestamp="1582139205109">
+    <state width="1899" height="364" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
+    <state width="1899" height="364" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
+    <state width="1899" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
+    <state width="1899" height="280" key="GridCell.Tab.0.left" timestamp="1586802113828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="283" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582139205109" />
-    <state width="1899" height="287" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581352213533" />
-    <state width="1899" height="283" key="GridCell.Tab.0.right" timestamp="1582139205110">
+    <state width="1899" height="364" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
+    <state width="1899" height="364" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960809" />
+    <state width="1899" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
+    <state width="1899" height="280" key="GridCell.Tab.0.right" timestamp="1586802113828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="283" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582139205110" />
-    <state width="1899" height="287" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581352213533" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1581285873257">
+    <state width="1899" height="364" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
+    <state width="1899" height="364" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
+    <state width="1899" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1586771166955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581285873257" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1581285873257">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1586771166955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581285873257" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1581285873257">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1586771166955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581285873257" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1581285873257">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1586771166955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581285873257" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1580849540522">
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
+    <state x="461" y="161" key="SettingsEditor" timestamp="1586766522725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580849540522" />
-    <state x="656" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1582130928775">
+    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583353762990" />
+    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586766522725" />
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2" timestamp="1586795636394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582130928775" />
-    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581344612431" />
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580912366669">
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256723760" />
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586795636394" />
+    <state x="656" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1586767561730">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1580912366669" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581244904271">
+    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584712186116" />
+    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586767561730" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586802587415">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581244904271" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256502187" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586802587415" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586779003159">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586779003159" />
   </component>
 </project>
