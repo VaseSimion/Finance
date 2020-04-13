@@ -207,3 +207,44 @@ def return_sma_and_closing_prices_buy(stock):
 # 2019-03-11  109.54  111.48  109.53  111.36  26491600        0.0             0
 # ...            ...     ...     ...     ...       ...        ...           ...
 # 2020-02-27  163.32  167.03  157.98  158.18  93174900        0.0             0
+
+# ****************************************************************************************
+# ****************************************************************************************
+# ************************This is for the long term part**********************************
+# ****************************************************************************************
+# ****************************************************************************************
+
+def is_eps_rising(financialdata):
+    eps = list(financialdata["EPS"])
+    if len(eps) < 8:
+        return False
+    elif eps[4] > 0 and eps[5] > 0 and eps[0]/eps[4] >= 1.25 and eps[1]/eps[5] >= 1.25:
+        return True
+    elif eps[0] > 0 > eps[4] and (eps[0] - eps[4])/eps[0] >= 0.25:
+        return True
+    else:
+        return False
+
+def sales_are_rising(financialdata):
+    sales = list(financialdata["Sales"])
+    if len(sales) < 8:
+        return False
+    elif sales[4] > 0 and sales[0] / sales[4] >= 1.25:
+        return True
+    else:
+        return False
+
+def is_return_on_equity_good(financialdata):
+    roe = list(financialdata["ReturnOnEquity"])
+    if roe[0] > 0.15:
+        return True
+    else:
+        return False
+def is_profit_good(financialdata):
+    profit = list(financialdata["ProfitMargin"])
+    if profit[0] > profit[4] and profit[1] > profit[5]:
+        return True
+    else:
+        return False
+
+
