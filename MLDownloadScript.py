@@ -8,7 +8,7 @@ import yfinance as yf
 csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-listOfStocksToAnalyze = Ds.get_lists()
+listOfStocksToAnalyze = Ds.list_of_healthcare
 for stock in listOfStocksToAnalyze:
     try:
         print(stock)

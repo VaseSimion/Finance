@@ -117,13 +117,13 @@ def get_latest_3_year_quarterly(financialdata, date):
 #        print(roe)
 #        print(dates)
 
-        baseline = max(eps)
+        baseline = max(max(eps),-min(eps))
         eps = [round(x/baseline,3) for x in eps]
-        baseline = max(profit)
+        baseline = max(max(profit), -min(profit))
         profit = [round(x/baseline,3) for x in profit]
-        baseline = max(sales)
+        baseline = max(max(sales), -min(sales))
         sales = [round(x/baseline,3) for x in sales]
-        baseline = max(roe)
+        baseline = max(max(roe), -min(roe))
         roe = [round(x/baseline,3) for x in roe]
 
 #        print("normalized")
