@@ -7,37 +7,39 @@ import yfinance as yf
 
 csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+verification_csvwriter = csv.writer(open('dataset_verification.csv', 'w'), delimiter=',', lineterminator='\n',
+                       quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-listOfStocksToAnalyze = Ds.list_of_healthcare
+listOfStocksToAnalyze = Ds.get_lists()
 for stock in listOfStocksToAnalyze:
     try:
         print(stock)
-
-        initial_date = "2006-07-24"
+        initial_date = "2006-07-22"
         last_date = "2020-03-02"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
 
         # get the oldest date so I dont run wihtout data
-        data = yf.download(tickers=stock, interval="1wk")
-        if (list(data.index)[0] + timedelta(days=365)) > date:
-            date = list(data.index)[0] + timedelta(days=365)
+        weekly = yf.download(tickers=stock, interval="1wk")
+        if (list(weekly.index)[0] + timedelta(days=365)) > date:
+            date = list(weekly.index)[0] + timedelta(days=365)
+
+        financial = ED.get_financial_data(stock)
 
         while date < last_date:
-            financial = ED.get_financial_data(stock)
             financial_values = ED.get_latest_3_year_quarterly(financial, date)
-            [price, validation] = ED.get_latest_1_year_price_weekly(stock, date)
+            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, date)
             print("new values for: " + str(date))
             print(financial_values)
             print(price)
             print(validation)
-            date = date + timedelta(days=70)
-            list_to_be_saved = validation + price + financial_values
-            if len(list_to_be_saved) == 100:
+            date = date + timedelta(days=28)
+            list_to_be_saved = validation + price + volume + financial_values
+            if len(list_to_be_saved) == 151:
                 csvwriter.writerow(list_to_be_saved)
-
+                verification_csvwriter.writerow([stock,date])
     except:
-        print("stock non existent")
+        print("something went bad")
 
 #  this is how I will read my values, with the first one being the validation
 # reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
