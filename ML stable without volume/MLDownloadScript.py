@@ -7,6 +7,8 @@ import yfinance as yf
 
 csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+verification_csvwriter = csv.writer(open('dataset_verification.csv', 'w'), delimiter=',', lineterminator='\n',
+                       quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
 listOfStocksToAnalyze = Ds.get_lists()
 for stock in listOfStocksToAnalyze:
@@ -26,15 +28,16 @@ for stock in listOfStocksToAnalyze:
 
         while date < last_date:
             financial_values = ED.get_latest_3_year_quarterly(financial, date)
-            [price, validation] = ED.get_latest_1_year_price_weekly(weekly, date)
+            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, date)
             print("new values for: " + str(date))
             print(financial_values)
             print(price)
             print(validation)
             date = date + timedelta(days=28)
-            list_to_be_saved = validation + price + financial_values
-            if len(list_to_be_saved) == 100:
+            list_to_be_saved = validation + price + volume + financial_values
+            if len(list_to_be_saved) == 151:
                 csvwriter.writerow(list_to_be_saved)
+                verification_csvwriter.writerow([stock,date])
     except:
         print("something went bad")
 

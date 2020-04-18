@@ -6,7 +6,7 @@ from datetime import datetime
 import yfinance as yf
 from datetime import timedelta
 import math
-
+from datetime import date
 
 def get_financial_data(stock):
     date = []
@@ -141,14 +141,19 @@ def get_latest_1_year_price_weekly(financialdata, date):
     dates.reverse()
     close_values = list(financialdata["Close"])
     close_values.reverse()
+    volume = list(financialdata["Volume"])
+    volume.reverse()
+
     while dates[0] > date and len(dates) > 12:
         dates.remove(dates[0])
         close_values.remove(close_values[0])
+        volume.remove(volume[0])
 
     if len(close_values) < 51:
-        return [[], []]
+        return [[], [], []]
     close_values = close_values[:51]
     close_values = [round(x, 2) for x in close_values]
+    volume = volume[:51]
 
     for element in close_values:
         if math.isnan(element):
@@ -158,6 +163,16 @@ def get_latest_1_year_price_weekly(financialdata, date):
                 close_values[close_values.index(element)] = close_values[close_values.index(element) + 1]
         else:
             continue
+
+    for element in volume:
+        if math.isnan(element):
+            if volume.index(element) != 0:
+                volume[volume.index(element)] = volume[volume.index(element) - 1]
+            else:
+                volume[volume.index(element)] = volume[volume.index(element) + 1]
+        else:
+            continue
+
 
     dates = list(financialdata.index)
     dates.reverse()
@@ -180,9 +195,66 @@ def get_latest_1_year_price_weekly(financialdata, date):
     max_price = max(close_values+[value_after_3_weeks])
     close_values = [round(x/max_price,3) for x in close_values]
     value_after_3_weeks = round(value_after_3_weeks/max_price,3)
+    max_volume = max(volume)
+    volume = [round(x/max_volume,3) for x in volume]
+    if 0.0 in close_values:
+        return [[], [], []]
+    elif math.isnan(close_values[0]) or math.isnan(value_after_3_weeks) or math.isnan(volume[0]):
+        return [[], [], []]
+    else:
+        return [close_values, [value_after_3_weeks], volume]
+
+
+def get_latest_1_year_price_weekly_from_today(financialdata):
+    close_values = list(financialdata["Close"])
+    close_values.reverse()
+    volume = list(financialdata["Volume"])
+    volume.reverse()
+
+    if date.today().weekday() == 0:
+        if len(close_values) < 52:
+            return [[], []]
+        close_values = close_values[1:52]
+        close_values = [round(x, 2) for x in close_values]
+        volume = volume[1:52]
+    elif date.today().weekday() == 5 or date.today().weekday() == 6:
+        if len(close_values) < 51:
+            return [[], []]
+        close_values = close_values[:51]
+        close_values = [round(x, 2) for x in close_values]
+        volume = volume[:51]
+    else:
+        if len(close_values) < 53:
+            return [[], []]
+        close_values = close_values[2:53]
+        close_values = [round(x, 2) for x in close_values]
+        volume = volume[2:53]
+
+    for element in close_values:
+        if math.isnan(element):
+            if close_values.index(element) != 0:
+                close_values[close_values.index(element)] = close_values[close_values.index(element) - 1]
+            else:
+                close_values[close_values.index(element)] = close_values[close_values.index(element) + 1]
+        else:
+            continue
+
+    for element in volume:
+        if math.isnan(element):
+            if volume.index(element) != 0:
+                volume[volume.index(element)] = volume[volume.index(element) - 1]
+            else:
+                volume[volume.index(element)] = volume[volume.index(element) + 1]
+        else:
+            continue
+
+    max_price = max(close_values)
+    close_values = [round(x/max_price,3) for x in close_values]
+    max_volume = max(volume)
+    volume = [round(x/max_volume,3) for x in volume]
     if 0.0 in close_values:
         return [[], []]
-    elif math.isnan(close_values[0]) or math.isnan(value_after_3_weeks):
+    elif math.isnan(close_values[0]) or math.isnan(volume[0]):
         return [[], []]
     else:
-        return [close_values, [value_after_3_weeks]]
+        return [close_values, volume]

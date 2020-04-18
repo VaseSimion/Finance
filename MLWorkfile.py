@@ -14,30 +14,30 @@ prediction_writer = csv.writer(prediction_file, delimiter=',', lineterminator='\
 
 model = tf.keras.models.Sequential()
 
-model.add(tf.keras.layers.Reshape((25, 6), input_shape=(1, 150)))
+model.add(tf.keras.layers.Reshape((25,6),input_shape=(1,150)))
 model.add(tf.keras.layers.Conv1D(25, 2, padding='same', activation='linear'))
 model.add(tf.keras.layers.Flatten())
 
 model.add(tf.keras.layers.Dense(252, activation='relu'))
 
-model.add(tf.keras.layers.Dropout(0.15, noise_shape=None, seed=None))
+model.add(tf.keras.layers.Dropout(0.2, noise_shape=None, seed=None))
 
-model.add(tf.keras.layers.Dense(80, activation='linear'))
-model.add(tf.keras.layers.LeakyReLU(alpha=0.4))
+model.add(tf.keras.layers.Dense(80, activation='relu'))
+model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
 
 model.add(tf.keras.layers.Dense(40, activation='relu'))
-model.add(tf.keras.layers.LeakyReLU(alpha=0.4))
+model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
 
 model.add(tf.keras.layers.Dense(20, activation='relu'))
-model.add(tf.keras.layers.LeakyReLU(alpha=0.4))
+model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
 
-model.add(tf.keras.layers.Dense(10, activation='linear'))
-model.add(tf.keras.layers.LeakyReLU(alpha=0.4))
+model.add(tf.keras.layers.Dense(10, activation='relu'))
+model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
 
 model.add(tf.keras.layers.Dense(1))
 model.add(tf.keras.layers.Activation('linear'))
 
-model.compile(optimizer='Adamax', loss='mean_squared_error')
+model.compile(optimizer='Adamax', loss='mean_absolute_error')
 
 checkpoint_path = "InitialTraining/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
