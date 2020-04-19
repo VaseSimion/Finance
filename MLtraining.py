@@ -54,7 +54,7 @@ model.compile(optimizer='Adamax', loss='mean_absolute_error')
 checkpoint_path = "InitialTraining/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 model.load_weights(checkpoint_path)
-cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,save_weights_only=True, verbose=1, period=50)
+cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,save_weights_only=True, verbose=1, period=20)
 
 model.fit(training_data, training_results, epochs=number_of_epochs, callbacks=[cp_callback])
 
@@ -93,9 +93,9 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(0.8*len(input_data) +
     elif predicted_value < 0.9 and value > 1:
         wrong_cases += 1
 
-    if predicted_value > 1.2 and value > 1:
+    if 2 > predicted_value > 1.2 and value > 1:
         succesfull_cases_1_2 += 1
-    elif predicted_value > 1.2 and value < 1:
+    elif 2 > predicted_value > 1.2 and value < 1:
         wrong_cases_1_2 += 1
 
     if check_index%2000==0:
@@ -128,4 +128,4 @@ print("Ratio between the value and predicted value is {}, with {} as value and {
 print("Invested sum was 100 and returned sum was {} with {} trades".format(round(return_sum,1),int(invested_sum/100)))
 print(list_of_trades)
 print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases,wrong_cases,succesfull_cases/(succesfull_cases+wrong_cases)))
-print("For anything above 1.2 growth prediction were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases_1_2,wrong_cases_1_2,succesfull_cases_1_2/(succesfull_cases_1_2+wrong_cases_1_2)))
+print("For anything between 1.2 and 2 growth prediction were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases_1_2,wrong_cases_1_2,succesfull_cases_1_2/(succesfull_cases_1_2+wrong_cases_1_2)))

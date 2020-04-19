@@ -15,7 +15,7 @@ for stock in listOfStocksToAnalyze:
     try:
         print(stock)
         initial_date = "2006-07-22"
-        last_date = "2020-03-02"
+        last_date = "2020-03-14"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
 
@@ -33,7 +33,10 @@ for stock in listOfStocksToAnalyze:
             print(financial_values)
             print(price)
             print(validation)
-            date = date + timedelta(days=28)
+            if date < datetime.strptime("2019-06-15", "%Y-%m-%d"):
+                date = date + timedelta(days=14)
+            else:
+                date = date + timedelta(days=7)
             list_to_be_saved = validation + price + volume + financial_values
             if len(list_to_be_saved) == 151:
                 csvwriter.writerow(list_to_be_saved)

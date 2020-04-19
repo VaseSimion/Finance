@@ -30,7 +30,7 @@ list_of_communication_services = ["ACIA", "GOOG", "AMCX", "T", "BIDU", "CTL", "C
 list_of_utilities_and_real_estate = ["AES", "AEE", "AEP", "AWK", "WTR", "ATO", "CMS", "ED", "DUK", "EIX", "EVRG",
                                      "EXC", "FE", "MDU", "NFG", "NEE", "NI", "NRG", "OGE", "PPL", "PEG", "SRE", "SO",
                                      "UGI", "XEL", "AGNC", "ARE", "AMH", "AVB", "BXP", "CPT", "CBL", "CBRE", "CB",
-                                     "CLNY", "CXP", "ESS", "FRT", "GLPI", "JLL", "TREE", "PB", "SVC", "SITC"]
+                                     "CLNY", "CXP", "ESS", "FRT", "GLPI", "JLL", "PB", "SVC", "SITC"]
 
 list_of_energy = ["LNT", "AR", "APA", "BKR", "COG", "CNP", "CHK", "CVX", "SNP", "CNX", "CXO", "COP",
                   "CLB", "DCP", "DVN", "DO", "D", "DRQ", "DTE", "ENS", "EPD", "EOG", "EQT", "XOM", "FSLR", "GPOR",

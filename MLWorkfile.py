@@ -60,8 +60,8 @@ for stock in listOfStocksToAnalyze:
             print("                                  {} out of {}                                     ".
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
-
-        weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
+        #weekly = yf.download(tickers=stock, interval="1wk", period="2y")
         financial = Ed.get_financial_data(stock)
         financial_values = Ed.get_latest_3_year_quarterly(financial, date)
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
