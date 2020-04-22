@@ -7,7 +7,7 @@ import os
 reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
-number_of_epochs = 200
+number_of_epochs = 10
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -26,16 +26,16 @@ test_results = result[int(0.8*len(input_data)):]
 model = tf.keras.models.Sequential()
 
 model.add(tf.keras.layers.Reshape((25,6),input_shape=(1,150)))
-model.add(tf.keras.layers.Conv1D(25, 2, padding='same', activation='linear'))
+model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
+model.add(tf.keras.layers.MaxPool1D(2))
 model.add(tf.keras.layers.Flatten())
 
-model.add(tf.keras.layers.Dense(252, activation='relu')) #Dense(output_dim(also hidden wight), input_dim = input_dim)
-#model.add(tf.keras.layers.LeakyReLU(alpha = 0)) #Activation
+model.add(tf.keras.layers.Dense(252, activation='relu'))
 
 model.add(tf.keras.layers.Dropout(0.2, noise_shape=None, seed=None))
 
-model.add(tf.keras.layers.Dense(80, activation='relu'))
-model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
+#model.add(tf.keras.layers.Dense(80, activation='relu'))
+#model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
 
 model.add(tf.keras.layers.Dense(40, activation='relu'))
 model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
@@ -52,14 +52,20 @@ model.add(tf.keras.layers.Activation('linear'))
 model.compile(optimizer='Adamax', loss='mean_absolute_error')
 
 checkpoint_path = "InitialTraining/cp.ckpt"
+best_model_path = "SavedModels/BestModel.h5"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 model.load_weights(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,save_weights_only=True, verbose=1, period=20)
+model_callback = tf.keras.callbacks.ModelCheckpoint(
+    best_model_path, monitor='val_loss', verbose=0, save_best_only=True,
+    save_weights_only=False, mode='auto', save_freq='epoch')
 
-model.fit(training_data, training_results, epochs=number_of_epochs, callbacks=[cp_callback])
+model.fit(input_data, result, validation_split=0.2, epochs=number_of_epochs, callbacks=[cp_callback, model_callback])
 
 print("evaluate")
 model.evaluate(test_data, test_results)
+
+model.save("SavedModels/ManualSave.h5")
 
 print(model.summary())
 check_index = 90

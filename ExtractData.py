@@ -8,6 +8,8 @@ from datetime import timedelta
 import math
 from datetime import date
 
+
+# This returns financial data that I need as a dataframe
 def get_financial_data(stock):
     date = []
     revenue = []  # nu scrie nimic de el in carte dar mi se pare relevant
@@ -87,12 +89,7 @@ def get_latest_3_year_quarterly(financialdata, date):
     sales = list(financialdata["Sales"])
     roe = list(financialdata["ReturnOnEquity"])
     date = date  - timedelta(days=7) # in order to compensate for yahoo giving 1 week delay of weekly data)
-#    print("initial ones")
-#    print(eps)
-#    print(profit)
-#    print(sales)
-#    print(roe)
-#    print(dates)
+
 
     while datetime.strptime(dates[0], "%Y-%m-%d") > date and len(dates) > 12:
         dates.remove(dates[0])
@@ -109,14 +106,11 @@ def get_latest_3_year_quarterly(financialdata, date):
         sales = sales[:12]
         roe = roe[:12]
 
-#        print("debug data")
-        dates = dates[:12]
-#        print(eps)
-#        print(profit)
-#        print(sales)
-#        print(roe)
-#        print(dates)
-
+        for i in range(7):
+            if eps[i] == 0 and eps[i+1] == 0 and eps[i+2] == 0 and eps[i+3] == 0:
+                return []
+            if sales[i] == 0 and sales[i+1] == 0 and sales[i+2] == 0 and sales[i+3] == 0:
+                return []
         baseline = max(max(eps),-min(eps))
         eps = [round(x/baseline,3) for x in eps]
         baseline = max(max(profit), -min(profit))
@@ -125,13 +119,6 @@ def get_latest_3_year_quarterly(financialdata, date):
         sales = [round(x/baseline,3) for x in sales]
         baseline = max(max(roe), -min(roe))
         roe = [round(x/baseline,3) for x in roe]
-
-#        print("normalized")
-#        print(eps)
-#        print(profit)
-#        print(sales)
-#        print(roe)
-#        print(dates)
 
         return eps + profit + sales + roe
 
