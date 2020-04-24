@@ -6,7 +6,7 @@ stock = "TSLA"
 #weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
 #print(weekly["Close"])
 
-for stock in ["NBR","SM","RAD","GNC","FTI","QEP","SLB","UAA","LPI","SGMS","CAL","ADI"]:
+for stock in ["MSFT"]:
     weekly = yf.download(tickers=stock, interval="1wk", period="1mo")
     closing = list(weekly["Close"])
     closing.reverse()

@@ -7,7 +7,7 @@ import os
 reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
-number_of_epochs = 10
+number_of_epochs = 1
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -26,8 +26,7 @@ test_results = result[int(0.8*len(input_data)):]
 model = tf.keras.models.Sequential()
 
 model.add(tf.keras.layers.Reshape((25,6),input_shape=(1,150)))
-model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
-model.add(tf.keras.layers.MaxPool1D(2))
+model.add(tf.keras.layers.Conv1D(25, 2, padding='same', activation='linear'))
 model.add(tf.keras.layers.Flatten())
 
 model.add(tf.keras.layers.Dense(252, activation='relu'))
@@ -65,7 +64,7 @@ model.fit(input_data, result, validation_split=0.2, epochs=number_of_epochs, cal
 print("evaluate")
 model.evaluate(test_data, test_results)
 
-model.save("SavedModels/ManualSave.h5")
+model.save("SavedModels/PricePrediction.h5")
 
 print(model.summary())
 check_index = 90

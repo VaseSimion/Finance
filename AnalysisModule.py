@@ -248,3 +248,23 @@ def is_profit_good(financialdata):
         return False
 
 
+def ClassifyResults(response_ratio):
+    if response_ratio > 2:
+        return [1, 0, 0, 0]
+    elif 2 > response_ratio > 1.2:
+        return [0, 1, 0, 0]
+    elif 1.2 > response_ratio > 0.8:
+        return [0, 0, 1, 0]
+    else:
+        return [0, 0, 0, 1]
+
+def Decode(matrix):
+    matrix = [int(round(x)) for x in matrix]
+    if matrix.index(max(matrix)) == 0:
+        return 2
+    elif matrix.index(max(matrix)) == 1:
+        return 1.2
+    elif matrix.index(max(matrix)) == 2:
+        return 0.8
+    else:
+        return 0.2
