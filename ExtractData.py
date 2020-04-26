@@ -239,3 +239,40 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
         return [[], []]
     else:
         return [close_values, volume]
+
+
+
+def get_financial_data_for_report(stock):
+    date = []
+    revenue = []  # nu scrie nimic de el in carte dar mi se pare relevant
+    EPS = []
+    profitMargin = []
+    netIncome = []  # also known as shares
+    shareholderEquity = []
+    url = ("https://financialmodelingprep.com/api/v3/financials/income-statement/" + stock)
+    response = urlopen(url)
+    results = json.loads(response.read().decode("utf-8"))
+
+    if len(results) == 0:
+        dataframeFinancialStatus = pd.DataFrame(
+            np.array([revenue, EPS, profitMargin, netIncome]).transpose(),
+            columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
+        dataframeFinancialStatus.index = date
+        return dataframeFinancialStatus
+
+    for year in results["financials"]:
+        date.append(year["date"])
+        revenue.append(year["Revenue"])
+        EPS.append(year["EPS"])
+        profitMargin.append(year["Net Profit Margin"])
+        netIncome.append(year["Net Income"])
+
+    number_of_years = min(5, len(EPS))
+
+    dataframeFinancialStatus = pd.DataFrame(
+        np.array([revenue[:number_of_years], EPS[:number_of_years], profitMargin[:number_of_years],
+                  netIncome[:number_of_years]]).transpose(),
+        columns=["Revenue", "EPS", "ProfitMargin", "Sales"])
+    dataframeFinancialStatus.index = date[:number_of_years]
+#    print("done")
+    return dataframeFinancialStatus

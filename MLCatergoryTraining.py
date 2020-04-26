@@ -10,7 +10,7 @@ reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
 original_result = []
-number_of_epochs = 1
+number_of_epochs = 10
 
 for row in reader:
     week = ([float(x) for x in row])
