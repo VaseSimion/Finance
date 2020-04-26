@@ -128,7 +128,7 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000
     elif predicted_value_numeric >= 1 and value < 1.1:
         wrong_cases_1_2 += 1
 
-    if check_index%2000==0:
+    if check_index%2000==0 and succesfull_cases != 0:
         print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases, wrong_cases, succesfull_cases/(succesfull_cases + wrong_cases)))
 
 print("Invested sum was 100 and returned sum was {} with {} trades".format(round(return_sum,1),int(invested_sum/100)))

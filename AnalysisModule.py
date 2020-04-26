@@ -259,7 +259,7 @@ def ClassifyResults(response_ratio):
         return [0, 0, 0, 1]
 
 def Decode(matrix):
-    matrix = [int(round(x)) for x in matrix]
+    matrix = [float(round(x,1)) for x in matrix]
     if matrix.index(max(matrix)) == 0:
         return 2
     elif matrix.index(max(matrix)) == 1:
