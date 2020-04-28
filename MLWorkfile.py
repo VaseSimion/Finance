@@ -9,7 +9,7 @@ import ExtractData as Ed
 import csv
 import AnalysisModule as Ass
 
-
+update_reports = True
 prediction_file = open('predictions.csv', 'w')
 prediction_writer = csv.writer(prediction_file, delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -53,7 +53,7 @@ for stock in listOfStocksToAnalyze:
             prediction_writer.writerow([stock, predicted_value[0][0]])
             prediction_file.flush()
             if predicted_value[0][0] > 1.18:
-                prediction_winners.append([stock, predicted_value[0][0]])
+                prediction_winners.append([stock, predicted_value[0][0], list(weekly["Close"])[-1]])
             print("{} prediction is {}".format(stock, predicted_value[0][0]))
 
             predicted_value = category_model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
@@ -64,24 +64,25 @@ for stock in listOfStocksToAnalyze:
                     both_methods_winners.append(prediction_winners[-1] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
                     prediction_winners.pop()
                 else:
-                    category_winners.append([stock] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
+                    category_winners.append([stock] + [list(weekly["Close"])[-1]] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
             print("{} prediction is {} with {}".format(stock, Ass.Decode(predicted_value[0]), predicted_value[0]))
     except:
         print("Some shit happened")
 
-report_file.write("Both scripts predicted this:\n")
-for stock_performance in both_methods_winners:
-    Rm.append_both(stock_performance, report_file)
+if update_reports:
+    report_file.write("Both scripts predicted this:\n")
+    for stock_performance in both_methods_winners:
+        Rm.append_both(stock_performance, report_file)
 
-report_file.write("\n---------------------------------------------------------------------\n")
-report_file.write("Category predicted this:\n")
-for stock_performance in category_winners:
-    Rm.append_category(stock_performance, report_file)
+    report_file.write("\n---------------------------------------------------------------------\n")
+    report_file.write("Category predicted this:\n")
+    for stock_performance in category_winners:
+        Rm.append_category(stock_performance, report_file)
 
-report_file.write("\n---------------------------------------------------------------------\n")
-report_file.write("Price prediction scripts predicted this:\n")
-for stock_performance in prediction_winners:
-    Rm.append_price_prediction(stock_performance, report_file)
+    report_file.write("\n---------------------------------------------------------------------\n")
+    report_file.write("Price prediction scripts predicted this:\n")
+    for stock_performance in prediction_winners:
+        Rm.append_price_prediction(stock_performance, report_file)
 
 prediction_file.close()
 category_prediction_file.close()

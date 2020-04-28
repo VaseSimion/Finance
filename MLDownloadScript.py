@@ -10,12 +10,12 @@ csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='
 verification_csvwriter = csv.writer(open('dataset_verification.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-listOfStocksToAnalyze = Ds.get_lists()
+listOfStocksToAnalyze = Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
     try:
         print(stock)
         initial_date = "2006-07-22"
-        last_date = "2020-03-14"
+        last_date = "2020-03-28"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
 
