@@ -10,7 +10,7 @@ reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
 original_result = []
-number_of_epochs = 10
+number_of_epochs = 1
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -53,11 +53,11 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 model.load_weights(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,save_weights_only=True, verbose=1, period=5)
 model_callback = tf.keras.callbacks.ModelCheckpoint(
-    best_model_path, monitor='val_loss', verbose=0, save_best_only=True,
+    best_model_path, monitor='val_accuracy', verbose=0, save_best_only=True,
     save_weights_only=False, mode='auto', save_freq='epoch')
 
 history = model.fit(input_data, result, validation_split=0.2, epochs=number_of_epochs,
-          callbacks=[cp_callback])
+          callbacks=[cp_callback, model_callback])
 
 
 acc = history.history['accuracy']
@@ -80,7 +80,7 @@ model.save("SavedModels/CategoryModel.h5")
 
 print(model.summary())
 
-check_index = 201500
+check_index = 222222
 predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
 print(predicted_value[0])
 print([int(round(x)) for x in predicted_value[0]])
