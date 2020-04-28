@@ -207,9 +207,9 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
     else:
         if len(close_values) < 53:
             return [[], []]
-        close_values = close_values[2:53]
+        close_values = close_values[:1] + close_values[2:52]
         close_values = [round(x, 2) for x in close_values]
-        volume = volume[2:53]
+        volume = volume[:1] + volume[2:52]
 
     for element in close_values:
         if math.isnan(element):
