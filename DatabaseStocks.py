@@ -224,4 +224,4 @@ def get_investing_lists():
     print(len(investment_list))
     return investment_list
 
-print(get_investing_lists())
+#print(get_investing_lists())

@@ -18,7 +18,7 @@ category_prediction_file = open('predictions_category.csv', 'w')
 category_prediction_writer = csv.writer(category_prediction_file, delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-name = "Reports/ReportFile" + str(date.today()) + ".txt"
+name = "Reports/ReportFile " + str(date.today()) + ".txt"
 report_file = open(name,"w+")
 
 category_model = tf.keras.models.load_model("SavedModels/CategoryModel.h5")
@@ -33,7 +33,7 @@ category_winners = []
 prediction_winners = []
 both_methods_winners = []
 
-listOfStocksToAnalyze = Ds.get_lists()
+listOfStocksToAnalyze = Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
     increment += 1
     try:
