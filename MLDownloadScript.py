@@ -8,7 +8,7 @@ import yfinance as yf
 csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
 verification_csvwriter = csv.writer(open('dataset_verification.csv', 'w'), delimiter=',', lineterminator='\n',
-                       quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
 listOfStocksToAnalyze = Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
@@ -33,14 +33,14 @@ for stock in listOfStocksToAnalyze:
             print(financial_values)
             print(price)
             print(validation)
-            if date < datetime.strptime("2019-06-15", "%Y-%m-%d"):
+            if date < datetime.strptime("2019-06-15", "%Y-%m-%d"):  # this is to increment the data taken, more recent
                 date = date + timedelta(days=14)
             else:
                 date = date + timedelta(days=7)
             list_to_be_saved = validation + price + volume + financial_values
             if len(list_to_be_saved) == 151:
                 csvwriter.writerow(list_to_be_saved)
-                verification_csvwriter.writerow([stock,date])
+                verification_csvwriter.writerow([stock, date])
     except:
         print("something went bad")
 

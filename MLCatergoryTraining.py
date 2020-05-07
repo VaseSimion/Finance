@@ -28,7 +28,7 @@ test_results = result[int(0.8*len(input_data)):]
 
 model = tf.keras.models.Sequential()
 
-model.add(tf.keras.layers.Reshape((25,6),input_shape=(1,150)))
+model.add(tf.keras.layers.Reshape((25, 6), input_shape=(1, 150)))
 model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
 model.add(tf.keras.layers.MaxPool1D(2))
 model.add(tf.keras.layers.Flatten())
@@ -38,26 +38,26 @@ model.add(tf.keras.layers.Dense(252, activation='relu'))
 model.add(tf.keras.layers.Dropout(0.5, noise_shape=None, seed=None))
 
 model.add(tf.keras.layers.Dense(40, activation='relu'))
-model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
+model.add(tf.keras.layers.LeakyReLU(alpha=0.1))
 
 model.add(tf.keras.layers.Dense(20, activation='relu'))
-model.add(tf.keras.layers.LeakyReLU(alpha = 0.1))
+model.add(tf.keras.layers.LeakyReLU(alpha=0.1))
 
 model.add(tf.keras.layers.Dense(4, activation='softmax'))
 
-model.compile(loss = 'categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 checkpoint_path = "CategoryChkp/cp.ckpt"
 best_model_path = "SavedModels/BestModel.h5"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 model.load_weights(checkpoint_path)
-cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,save_weights_only=True, verbose=1, period=5)
+cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
 model_callback = tf.keras.callbacks.ModelCheckpoint(
     best_model_path, monitor='val_accuracy', verbose=0, save_best_only=True,
     save_weights_only=False, mode='auto', save_freq='epoch')
 
 history = model.fit(input_data, result, validation_split=0.2, epochs=number_of_epochs,
-          callbacks=[cp_callback, model_callback])
+                    callbacks=[cp_callback, model_callback])
 
 
 acc = history.history['accuracy']
@@ -110,7 +110,7 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000
 
     predicted_value_numeric = Ass.Decode(predicted_value[0])
     if predicted_value_numeric == 2:
-        cases_over_2 +=1
+        cases_over_2 += 1
     elif predicted_value_numeric == 1.2:
         cases_1_2 += 1
     elif predicted_value_numeric == 0.8:
@@ -120,7 +120,7 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000
 
     if predicted_value_numeric >= 1 and value > 1:
         succesfull_cases += 1
-    elif predicted_value_numeric >= 1 and value < 1:
+    elif predicted_value_numeric >= 1 > value:
         wrong_cases += 1
 
     if predicted_value_numeric >= 1 and value > 1.1:
@@ -128,10 +128,14 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000
     elif predicted_value_numeric >= 1 and value < 1.1:
         wrong_cases_1_2 += 1
 
-    if check_index%2000==0 and succesfull_cases != 0:
-        print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases, wrong_cases, succesfull_cases/(succesfull_cases + wrong_cases)))
+    if check_index % 2000 == 0 and succesfull_cases != 0:
+        print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}"
+              "".format(succesfull_cases, wrong_cases, succesfull_cases/(succesfull_cases + wrong_cases)))
 
-print("Invested sum was 100 and returned sum was {} with {} trades".format(round(return_sum,1),int(invested_sum/100)))
+print("Invested sum was 100 and returned sum was {} with {} trades".format(round(return_sum, 1), int(invested_sum/100)))
 print(list_of_trades)
-print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases,wrong_cases,succesfull_cases/(succesfull_cases+wrong_cases)))
-print("For anything between 1.2 and 2 growth prediction were {} succesful guesses and {} wrong guesses with an accuracy of {}".format(succesfull_cases_1_2,wrong_cases_1_2,succesfull_cases_1_2/(succesfull_cases_1_2+wrong_cases_1_2)))
+print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}"
+      "".format(succesfull_cases, wrong_cases, succesfull_cases/(succesfull_cases+wrong_cases)))
+print("For anything between 1.2 and 2 growth prediction were {} succesful guesses and {} wrong guesses with an "
+      "accuracy of {}".format(succesfull_cases_1_2, wrong_cases_1_2,
+                              succesfull_cases_1_2/(succesfull_cases_1_2+wrong_cases_1_2)))

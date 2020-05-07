@@ -28,7 +28,7 @@ list_of_communication_services = ["ACIA", "GOOG", "AMCX", "T", "BIDU", "CTL", "C
                                   "CMCSA", "DISCA", "DISH", "DIS", "EXPE", "FFIV", "FB", "FOXA", "FTR", "GDDY",
                                   "GRUB", "IPG", "LBTYA", "LN", "LYFT", "MTCH", "NFLX", "OMC",
                                   "PINS", "RCI", "ROKU", "SBAC", "SNAP", "SPOT", "S", "TMUS", "TU", "TTD", "TRIP",
-                                  "TWTR", "UBER", "VEON", "VZ", "VIAB", "VIAC", "WB", "YNDX", "Z"]
+                                  "TWTR", "UBER", "VEON", "VZ", "VIAC", "WB", "YNDX", "Z"]
 
 list_of_utilities_and_real_estate = ["AES", "AEE", "AEP", "AWK", "WTR", "ATO", "CMS", "ED", "DUK", "EIX", "EVRG",
                                      "EXC", "FE", "MDU", "NFG", "NEE", "NI", "NRG", "OGE", "PPL", "PEG", "SRE", "SO",
@@ -108,7 +108,7 @@ def get_lists():
 
 investing_list_of_energy = ["AES", "APA", "BKR", "BLDP", "BSM", "COG", "CHK", "CVX", "XEC", "CMS", "COP", "CEIX",
                             "CZZ", "DVN", "DO", "FANG", "DTE", "ENB", "ENPH", "ETR", "EOG", "EQT", "ES", "EXC", "EXTN",
-                            "XOM", "FSLR", "FCEL", "HAL", "HP", "HES", "KMI", "KOS", "MRO", "MPC", "MDR", "MUR",
+                            "XOM", "FSLR", "FCEL", "HAL", "HP", "HES", "KMI", "KOS", "MRO", "MPC", "MUR",
                             "MUSA", "NOV", "NEE", "NBL", "DNOW", "OXY", "OKE", "BTU", "PSX", "PXD", "PLUG", "RRC",
                             "SLB", "SEDG", "SO", "SWN", "SPWR", "TRP", "FTI", "RIG", "VAL", "VLO", "VNOM", "VSLR",
                             "WMB"]
@@ -117,7 +117,7 @@ investing_list_of_materials = ["MMM", "AEM", "AIV", "ADP", "AA", "AU", "AVY", "B
                                "DD", "EMN", "ESI", "FMC", "FCX", "GCP", "ICL", "IP", "IFF", "LYB", "MLM", "NEM", "NUE",
                                "OI", "PPG", "SSL", "SEE", "SHW", "STLD", "MOS", "VMC", "WRK", "AUY"]
 
-investing_list_of_industrials = ["ATU", "AME", "APH", "ATRO", "BDC", "BHE", "BA", "BGG", "CAT", "CFX", "CMI", "CW",
+investing_list_of_industrials = ["AME", "APH", "ATRO", "BDC", "BHE", "BA", "BGG", "CAT", "CFX", "CMI", "CW",
                                  "DE", "DOV", "ETN", "EMR", "WATT", "EXPO", "FAST", "FLS", "FLR", "GD", "GE", "GHM",
                                  "HON", "HWM", "ICHR", "ITW", "IR", "IVAC", "ITRI", "J", "JBT", "JCI", "KAI", "KEYS",
                                  "KE", "LECO", "LMT", "MNTX", "MIDD", "NATI", "NOC", "OSIS", "PCAR", "PH", "PNR", "PWR",
@@ -175,7 +175,7 @@ investing_list_of_technology = ["DDD", "ACN", "ACIW", "ATVI", "ADBE", "AMD", "AG
                                 "BNFT", "BLKB", "BB", "EPAY", "BOX", "BCOV", "AVGO", "BRKS", "CCMP", "CACI", "CDNS",
                                 "CAMP", "CDW", "CERN", "CEVA", "ECOM", "CHKP", "CRUS", "CSCO", "CTXS", "NET", "CTSH",
                                 "COHR", "COMM", "CPSI", "CLGX", "CSOD", "GLW", "CSGP", "COUP", "CREE", "CRWD", "CSGS",
-                                "CTS", "CYBR", "DDOG", "DGII", "DMRC", "APPS", "DIOD", "DVX", "DSPG", "EBIX", "EA",
+                                "CTS", "CYBR", "DDOG", "DGII", "DMRC", "APPS", "DIOD", "DSPG", "EBIX", "EA",
                                 "EMKR", "EIGI", "ENV", "EPAM", "PLUS", "EFX", "EVBG", "MRAM",  "EXTR", "FFIV", "FDS",
                                 "FSLY", "FEYE", "FIT", "FIVN", "FLIR", "FSCT", "FORM", "FTNT", "GRMN", "GSB", "GLOB",
                                 "GLUU", "GPRO", "GSIT", "GWRE", "HLIT", "HPE", "HPQ", "HUBS", "IBM", "INFO", "IMMR",
@@ -200,7 +200,7 @@ investing_list_of_communication_services = ["EGHT", "ACIA", "GOOGL", "GOOG", "T"
                                             "IRDM", "KVHI", "LILA", "LILAK", "LBTYK", "LTRPB", "LTRPA", "LGF-B", "LORL",
                                             "LYFT", "MTCH", "NFLX", "NWSA", "NWS", "OMC", "PINS", "QRTEA", "ROKU",
                                             "SHOP", "SSTK", "SBGI", "SIRI", "SNAP", "SOGO", "TMUS", "TGNA", "TTD",
-                                            "TZOO", "TRIP", "TRUE", "TWTR", "UBER", "USM", "VEON", "VZ", "VIAB", "VIAC",
+                                            "TZOO", "TRIP", "TRUE", "TWTR", "UBER", "USM", "VEON", "VZ", "VIAC",
                                             "VOD", "DIS", "WIX", "YNDX", "Z", "ZIXI", "ZM"]
 
 investing_list_of_utilities_and_real_estate = ["ALE", "LNT", "AEE", "AEP", "AWR", "AVA", "BKH", "BIT", "CNP", "ED",
@@ -224,4 +224,4 @@ def get_investing_lists():
     print(len(investment_list))
     return investment_list
 
-#print(get_investing_lists())
+# print(get_investing_lists())
