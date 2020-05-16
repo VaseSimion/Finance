@@ -57,6 +57,8 @@ for stock in listOfStocksToAnalyze:
             print("{} prediction is {}".format(stock, price_predicted_value[0][0]))
 
             predicted_value = category_model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
+            total_chance = sum(predicted_value[0])
+            predicted_value[0] = [round(100*x/total_chance, 2) for x in predicted_value[0]]
             category_prediction_writer.writerow([stock] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
             category_prediction_file.flush()
             if Ass.Decode(predicted_value[0]) > 1:
@@ -65,7 +67,7 @@ for stock in listOfStocksToAnalyze:
                                                 list(predicted_value[0]))
                     prediction_winners.pop()
                 else:
-                    category_winners.append([stock] + price_predicted_value[0][0] + [list(weekly["Close"])[-1]] +
+                    category_winners.append([stock] + [price_predicted_value[0][0]] + [list(weekly["Close"])[-1]] +
                                             [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
             print("{} prediction is {} with {}".format(stock, Ass.Decode(predicted_value[0]), predicted_value[0]))
     except:

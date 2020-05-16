@@ -99,9 +99,11 @@ def get_lists():
     print(len(list_of_industrials + list_of_technology + list_of_communication_services + list_of_energy +
               list_of_utilities_and_real_estate + list_of_materials + list_of_consumer_discretionary +
               list_of_consumer_staples + list_of_healthcare + list_of_financials))
-    return list_of_industrials + list_of_technology + list_of_communication_services + list_of_energy + \
+    list_CFD = list_of_industrials + list_of_technology + list_of_communication_services + list_of_energy + \
         list_of_utilities_and_real_estate + list_of_materials + list_of_consumer_discretionary + \
         list_of_consumer_staples + list_of_healthcare + list_of_financials
+    random.shuffle(list_CFD)
+    return list_CFD
 
 
 # investing side of Trading212
@@ -189,7 +191,7 @@ investing_list_of_technology = ["DDD", "ACN", "ACIW", "ATVI", "ADBE", "AMD", "AG
                                 "QADB", "QRVO", "QCOM", "QLYS", "QMCO", "RMBS", "RPD", "RTX", "RNWK", "RP", "RST",
                                 "SABR", "CRM", "SANM", "SCSC", "STX", "SCWX", "SMTC", "NOW", "SSTI", "SIGM", "SLAB",
                                 "SLP", "SWKS", "WORK", "SGH", "SNE", "SPLK", "SPOT", "SPSC", "SSNC", "SRT", "SSYS",
-                                "SMCI", "SYKE", "SYNC", "SYNA", "SNCR", "SNX", "SNPS", "TTWO", "TLND", "TECD", "TDC",
+                                "SMCI", "SYKE", "SYNC", "SNCR", "SNX", "SNPS", "TTWO", "TLND", "TECD", "TDC",
                                 "TER", "TXN", "TRU", "TTEC", "TTMI", "TWLO", "TYL", "UI", "UCTT", "UIS", "UMC", "UPLD",
                                 "VRNS", "VECO", "VRNT", "VRSK", "VERI", "VSAT", "VIAV", "VRTU", "VMW", "VUZI", "WDC",
                                 "WDAY", "WL", "XRX", "XLNX", "XPER", "YEXT", "ZBRA", "ZEN", "ZNGA", "ZS"]
@@ -197,7 +199,7 @@ investing_list_of_technology = ["DDD", "ACN", "ACIW", "ATVI", "ADBE", "AMD", "AG
 investing_list_of_communication_services = ["EGHT", "ACIA", "GOOGL", "GOOG", "T", "BIDU", "BKNG", "CABO", "CARG", "CTL",
                                             "CHTR", "CMCSA", "CVLT", "CMTL", "DISCA", "DISCK", "DISH", "SATS", "EB",
                                             "EXPE", "FB", "FOXA", "FTR", "GDDY",  "GRPN", "HSTM", "IAC", "INAP", "IPG",
-                                            "IRDM", "KVHI", "LILA", "LILAK", "LBTYK", "LTRPB", "LTRPA", "LGF-B", "LORL",
+                                            "IRDM", "KVHI", "LILA", "LILAK", "LBTYK", "LTRPA", "LGF-B", "LORL",
                                             "LYFT", "MTCH", "NFLX", "NWSA", "NWS", "OMC", "PINS", "QRTEA", "ROKU",
                                             "SHOP", "SSTK", "SBGI", "SIRI", "SNAP", "SOGO", "TMUS", "TGNA", "TTD",
                                             "TZOO", "TRIP", "TRUE", "TWTR", "UBER", "USM", "VEON", "VZ", "VIAC",
@@ -207,7 +209,7 @@ investing_list_of_utilities_and_real_estate = ["ALE", "LNT", "AEE", "AEP", "AWR"
                                                "DUK", "EIX", "EVRG", "FE", "GWRS", "MGEE", "NI", "NRG", "PCG", "PNW",
                                                "PPL", "PEG", "SRE", "WEC", "XEL", "ADC", "AMT", "AVB", "BXP", "BRX",
                                                "BPY", "CBRE", "CLNY", "CXW", "CCI", "CONE", "EQIX", "EQR", "ESS",
-                                               "FPIBP", "FRT", "PEAK", "HST", "HPP", "IIPR", "IRM", "KIM", "LTC", "MAC",
+                                               "FRT", "PEAK", "HST", "HPP", "IIPR", "IRM", "KIM", "LTC", "MAC",
                                                "MGRC", "MPW", "MNR", "NMRK", "PK", "PLYM", "PLD", "PSA", "O", "BFS",
                                                "SBAC", "SPG", "SLG", "SRC", "STOR", "SHO", "SKT", "VTR", "VICI", "VNO",
                                                "WELL", "WY", "WSR"]
