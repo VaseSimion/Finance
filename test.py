@@ -3,9 +3,6 @@ from datetime import date
 from datetime import timedelta
 
 stock = "TSLA"
-#weekly = yf.download(tickers=stock, interval="1wk", period="2y")
-#weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
-#print(weekly["Close"])
 
 for stock in ["M","TEX","CLB","GPS","DO","NBR","VAL","HTZ","SIX","TSLA","TUP","RAD"]:
     try:
