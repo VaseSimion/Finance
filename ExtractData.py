@@ -8,119 +8,6 @@ import math
 from datetime import date
 
 
-# This returns financial data that I need as a dataframe
-def get_financial_data(stock):
-    date_list = []
-    revenue = []  # nu scrie nimic de el in carte dar mi se pare relevant
-    EPS = []
-    profitMargin = []
-    netIncome = []  # also known as shares
-    shareholderEquity = []
-    returnOnEquity = []
-    url = ("https://financialmodelingprep.com/api/v3/financials/income-statement/" + stock + "?period=quarter")
-    response = urlopen(url)
-    results = json.loads(response.read().decode("utf-8"))
-
-    if len(results) == 0:
-        dataframeFinancialStatus = pd.DataFrame(
-            np.array([revenue, EPS, profitMargin, netIncome, returnOnEquity]).transpose(),
-            columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
-        dataframeFinancialStatus.index = date_list
-        return dataframeFinancialStatus
-
-    for quarter in results["financials"]:
-        date_list.append(quarter["date"])
-        if quarter["Revenue"] != "":
-            revenue.append(float(quarter["Revenue"]))
-        else:
-            revenue.append(0.0)
-
-        if quarter["EPS"] != "":
-            EPS.append(float(quarter["EPS"]))
-        else:
-            EPS.append(0.0)
-
-        if quarter["Net Profit Margin"] != "":
-            profitMargin.append(float(quarter["Net Profit Margin"]))
-        else:
-            profitMargin.append(0.0)
-
-        if quarter["Net Income"] != "":
-            netIncome.append(float(quarter["Net Income"]))
-        else:
-            netIncome.append(0.0)
-
-    url = ("https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/" + stock + "?period=quarter")
-    response = urlopen(url)
-    results = json.loads(response.read().decode("utf-8"))
-#    print(results)
-    for quarter in results["financials"]:
-        if quarter["Total shareholders equity"] != "":
-            shareholderEquity.append(float(quarter["Total shareholders equity"]))
-        else:
-            shareholderEquity.append(0.0)
-    # print(shareholderEquity)
-
-    minimumData = min(len(shareholderEquity), len(netIncome))
-#    print(minimumData)
-    roetuple = zip(netIncome[:minimumData], shareholderEquity[:minimumData])
-    for element in roetuple:
-        if element[1] == 0:
-            returnOnEquity.append(-1)
-        else:
-            returnOnEquity.append(element[0] / element[1])
-#    print(returnOnEquity)
-
-    dataframeFinancialStatus = pd.DataFrame(
-        np.array([revenue[:minimumData], EPS[:minimumData], profitMargin[:minimumData],
-                  netIncome[:minimumData], returnOnEquity[:minimumData]]).transpose(),
-        columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
-    dataframeFinancialStatus.index = date_list[:minimumData]
-#    print("done")
-    return dataframeFinancialStatus
-
-
-# in this function I get the values up to a specific date, and the financialdata is a dataframe with colums as above
-def get_latest_3_year_quarterly(financialdata, data):
-    dates = list(financialdata.index)
-    eps = list(financialdata["EPS"])
-    profit = list(financialdata["ProfitMargin"])
-    sales = list(financialdata["Sales"])
-    roe = list(financialdata["ReturnOnEquity"])
-    data = data - timedelta(days=7)  # in order to compensate for yahoo giving 1 week delay of weekly data)
-
-    while datetime.strptime(dates[0], "%Y-%m-%d") > data and len(dates) > 12:
-        dates.remove(dates[0])
-        eps.remove(eps[0])
-        profit.remove(profit[0])
-        sales.remove(sales[0])
-        roe.remove(roe[0])
-
-    if len(eps) < 12:
-        return []
-    else:
-        eps = eps[:12]
-        profit = profit[:12]
-        sales = sales[:12]
-        roe = roe[:12]
-
-        for i in range(7):
-            if eps[i] == 0 and eps[i+1] == 0 and eps[i+2] == 0 and eps[i+3] == 0:
-                return []
-            if sales[i] == 0 and sales[i+1] == 0 and sales[i+2] == 0 and sales[i+3] == 0:
-                return []
-        baseline = max(max(eps), -min(eps))
-        eps = [round(x/baseline, 3) for x in eps]
-        baseline = max(max(profit), -min(profit))
-        profit = [round(x/baseline, 3) for x in profit]
-        baseline = max(max(sales), -min(sales))
-        sales = [round(x/baseline, 3) for x in sales]
-        baseline = max(max(roe), -min(roe))
-        roe = [round(x/baseline, 3) for x in roe]
-
-        return eps + profit + sales + roe
-
-
 def get_latest_1_year_price_weekly(financialdata, data):
     dates = list(financialdata.index)
     dates.reverse()
@@ -236,6 +123,120 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
         return [[], []]
     else:
         return [close_values, volume]
+
+
+# Obsolete
+# These fuckers charge moeny for this data now - This returns financial data that I need as a dataframe
+def get_financial_data(stock):
+    date_list = []
+    revenue = []  # nu scrie nimic de el in carte dar mi se pare relevant
+    EPS = []
+    profitMargin = []
+    netIncome = []  # also known as shares
+    shareholderEquity = []
+    returnOnEquity = []
+    url = ("https://financialmodelingprep.com/api/v3/financials/income-statement/" + stock + "?period=quarter")
+    response = urlopen(url)
+    results = json.loads(response.read().decode("utf-8"))
+
+    if len(results) == 0:
+        dataframeFinancialStatus = pd.DataFrame(
+            np.array([revenue, EPS, profitMargin, netIncome, returnOnEquity]).transpose(),
+            columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
+        dataframeFinancialStatus.index = date_list
+        return dataframeFinancialStatus
+
+    for quarter in results["financials"]:
+        date_list.append(quarter["date"])
+        if quarter["Revenue"] != "":
+            revenue.append(float(quarter["Revenue"]))
+        else:
+            revenue.append(0.0)
+
+        if quarter["EPS"] != "":
+            EPS.append(float(quarter["EPS"]))
+        else:
+            EPS.append(0.0)
+
+        if quarter["Net Profit Margin"] != "":
+            profitMargin.append(float(quarter["Net Profit Margin"]))
+        else:
+            profitMargin.append(0.0)
+
+        if quarter["Net Income"] != "":
+            netIncome.append(float(quarter["Net Income"]))
+        else:
+            netIncome.append(0.0)
+
+    url = ("https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/" + stock + "?period=quarter")
+    response = urlopen(url)
+    results = json.loads(response.read().decode("utf-8"))
+#    print(results)
+    for quarter in results["financials"]:
+        if quarter["Total shareholders equity"] != "":
+            shareholderEquity.append(float(quarter["Total shareholders equity"]))
+        else:
+            shareholderEquity.append(0.0)
+    # print(shareholderEquity)
+
+    minimumData = min(len(shareholderEquity), len(netIncome))
+#    print(minimumData)
+    roetuple = zip(netIncome[:minimumData], shareholderEquity[:minimumData])
+    for element in roetuple:
+        if element[1] == 0:
+            returnOnEquity.append(-1)
+        else:
+            returnOnEquity.append(element[0] / element[1])
+#    print(returnOnEquity)
+
+    dataframeFinancialStatus = pd.DataFrame(
+        np.array([revenue[:minimumData], EPS[:minimumData], profitMargin[:minimumData],
+                  netIncome[:minimumData], returnOnEquity[:minimumData]]).transpose(),
+        columns=["Revenue", "EPS", "ProfitMargin", "Sales", "ReturnOnEquity"])
+    dataframeFinancialStatus.index = date_list[:minimumData]
+#    print("done")
+    return dataframeFinancialStatus
+
+
+# in this function I get the values up to a specific date, and the financialdata is a dataframe with colums as above
+def get_latest_3_year_quarterly(financialdata, data):
+    dates = list(financialdata.index)
+    eps = list(financialdata["EPS"])
+    profit = list(financialdata["ProfitMargin"])
+    sales = list(financialdata["Sales"])
+    roe = list(financialdata["ReturnOnEquity"])
+    data = data - timedelta(days=7)  # in order to compensate for yahoo giving 1 week delay of weekly data)
+
+    while datetime.strptime(dates[0], "%Y-%m-%d") > data and len(dates) > 12:
+        dates.remove(dates[0])
+        eps.remove(eps[0])
+        profit.remove(profit[0])
+        sales.remove(sales[0])
+        roe.remove(roe[0])
+
+    if len(eps) < 12:
+        return []
+    else:
+        eps = eps[:12]
+        profit = profit[:12]
+        sales = sales[:12]
+        roe = roe[:12]
+
+        for i in range(7):
+            if eps[i] == 0 and eps[i+1] == 0 and eps[i+2] == 0 and eps[i+3] == 0:
+                return []
+            if sales[i] == 0 and sales[i+1] == 0 and sales[i+2] == 0 and sales[i+3] == 0:
+                return []
+        baseline = max(max(eps), -min(eps))
+        eps = [round(x/baseline, 3) for x in eps]
+        baseline = max(max(profit), -min(profit))
+        profit = [round(x/baseline, 3) for x in profit]
+        baseline = max(max(sales), -min(sales))
+        sales = [round(x/baseline, 3) for x in sales]
+        baseline = max(max(roe), -min(roe))
+        roe = [round(x/baseline, 3) for x in roe]
+
+        return eps + profit + sales + roe
 
 
 def get_financial_data_for_report(stock):

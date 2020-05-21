@@ -8,6 +8,7 @@ import yfinance as yf
 import ExtractData as Ed
 import csv
 import AnalysisModule as Ass
+import winsound
 
 update_reports = True
 prediction_file = open('predictions.csv', 'w')
@@ -21,8 +22,8 @@ category_prediction_writer = csv.writer(category_prediction_file, delimiter=',',
 name = "Reports/ReportFile " + str(date.today()) + ".txt"
 report_file = open(name, "w+")
 
-category_model = tf.keras.models.load_model("SavedModels/CategoryModel.h5")
-model = tf.keras.models.load_model("SavedModels/PricePrediction.h5")
+category_model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
+model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
 
 date = date.today()
 prediction_writer.writerow([str(date)])
@@ -44,21 +45,17 @@ for stock in listOfStocksToAnalyze:
             print("*****************************************************************************************")
     #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
         weekly = yf.download(tickers=stock, interval="1wk", period="2y")
-        financial = Ed.get_financial_data(stock)
-        financial_values = Ed.get_latest_3_year_quarterly(financial, date)
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
-        list_to_be_analyzed = price + volume + financial_values
-        if len(list_to_be_analyzed) == 150:
+        list_to_be_analyzed = price + volume
+        if len(list_to_be_analyzed) == 102:
             price_predicted_value = model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
             prediction_writer.writerow([stock, price_predicted_value[0][0]])
             prediction_file.flush()
-            if price_predicted_value[0][0] > 1.18:
+            if 2 > price_predicted_value[0][0] > 1.15:
                 prediction_winners.append([stock, price_predicted_value[0][0], list(weekly["Close"])[-1]])
             print("{} prediction is {}".format(stock, price_predicted_value[0][0]))
 
-            predicted_value = category_model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
-            total_chance = sum(predicted_value[0])
-            predicted_value[0] = [round(100*x/total_chance, 2) for x in predicted_value[0]]
+            predicted_value = category_model.predict(np.array([[list_to_be_analyzed]]))
             category_prediction_writer.writerow([stock] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
             category_prediction_file.flush()
             if Ass.Decode(predicted_value[0]) > 1:
@@ -95,3 +92,4 @@ for stock in both_methods_winners+category_winners+prediction_winners:
 prediction_file.close()
 category_prediction_file.close()
 report_file.close()
+winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

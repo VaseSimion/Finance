@@ -28,7 +28,7 @@ test_results = result[int(0.8*len(input_data)):]
 
 model = tf.keras.models.Sequential()
 
-model.add(tf.keras.layers.Reshape((25, 6), input_shape=(1, 150)))
+model.add(tf.keras.layers.Reshape((17, 6), input_shape=(1, 102)))
 model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
 model.add(tf.keras.layers.MaxPool1D(2))
 model.add(tf.keras.layers.Flatten())
@@ -48,7 +48,7 @@ model.add(tf.keras.layers.Dense(4, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 checkpoint_path = "CategoryChkp/cp.ckpt"
-best_model_path = "SavedModels/BestModel.h5"
+best_model_path = "SavedModels/BestCategoryModel.h5"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 model.load_weights(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
@@ -78,6 +78,8 @@ model.evaluate(test_data, test_results)
 
 model.save("SavedModels/CategoryModel.h5")
 
+model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
+
 print(model.summary())
 
 check_index = 222222
@@ -103,7 +105,7 @@ cases_below_0_8 = 0
 for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000)):
     value = original_result[check_index] / input_data[check_index][0][0]
     predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
-    if Ass.Decode(predicted_value[0]) >= 1 and check_index < (int(0.8*len(input_data)) + 20000):
+    if Ass.Decode(predicted_value[0]) >= 1 and invested_sum < 1500:
         invested_sum += 100
         return_sum *= value
         list_of_trades.append([Ass.Decode(predicted_value[0]), value, check_index])
@@ -128,9 +130,10 @@ for check_index in range(int(0.8*len(input_data)) + 1, int(len(input_data)-20000
     elif predicted_value_numeric >= 1 and value < 1.1:
         wrong_cases_1_2 += 1
 
-    if check_index % 2000 == 0 and succesfull_cases != 0:
-        print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}"
-              "".format(succesfull_cases, wrong_cases, succesfull_cases/(succesfull_cases + wrong_cases)))
+    if check_index % 1000 == 0 and succesfull_cases != 0:
+        print("There were {} succesful guesses and {} wrong guesses with an accuracy of {}%"
+              "".format(succesfull_cases, wrong_cases,
+                        round(100*(succesfull_cases/(succesfull_cases + wrong_cases)), 2)))
 
 print("Invested sum was 100 and returned sum was {} with {} trades".format(round(return_sum, 1), int(invested_sum/100)))
 print(list_of_trades)
