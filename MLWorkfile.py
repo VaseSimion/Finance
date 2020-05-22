@@ -56,6 +56,8 @@ for stock in listOfStocksToAnalyze:
             print("{} prediction is {}".format(stock, price_predicted_value[0][0]))
 
             predicted_value = category_model.predict(np.array([[list_to_be_analyzed]]))
+            total_predictions_chances = sum(predicted_value[0])
+            predicted_value[0] = [round(100*x/total_predictions_chances, 2) for x in predicted_value[0]]
             category_prediction_writer.writerow([stock] + [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
             category_prediction_file.flush()
             if Ass.Decode(predicted_value[0]) > 1:
