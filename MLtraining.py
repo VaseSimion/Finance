@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
-number_of_epochs = 50
+number_of_epochs = 1
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -95,19 +95,21 @@ wrong_cases_1_2 = 0
 for check_index in range(int(0.8*len(input_data)) + 1, int(0.8*len(input_data) + 20000)):
     value = result[check_index][0] / input_data[check_index][0][0]
     predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
-    if predicted_value[0][0] > 1.2 and invested_sum < 1500:
+    if predicted_value[0][0] > 1.8:
+        continue
+    if predicted_value[0][0] > 1.15 and invested_sum < 1500:
         invested_sum += 100
         return_sum *= value
         list_of_trades.append([predicted_value[0][0], value, check_index])
 
-    if 2 > predicted_value > 1.2 and value > 1:
+    if 2 > predicted_value > 1.15 and value > 1:
         succesfull_cases += 1
-    elif 2 > predicted_value > 1.2 and value < 1:
+    elif 2 > predicted_value > 1.15 and value < 1:
         wrong_cases += 1
 
-    if 2 > predicted_value > 1.2 and value > 1.1:
+    if 2 > predicted_value > 1.15 and value > 1.1:
         succesfull_cases_1_2 += 1
-    elif 2 > predicted_value > 1.2 and value < 1.1:
+    elif 2 > predicted_value > 1.15 and value < 1.1:
         wrong_cases_1_2 += 1
 
     if check_index % 1000 == 0 and succesfull_cases != 0:

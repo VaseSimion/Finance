@@ -139,7 +139,7 @@ investing_list_of_consumer_discretionary = ["TWOU", "AAN", "ADNT", "AAP", "BABA"
                                             "KFY", "LB", "LAUR", "LEG", "LEN", "LEVI", "LAD", "LK", "LULU", "M", "MANU",
                                             "MAN", "MAR", "MAS", "MAT", "MCD", "MELI", "MHK", "NRC", "NWL", "NKE",
                                             "NIO", "JWN", "ORLY", "PTON", "PDD", "PLNT", "RL", "PHM", "PVH", "QRTEA",
-                                            "RCII", "RVLV", "RHI", "ROST", "RCL", "SGMS", "SHAK", "SSTI", "SIG", "SIX",
+                                            "RCII", "RVLV", "RHI", "ROST", "RCL", "SGMS", "SHAK", "SIG", "SIX",
                                             "SKYW", "SLM", "SWK", "SBUX", "STRA", "TLRD", "TPR", "TSLA", "TXRH", "REAL",
                                             "TIF", "TJX", "TSCO", "TBI", "ULTA", "UA", "UAL", "URBN", "VFC", "SPCE",
                                             "W", "WHR", "WING", "WW", "WYND", "WYNN", "YUM"]
@@ -183,6 +183,7 @@ investing_list_of_technology = ["DDD", "ACN", "ACIW", "ATVI", "ADBE", "AMD", "AG
                                 "GLUU", "GPRO", "GSIT", "GWRE", "HLIT", "HPE", "HPQ", "HUBS", "IBM", "INFO", "IMMR",
                                 "INOV", "IPHI", "INSE", "INTC", "IDCC", "INTU", "IPGP", "JBL", "JCOM", "JNPR", "KLAC",
                                 "KOPN", "LRCX", "LSCC", "LDOS", "LPSN", "RAMP", "LOGI", "LITE", "MTSI", "MANH", "MKTX",
+                                "MRVL", "MXIM", "MXL", "MLNX", "MCHP", "MU", "MSFT", "MSTR", "MIME", "MITK", "MOBL",
                                 "MRVL", "MXIM", "MXL", "MLNX", "MCHP", "MU", "MSFT", "MSTR", "MIME", "MITK", "MOBL",
                                 "MODN", "MDB", "MPWR", "MCO", "MSI", "NPTN", "NTAP", "NTES", "NCR", "NTGR", "NTCT",
                                 "NEWR", "NLSN", "NOK", "NLOK", "NUAN", "NTNX", "NVEC", "NVDA", "NXPI", "OKTA", "OMCL",
