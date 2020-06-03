@@ -158,7 +158,7 @@ investing_list_of_healthcare = ["ABT", "ABBV", "ABMD", "ACHC", "ACAD", "ADPT", "
                                 "ILMN", "IMMU", "INCY", "INMD", "NTLA", "ISRG", "NVTA", "JNJ", "LH", "LVGO", "MNK",
                                 "MCK", "MDT", "MRK", "MRNA", "MYL", "MYGN", "NH", "NEOG", "NBIX", "NGM", "NUVA", "PDCO",
                                 "PKI", "PRGO", "PFE", "DGX", "REGN", "SAGE", "SDC", "SYK", "TARO", "THC", "TMO", "TLRY",
-                                "TCDA", "UNH", "UHS", "VAR", "VRTX", "WAT", "ZBH", "ZTS", "ZGNX"]
+                                "TCDA", "UNH", "UHS", "VAR", "VRTX", "WAT", "ZBH", "ZTS", "ZGNX", "KRTX"]
 
 investing_list_of_financials = ["QFIN", "AER", "AMG", "AFL", "AGNC", "AIG", "AL", "ADS", "ALL", "AXP", "AMP", "ABCB",
                                 "AON", "ACGL", "ASB", "AIZ", "AXS", "BANF", "BAC", "BMO", "BK", "BKU", "BANR", "BRKB",
