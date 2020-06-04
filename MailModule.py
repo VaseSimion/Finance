@@ -1,6 +1,8 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
@@ -35,7 +37,7 @@ def create_mail_body(name, both, category, priceprediction):
     Best regards,
     Simion
     
-    -----------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     According to backtest on the weakest script we still have a 70% chance of growth over the next 3 weeks. The other two are better 
     
     *if in some category there are no stocks written it means the script doesn't consider any stock to be good enough
@@ -47,7 +49,7 @@ def create_mail_body(name, both, category, priceprediction):
     return body
 
 
-def send_mail(both, category, pricepredict):
+def send_mail(both, category, pricepredict, file):
     names, emails = get_contacts('mycontacts.txt')  # read contacts
 
     # set up the SMTP server
@@ -59,7 +61,6 @@ def send_mail(both, category, pricepredict):
     # For each contact, send the email:
     for name, email in zip(names, emails):
         msg = MIMEMultipart()  # create a message
-
 
         # setup the parameters of the message
         msg['From'] = EMAIL_FROM
@@ -73,6 +74,22 @@ def send_mail(both, category, pricepredict):
 
         msg.attach(part1)
 
+        # Open report file in binary mode
+        with open(file, "rb") as attachment:
+            # Add file as application/octet-stream
+            # Email client can usually download this automatically as attachment
+            part = MIMEBase("application", "octet-stream")
+            part.set_payload(attachment.read())
+        # Encode file in ASCII characters to send by email
+        encoders.encode_base64(part)
+
+        # Add header as key/value pair to attachment part
+        part.add_header(
+            "Content-Disposition",
+            f"attachment; filename= {file}",
+        )
+
+        msg.attach(part)
         # send the message via the server set up earlier.
         mail.send_message(msg)
         del msg

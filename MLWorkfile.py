@@ -16,8 +16,8 @@ prediction_file = open('predictions.csv', 'w')
 prediction_writer = csv.writer(prediction_file, delimiter=',', lineterminator='\n',
                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-name = "Reports/ReportFile " + str(date.today()) + ".txt"
-report_file = open(name, "w+")
+report_name = "Reports/ReportFile " + str(date.today()) + ".txt"
+report_file = open(report_name, "w+")
 
 category_model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
 model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
@@ -92,5 +92,6 @@ prediction_file.close()
 report_file.close()
 Mm.send_mail([element[0] for element in both_methods_winners],
              [element[0] for element in category_winners],
-             [element[0] for element in prediction_winners])
+             [element[0] for element in prediction_winners],
+             file=report_name)
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)
