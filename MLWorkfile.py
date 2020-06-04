@@ -9,6 +9,7 @@ import ExtractData as Ed
 import csv
 import AnalysisModule as Ass
 import winsound
+import MailModule as Mm
 
 update_reports = True
 prediction_file = open('predictions.csv', 'w')
@@ -29,7 +30,7 @@ category_winners = []
 prediction_winners = []
 both_methods_winners = []
 
-listOfStocksToAnalyze = Ds.get_investing_lists()
+listOfStocksToAnalyze = ["^GSPC"] + Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
     increment += 1
     try:
@@ -89,4 +90,7 @@ for stock in both_methods_winners+category_winners+prediction_winners:
 
 prediction_file.close()
 report_file.close()
+Mm.send_mail([element[0] for element in both_methods_winners],
+             [element[0] for element in category_winners],
+             [element[0] for element in prediction_winners])
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)
