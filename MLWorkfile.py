@@ -41,8 +41,6 @@ for stock in listOfStocksToAnalyze:
             print("*****************************************************************************************")
     #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
         weekly = yf.download(tickers=stock, interval="1wk", period="2y")
-        if weekly["Close"][-1] < 1:  # Ignore penny stocks
-            continue
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
         if len(list_to_be_analyzed) == 102:

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33660d3d-1137-433b-8f62-aa9860556cad" name="Default Changelist" comment="">
+    <list default="true" id="33660d3d-1137-433b-8f62-aa9860556cad" name="Default Changelist" comment="Added an attachment to the mail with the txt report">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MLtraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/MLtraining.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset_verification.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_verification.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mycontacts.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mycontacts.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/predictions.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +44,8 @@
       <recent name="C:\Users\sular\PycharmProjects\Finance" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.MLtraining">
-    <configuration name="LongTermWorkFile" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="MLCatergoryTraining" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -55,7 +57,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LongTermWorkFile.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MLCatergoryTraining.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -77,6 +79,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MLDownloadScript.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MLWorkfile" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\sular\PycharmProjects\Finance\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MLWorkfile.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,34 +171,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="workfile" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\sular\PycharmProjects\Finance\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/workfile.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.MLWorkfile" />
+        <item itemvalue="Python.MLCatergoryTraining" />
         <item itemvalue="Python.MLtraining" />
         <item itemvalue="Python.MLDownloadScript" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.LongTermWorkFile" />
-        <item itemvalue="Python.workfile" />
       </list>
     </recent_temporary>
   </component>
@@ -279,7 +281,203 @@
       <option name="project" value="LOCAL" />
       <updated>1586795629919</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="The machine learning stuff stable">
+      <created>1586802610417</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1586802610417</updated>
+    </task>
+    <task id="LOCAL-00013" summary="The machine learning stuff stable with good results">
+      <created>1586812834172</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1586812834172</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Machine learning with volume added">
+      <created>1587052321365</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1587052321365</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1587057415213</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1587057415213</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1587062914110</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1587062914110</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1587064269138</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1587064269138</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Machine learning with volume added and changed optimizer and relu proportions">
+      <created>1587210605585</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1587210605585</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Machine learning stable 75% accuracy">
+      <created>1587288695793</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1587288695794</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1587561706227</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1587561706227</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1587746198555</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1587746198555</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Made in the previous commit the category part of ML and in this commit are the saved models that work relatively well">
+      <created>1587760755024</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1587760755024</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Combined workfile for both ML scripts and fixed bug with the decoding function showing 1.2 instead of 0.8 in the case of both 2nd and 3rd element rounded to 1">
+      <created>1587890304716</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1587890304716</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Added report module">
+      <created>1587930894724</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1587930894724</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Added investing list of Trading212 and price to the report">
+      <created>1588066066113</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1588066066113</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Saving models with good accuracy (approx 90%) adn added saving best model for category model training">
+      <created>1588082430612</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1588082430612</updated>
+    </task>
+    <task id="LOCAL-00027" summary="MAde it so that it can run on Fridays">
+      <created>1588092858439</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1588092858440</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Small cleaning and details in report">
+      <created>1588169600313</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1588169600313</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Small corrections for code compliance and small modifications in the report">
+      <created>1588830586361</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1588830586361</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Made small changes to report to show results in category as percentages">
+      <created>1589627752414</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1589627752414</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Got rid of that financial data from that BS website">
+      <created>1590057084948</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1590057084948</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Machine learning with volume added and working file made to save to csv">
+      <created>1590080005664</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1590080005664</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Here is a stable version without that BS &quot;Free API&quot; shit">
+      <created>1590080112568</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1590080112568</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Don't really know why these files were not uploaded last time">
+      <created>1590080209341</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1590080209341</updated>
+    </task>
+    <task id="LOCAL-00035" summary="MAde small changes for the report showing of percentage">
+      <created>1590176412112</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1590176412112</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Small changes in percentage considered win">
+      <created>1590230325724</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1590230325724</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Ignoring penny stocks and updated a bit the database with stocks">
+      <created>1591164536401</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1591164536401</updated>
+    </task>
+    <task id="LOCAL-00038" summary="I added the e-mail module with the files for mails of people">
+      <created>1591276790832</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1591276790832</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Added the report as attachment to the mail">
+      <created>1591277833163</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1591277833163</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -306,100 +504,129 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated stocks to Just US and Europe moved in another list" />
-    <MESSAGE value="Updated Stock list to all technology in US" />
-    <MESSAGE value="Added functions to check the trend if it's upwards or downwards and also the current price if it's positive or negative" />
-    <MESSAGE value="Added validation file and also modified a bit some functions" />
-    <MESSAGE value="Corrected validation and changed some analysis" />
-    <MESSAGE value="added database and reduced the sma is rising in the analysis module" />
-    <MESSAGE value="All US stocks added" />
-    <MESSAGE value="stocks buy/sell based on ma crossing" />
-    <MESSAGE value="added MA recommandations" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Added extraction data for the long term script. This gives me the EPS, Profit margin, sales, return on equity and revenue numbers in a the quarterly format" />
     <MESSAGE value="The machine learning stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="The machine learning stuff" />
+    <MESSAGE value="The machine learning stuff stable" />
+    <MESSAGE value="The machine learning stuff stable with good results" />
+    <MESSAGE value="Machine learning with volume added" />
+    <MESSAGE value="Machine learning with volume added and changed optimizer and relu proportions" />
+    <MESSAGE value="Machine learning stable 75% accuracy" />
+    <MESSAGE value="Made in the previous commit the category part of ML and in this commit are the saved models that work relatively well" />
+    <MESSAGE value="Combined workfile for both ML scripts and fixed bug with the decoding function showing 1.2 instead of 0.8 in the case of both 2nd and 3rd element rounded to 1" />
+    <MESSAGE value="Added report module" />
+    <MESSAGE value="Added investing list of Trading212 and price to the report" />
+    <MESSAGE value="Saving models with good accuracy (approx 90%) adn added saving best model for category model training" />
+    <MESSAGE value="MAde it so that it can run on Fridays" />
+    <MESSAGE value="Small cleaning and details in report" />
+    <MESSAGE value="Small corrections for code compliance and small modifications in the report" />
+    <MESSAGE value="Made small changes to report to show results in category as percentages" />
+    <MESSAGE value="Got rid of that financial data from that BS website" />
+    <MESSAGE value="Machine learning with volume added and working file made to save to csv" />
+    <MESSAGE value="Here is a stable version without that BS &quot;Free API&quot; shit" />
+    <MESSAGE value="Don't really know why these files were not uploaded last time" />
+    <MESSAGE value="MAde small changes for the report showing of percentage" />
+    <MESSAGE value="Small changes in percentage considered win" />
+    <MESSAGE value="Ignoring penny stocks and updated a bit the database with stocks" />
+    <MESSAGE value="I added the e-mail module with the files for mails of people" />
+    <MESSAGE value="Added the report as attachment to the mail" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the report as attachment to the mail" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586766502444">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586766502444" />
-    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2" timestamp="1586795627689">
+    <state x="709" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1591012809013">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="709" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591012809013" />
+    <state x="209" y="88" width="1564" height="952" key="CommitChangelistDialog2" timestamp="1591277830864">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="203" y="30" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256718531" />
-    <state x="203" y="30" width="1564" height="952" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586795627689" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1580912380523">
+    <state x="209" y="88" width="1564" height="952" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591277830864" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1587561669960">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580912380523" />
-    <state width="1899" height="280" key="GridCell.Tab.0.bottom" timestamp="1586802113828">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587561669960" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1590520979486">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590520979486" />
+    <state width="936" height="310" key="GridCell.Tab.0.bottom" timestamp="1591362019025">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017224" />
-    <state width="1899" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
-    <state width="1899" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
-    <state width="1899" height="280" key="GridCell.Tab.0.center" timestamp="1586802113828">
+    <state width="1899" height="127" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588060341125" />
+    <state width="936" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591362019025" />
+    <state width="936" height="310" key="GridCell.Tab.0.center" timestamp="1591362019025">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="364" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
-    <state width="1899" height="364" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
-    <state width="1899" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
-    <state width="1899" height="280" key="GridCell.Tab.0.left" timestamp="1586802113828">
+    <state width="1899" height="127" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588060341125" />
+    <state width="936" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591362019025" />
+    <state width="936" height="310" key="GridCell.Tab.0.left" timestamp="1591362019024">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="364" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
-    <state width="1899" height="364" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960809" />
-    <state width="1899" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
-    <state width="1899" height="280" key="GridCell.Tab.0.right" timestamp="1586802113828">
+    <state width="1899" height="127" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588060341125" />
+    <state width="936" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591362019024" />
+    <state width="936" height="310" key="GridCell.Tab.0.right" timestamp="1591362019025">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="364" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584986017223" />
-    <state width="1899" height="364" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584720960810" />
-    <state width="1899" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586802113828" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1586771166955">
+    <state width="1899" height="127" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588060341125" />
+    <state width="936" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591362019025" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1587117023438">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1586771166955">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587117023438" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1587117023438">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1586771166955">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587117023438" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1587117023438">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1586771166955">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587117023438" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1587117023438">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584048528936" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586771166955" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587117023438" />
+    <state x="771" y="230" key="RollbackChangesDialog" timestamp="1587655735046">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587655735046" />
     <state x="461" y="161" key="SettingsEditor" timestamp="1586766522725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583353762990" />
     <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586766522725" />
-    <state x="0" y="0" key="Vcs.Push.Dialog.v2" timestamp="1586795636394">
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2" timestamp="1591277835634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256723760" />
-    <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586795636394" />
-    <state x="656" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1586767561730">
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591277835634" />
+    <state x="656" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1591382442939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584712186116" />
-    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586767561730" />
+    <state x="2576" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588055515754" />
+    <state x="656" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591382442939" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586802587415">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583256502187" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586802587415" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586779003159">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1588008301823">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586779003159" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588008301823" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587900190713" />
   </component>
 </project>
