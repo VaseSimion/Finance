@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import ReportModule as Rm
 from datetime import date
-from datetime import datetime
+from datetime import datetime, timedelta
 import DatabaseStocks as Ds
 import yfinance as yf
 import ExtractData as Ed
@@ -24,7 +24,6 @@ model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
 
 date = date.today()
 prediction_writer.writerow([str(date)])
-date = datetime.combine(date.today(), datetime.min.time())
 increment = 0
 category_winners = []
 prediction_winners = []
@@ -40,7 +39,10 @@ for stock in listOfStocksToAnalyze:
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
     #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
-        weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        #weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        weekly = yf.download(tickers=stock, interval="1d", start=str(date.today() + timedelta(weeks=-53)),
+                             end=str(date.today()))
+        weekly = weekly.resample('7D', label='right', closed='right').pad()
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
         if len(list_to_be_analyzed) == 102:

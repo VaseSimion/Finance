@@ -82,18 +82,11 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
     volume = list(financialdata["Volume"])
     volume.reverse()
 
-    if date.today().weekday() == 0 or date.today().weekday() == 5 or date.today().weekday() == 6:
-        if len(close_values) < 52:
-            return [[], []]
-        close_values = close_values[1:52]
-        close_values = [round(x, 2) for x in close_values]
-        volume = volume[1:52]
-    else:
-        if len(close_values) < 53:
-            return [[], []]
-        close_values = close_values[:1] + close_values[2:52]
-        close_values = [round(x, 2) for x in close_values]
-        volume = volume[:1] + volume[2:52]
+    if len(close_values) < 51:
+        return [[], []]
+    close_values = close_values[:51]
+    close_values = [round(x, 2) for x in close_values]
+    volume = volume[:51]
 
     for element in close_values:
         if math.isnan(element):

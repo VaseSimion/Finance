@@ -41,7 +41,8 @@ def create_mail_body(name, both, category, priceprediction):
     According to backtest on the weakest script we still have a 70% chance of growth over the next 3 weeks. The other two are better 
     
     *if in some category there are no stocks written it means the script doesn't consider any stock to be good enough
-    **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research. 
+    **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
+    ***Penny stocks are more risky then the rest, ignore them if you want to lower your risk 
     All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above.
     """.format(name, both, category, priceprediction)
 
