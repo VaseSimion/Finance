@@ -1,3 +1,3 @@
 # Finance
- Pynance
- A module that will give financial indication to what to buy or sell based on various indicators
+Money maker
+Based on machine learning this is recommending buying specific stocks
