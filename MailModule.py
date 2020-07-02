@@ -28,19 +28,28 @@ def create_mail_body(name, both, category, priceprediction):
     
     How are you? I hope you had been an amazing week and the weekend is even better:)
     
+	Because this idea is becoming more popular and I didn't get the time to explain it properly to everyone I am addind at the end the description of the program. If you know what the predictions mean you can skip that part. If you have never read all the e-mail I strongly recommeend you do that at least once.
     According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
     The biggest chances to succeed: {} 
     The second priority would be: {}
-    And the ones predicted by our weakest script are: {}
+    And the third priority list is: {}
     Hope you make money out of these script predictions.
-        
-    Best regards,
+    
+	As a notification, in this period, for a few weeks there are high chances of crazy high volatility and the risk is higher than usual. I recommend not investing any big ammount for at least 3 weeks.
+    
+	Best regards,
     Simion
     
     ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    According to backtest on the weakest script we still have a 70% chance of growth over the next 3 weeks. The other two are better 
-    
-    *if in some category there are no stocks written it means the script doesn't consider any stock to be good enough
+    Background:
+	I have designed 2 scripts based on machine learning with different approaches. One predicts if the price will rise over 20% or not (in reality is more than that but this is the short version) and the other one tries to predict the exact price increase and from that I pick some based on backtesting.
+	If both scripts predict one stock as a winner, this will appear in the "biggest chances to succeed". If only the best script predicts one stock is a winner then it appears in the second priority list. And if only the price prediction script predicts for one stock to grow then it appears in the third priority list.
+	According to backtest on the weakest script we still have a 70% chance of growth over the next 3 weeks. The other two are better. 
+    The scripts are actually predicting on what is going to happen over the next three weeks. So the strategy is to buy now and hold for 3 weeks. An increase in price of 1.25 in the raport means the script thinks the price will rise with 25%.
+	I hope this is clear enough, if not please do not hesitate to contact me at vasile.sularea@gmail.com. The e-mail adress I'm sending the e-mails from will most probabily be seen as spam in the future so I use this yahoo one which is basically used for promotions and spam.
+	If you want to see od predictions to check how the script behaved, I have data saved since 23.5.2020. I have more with a variation of this script which are from march but it's not exactly this script so I don't count them as validation.
+	
+    *if in some category there are no stocks written (you see this sign [])it means the script doesn't consider any stock to be good enough for that category
     **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
     ***Penny stocks are more risky then the rest, ignore them if you want to lower your risk 
     All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above.
