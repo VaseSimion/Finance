@@ -45,6 +45,8 @@ for stock in listOfStocksToAnalyze:
         weekly = weekly.resample('7D', label='right', closed='right').pad()
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
+        if list(weekly["Close"])[-1] <= 1:
+            continue
         if len(list_to_be_analyzed) == 102:
             price_predicted_value = model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
             if 1.8 > price_predicted_value[0][0] > 1.15:

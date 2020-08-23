@@ -22,7 +22,7 @@ for stock in listOfStocksToAnalyze:
             print("*****************************************************************************************")
         print(stock)
         initial_date = "2006-07-22"
-        last_date = "2020-04-11"
+        last_date = "2020-07-04"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
 
