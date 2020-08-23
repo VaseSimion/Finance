@@ -26,6 +26,9 @@ model = tf.keras.models.Sequential()
 
 model.add(tf.keras.layers.Reshape((17, 6), input_shape=(1, 102)))
 model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
+
+model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
+
 model.add(tf.keras.layers.Flatten())
 
 model.add(tf.keras.layers.Dense(252, activation='relu'))
