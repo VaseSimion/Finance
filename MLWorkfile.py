@@ -92,8 +92,8 @@ for stock in both_methods_winners+category_winners+prediction_winners:
 
 prediction_file.close()
 report_file.close()
-Mm.send_mail([element[0] for element in both_methods_winners],
-             [element[0] for element in category_winners],
-             [element[0] for element in prediction_winners],
-             file=report_name)
+# Mm.send_mail([element[0] for element in both_methods_winners],
+#              [element[0] for element in category_winners],
+#              [element[0] for element in prediction_winners],
+#              file=report_name)
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

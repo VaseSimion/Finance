@@ -26,34 +26,15 @@ def create_mail_body(name, both, category, priceprediction):
     body = """\
     Hi {},
     
-	It's been a while since I've put some time into this script. And now that time has come. As a changelog:
-	    - Expanded the database with stocks that I analyze from 1055 to 2024
-	    - A ton of the companies from biomedical domain have been added
-	    - Made a script to calculate the ratio between the price late Friday and what was the first opening price after the recommandations are given (18 days before)
-	    - Will add the result of the predictions in the mail manually along with S&P500 result
-	    - Ignoring from now on all stocks under 1$ because they are too risky
-	Plans:
-	    - Hope to automate adding the results from the predictions in the mails
-	    - Plan to redo the machine learning models given that my stocks database is much bigger now
-	    - Hope I can improve the accuracy
-	
-	Results for 3 weeks ago:
-	    S&P500: 1.0310011802909453
-	    BLDP 1.1384769262742067
-        NIO 1.1350838217330737
-        DLPH 1.1398417454202874
-        MRNA 0.8780460976991852
-        TLRD and BGG went bankrupt (both of these were under 1$ at the time of prediction, this is one of the reasons I will ignore anything under 1$, because this is the proof they can get delisted)
-     
-    And one more thing before going to predictions, please give me some feedback at sularea.vasile@gmail.com on how you see this. Do you think it's usefull, fun, usless, etc? And also what you want to have added. And now to go into the business. 
+    This is going to be the last prediction email for a while. It seems the new model is not responding well with real data although in backtest it proved amazing. 
+    After I fix it (if I ever manage to fix it) I will resume sending e-mails. 
+    Thanks for understanding. 
         
 	According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
     The biggest chances to succeed: {} 
     The second priority would be: {}
     And the third priority list is: {}
     Hope you make money out of these script predictions.
-    
-	As a notification, in this period it seems the market behaves a bit off compared to my model so be cautious.
     
 	Best regards,
     Simion
