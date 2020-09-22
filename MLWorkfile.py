@@ -11,23 +11,33 @@ import AnalysisModule as Ass
 import winsound
 import MailModule as Mm
 
+
+class PredictedStock:
+    def __init__(self, stock_name, close_price, predicted_price_increase, predicted_category_increase,
+                 predicted_category_probabilities, supervised_category_prediction):
+        self.name = stock_name
+        self.price = close_price
+        self.predicted_price_increase = predicted_price_increase
+        self.predicted_category_increase = predicted_category_increase
+        self.supervised_category_prediction = supervised_category_prediction
+        self.predicted_category_probabilities = predicted_category_probabilities
+
+
 update_reports = True
-prediction_file = open('predictions.csv', 'w')
-prediction_writer = csv.writer(prediction_file, delimiter=',', lineterminator='\n',
-                               quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
 report_name = "Reports/ReportFile " + str(date.today()) + ".txt"
 report_file = open(report_name, "w+")
 
 category_model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
 model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
+supervision_model = tf.keras.models.load_model("SavedModels/BestCategoryAlreadyPredictedModel.h5")
 
 date = date.today()
-prediction_writer.writerow([str(date)])
 increment = 0
 category_winners = []
 prediction_winners = []
 both_methods_winners = []
+winners_as_objects = []
 
 listOfStocksToAnalyze = ["^GSPC"] + Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
@@ -48,52 +58,60 @@ for stock in listOfStocksToAnalyze:
         if list(weekly["Close"])[-1] <= 1:
             continue
         if len(list_to_be_analyzed) == 102:
-            price_predicted_value = model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]
-            if 1.8 > price_predicted_value[0][0] > 1.15:
-                prediction_winners.append([stock, price_predicted_value[0][0], list(weekly["Close"])[-1]])
-            print("{} prediction is {}".format(stock, price_predicted_value[0][0]))
-
-            predicted_value = category_model.predict(np.array([[list_to_be_analyzed]]))
+            price_predicted_value = model.predict(np.array([[list_to_be_analyzed]])) / list_to_be_analyzed[0]  # here we predict the price increase and it needs to be calculated as a ratio of the last price
+            predicted_value = category_model.predict(np.array([[list_to_be_analyzed]]))  # here we calculate the price category where the stock lies in (0 - 0.8 - 1.2 - 2 - inf)
             total_predictions_chances = sum(predicted_value[0])
-            predicted_value[0] = [round(100*x/total_predictions_chances, 2) for x in predicted_value[0]]
-            prediction_writer.writerow([stock] + [round(price_predicted_value[0][0],2)] + [Ass.Decode(predicted_value[0])] +
-                                       list(predicted_value[0]))
-            prediction_file.flush()
-            if Ass.Decode(predicted_value[0]) > 1:
-                if len(prediction_winners) > 0 and stock == prediction_winners[-1][0]:
-                    both_methods_winners.append(prediction_winners[-1] + [Ass.Decode(predicted_value[0])] +
-                                                list(predicted_value[0]))
-                    prediction_winners.pop()
-                else:
-                    category_winners.append([stock] + [price_predicted_value[0][0]] + [list(weekly["Close"])[-1]] +
-                                            [Ass.Decode(predicted_value[0])] + list(predicted_value[0]))
-            print("{} prediction is {} with {}".format(stock, Ass.Decode(predicted_value[0]), predicted_value[0]))
+            predicted_value[0] = [round(100*x/total_predictions_chances, 2) for x in predicted_value[0]]  # making the prediction chance to be prediction probabilities and sum as 1
+
+            if 2.5 > price_predicted_value[0][0] > 1.2 or Ass.Decode(predicted_value[0]) > 1:
+                supervision_predicted_value = supervision_model.predict(np.array([[list_to_be_analyzed]]))  # here we calculate the price category for supervision in case we want to predict this and it's where the stock lies in (0 - 0.8 - 1.2 - 2 - inf)
+                total_supervised_predictions_chances = sum(supervision_predicted_value[0])
+                supervision_predicted_value[0] = [round(100 * x / total_supervised_predictions_chances, 2)
+                                                  for x in supervision_predicted_value[0]]  # making the prediction chance to be prediction probabilities and sum as 1
+
+                winners_as_objects.append(PredictedStock(stock_name=stock,
+                                                         close_price=list(weekly["Close"])[-1],
+                                                         predicted_price_increase=price_predicted_value[0][0],
+                                                         predicted_category_increase=Ass.Decode(predicted_value[0]),
+                                                         supervised_category_prediction=
+                                                         Ass.Decode(supervision_predicted_value[0]),
+                                                         predicted_category_probabilities=predicted_value[0]))
+
+            print("{} prediction is {} and {} with {}".format(stock, round(price_predicted_value[0][0], 2),
+                                                              Ass.Decode(predicted_value[0]), predicted_value[0]))
     except:
         print("Some shit happened")
+
+for stocks_predicted in winners_as_objects:
+    if stocks_predicted.predicted_price_increase > 1.2 and stocks_predicted.predicted_category_increase > 1:
+        both_methods_winners.append(stocks_predicted)
+    elif stocks_predicted.predicted_category_increase < 1:
+        prediction_winners.append(stocks_predicted)
+    else:
+        category_winners.append(stocks_predicted)
 
 if update_reports:
     report_file.write("Both scripts predicted this:\n")
     for stock_performance in both_methods_winners:
-        Rm.append_both(stock_performance, report_file)
+        Rm.write_stock(stock_performance, report_file)
 
     report_file.write("\n---------------------------------------------------------------------\n")
     report_file.write("Category predicted this:\n")
     for stock_performance in category_winners:
-        Rm.append_category(stock_performance, report_file)
+        Rm.write_stock(stock_performance, report_file)
 
     report_file.write("\n---------------------------------------------------------------------\n")
     report_file.write("Price prediction scripts predicted this:\n")
     for stock_performance in prediction_winners:
-        Rm.append_price_prediction(stock_performance, report_file)
+        Rm.write_stock(stock_performance, report_file)
 
 report_file.write("\nFor validation purposes this is the list to use:\n")
 for stock in both_methods_winners+category_winners+prediction_winners:
-    report_file.write("\"" + stock[0] + "\",")
+    report_file.write("\"" + stock.name + "\",")
 
-prediction_file.close()
 report_file.close()
-# Mm.send_mail([element[0] for element in both_methods_winners],
-#              [element[0] for element in category_winners],
-#              [element[0] for element in prediction_winners],
+# Mm.send_mail([element.name for element in both_methods_winners],
+#              [element.name for element in category_winners],
+#              [element.name for element in prediction_winners],
 #              file=report_name)
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

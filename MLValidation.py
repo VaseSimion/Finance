@@ -4,11 +4,16 @@ import csv
 import AnalysisModule as Ass
 import datetime
 from matplotlib import pyplot as plt
+import ExtractData as ED
+import yfinance as yf
 
-CategoryTest = False
+CategoryTest = True
 
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
+
+csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
+                       quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
 if CategoryTest is False:
     reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
@@ -62,6 +67,11 @@ if CategoryTest is False:
         if 2.5 > predicted_value > 1.2 and value > 1:
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
+            weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+            list_to_be_saved = validation + price + volume
+            if len(list_to_be_saved) == 103:
+                csvwriter.writerow(list_to_be_saved)
             if value > 3:
                 value = 3
             print("Traded " + input_data_corresponding_company[check_index] + " on " +
@@ -71,6 +81,11 @@ if CategoryTest is False:
         elif 2.5 > predicted_value > 1.2 and value < 1:
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                      value, "o")
+            weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+            list_to_be_saved = validation + price + volume
+            if len(list_to_be_saved) == 103:
+                csvwriter.writerow(list_to_be_saved)
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
             wrong_cases += 1
@@ -154,6 +169,12 @@ if CategoryTest is True:
             if value < 3:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
+                    dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                list_to_be_saved = validation + price + volume
+                if len(list_to_be_saved) == 103:
+                    csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
@@ -161,6 +182,12 @@ if CategoryTest is True:
             if value < 3:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
+                    dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                list_to_be_saved = validation + price + volume
+                if len(list_to_be_saved) == 103:
+                    csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 0.8:
