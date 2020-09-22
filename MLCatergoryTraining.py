@@ -10,7 +10,7 @@ reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
 original_result = []
-number_of_epochs = 10
+number_of_epochs = 30
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -30,13 +30,10 @@ model = tf.keras.models.Sequential()
 
 model.add(tf.keras.layers.Reshape((17, 6), input_shape=(1, 102)))
 
-model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
+model.add(tf.keras.layers.Conv1D(100, 3, padding='same', activation='relu'))
 model.add(tf.keras.layers.MaxPool1D(2))
 
-model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
-model.add(tf.keras.layers.MaxPool1D(2))
-
-model.add(tf.keras.layers.Conv1D(100, 2, padding='same', activation='linear'))
+model.add(tf.keras.layers.Conv1D(100, 3, padding='same', activation='relu'))
 model.add(tf.keras.layers.MaxPool1D(2))
 
 model.add(tf.keras.layers.Flatten())
@@ -64,7 +61,7 @@ model_callback = tf.keras.callbacks.ModelCheckpoint(
     best_model_path, monitor='val_accuracy', verbose=0, save_best_only=True,
     save_weights_only=False, mode='auto', save_freq='epoch')
 
-history = model.fit(input_data, result, validation_split=0.2, epochs=number_of_epochs,
+history = model.fit(training_data, training_results, validation_data=[test_data, test_results], epochs=number_of_epochs,
                     callbacks=[cp_callback, model_callback])
 
 
@@ -85,5 +82,3 @@ print("evaluate")
 model.evaluate(test_data, test_results)
 
 model.save("SavedModels/CategoryModel.h5")
-
-

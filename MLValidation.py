@@ -2,18 +2,31 @@ import tensorflow as tf
 import numpy as np
 import csv
 import AnalysisModule as Ass
+import datetime
+from matplotlib import pyplot as plt
 
-CategoryTest = True
+CategoryTest = False
+
+list_of_values_for_predicted = []
+list_of_dates_for_predicted = []
 
 if CategoryTest is False:
     reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
     input_data = []
     result = []
 
+    verification_reader = csv.reader(open("dataset_verification.csv"), delimiter=',', quotechar='|')
+    input_data_corresponding_company = []
+    dates_list_validation = []
+
     for row in reader:
         week = ([float(x) for x in row])
         input_data.append([week[1:]])
         result.append(week[:1])
+
+    for row in verification_reader:
+        input_data_corresponding_company.append(row[0])
+        dates_list_validation.append(row[1])
 
     input_data = np.array(input_data)
     result = np.array(result)
@@ -36,7 +49,7 @@ if CategoryTest is False:
     succesfull_cases_1_2 = 0
     wrong_cases_1_2 = 0
 
-    for check_index in range(int(0.8*len(input_data)) + 1, len(input_data)):
+    for check_index in range(int(0.8*len(input_data)) + 1, int(1*len(input_data))):
         value = result[check_index][0] / input_data[check_index][0][0]
         predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
         if predicted_value[0][0] > 2.5:
@@ -48,7 +61,18 @@ if CategoryTest is False:
 
         if 2.5 > predicted_value > 1.2 and value > 1:
             succesfull_cases += 1
+            plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
+            if value > 3:
+                value = 3
+            print("Traded " + input_data_corresponding_company[check_index] + " on " +
+                  dates_list_validation[check_index])
+            list_of_values_for_predicted.append(value-1)
+            list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif 2.5 > predicted_value > 1.2 and value < 1:
+            plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
+                     value, "o")
+            list_of_values_for_predicted.append(value-1)
+            list_of_dates_for_predicted.append(dates_list_validation[check_index])
             wrong_cases += 1
 
         if 2.5 > predicted_value > 1.2 and value > 1.1:
@@ -69,6 +93,7 @@ if CategoryTest is False:
     print("For anything between 1.2 and 2 growth prediction were {} succesful guesses and {} wrong guesses with an "
           "accuracy of {}".format(succesfull_cases_1_2, wrong_cases_1_2,
                                   round(100*(succesfull_cases_1_2/(succesfull_cases_1_2+wrong_cases_1_2)), 2)))
+    plt.show()
 
 if CategoryTest is True:
     reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
@@ -76,11 +101,19 @@ if CategoryTest is True:
     result = []
     original_result = []
 
+    verification_reader = csv.reader(open("dataset_verification.csv"), delimiter=',', quotechar='|')
+    input_data_corresponding_company = []
+    dates_list_validation = []
+
     for row in reader:
         week = ([float(x) for x in row])
         input_data.append([week[1:]])
         result.append(Ass.ClassifyResults(week[0] / week[1]))
         original_result.append(week[0])
+
+    for row in verification_reader:
+        input_data_corresponding_company.append(row[0])
+        dates_list_validation.append(row[1])
 
     model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
 
@@ -115,10 +148,21 @@ if CategoryTest is True:
             list_of_trades.append([Ass.Decode(predicted_value[0]), value, check_index])
 
         predicted_value_numeric = Ass.Decode(predicted_value[0])
+
         if predicted_value_numeric == 2:
             cases_over_2 += 1
+            if value < 3:
+                plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
+                         value, "o")
+                list_of_values_for_predicted.append(value-1)
+                list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
             cases_1_2 += 1
+            if value < 3:
+                plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
+                         value, "o")
+                list_of_values_for_predicted.append(value-1)
+                list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 0.8:
             cases_0_8 += 1
         elif predicted_value_numeric == 0.2:
@@ -147,3 +191,10 @@ if CategoryTest is True:
     print("For anything between 1.2 and 2 growth prediction were {} succesful guesses and {} wrong guesses with an "
           "accuracy of {}".format(succesfull_cases_1_2, wrong_cases_1_2,
                                   succesfull_cases_1_2 / (succesfull_cases_1_2 + wrong_cases_1_2)))
+    plt.show()
+
+list_of_values_for_predicted = [100*x for x in list_of_values_for_predicted]
+list_of_dates_for_predicted = [datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S") for x in list_of_dates_for_predicted]
+
+print("Average gain is: " + str(np.average(list_of_values_for_predicted)))
+print("Standard deviation is: " + str(np.std(list_of_values_for_predicted)) + "%")
