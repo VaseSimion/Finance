@@ -214,6 +214,7 @@ def return_sma_and_closing_prices_buy(stock):
 # ****************************************************************************************
 # ****************************************************************************************
 
+
 def is_eps_rising(financialdata):
     eps = list(financialdata["EPS"])
     if len(eps) < 8:
@@ -225,6 +226,7 @@ def is_eps_rising(financialdata):
     else:
         return False
 
+
 def sales_are_rising(financialdata):
     sales = list(financialdata["Sales"])
     if len(sales) < 8:
@@ -234,12 +236,15 @@ def sales_are_rising(financialdata):
     else:
         return False
 
+
 def is_return_on_equity_good(financialdata):
     roe = list(financialdata["ReturnOnEquity"])
     if roe[0] > 0.15:
         return True
     else:
         return False
+
+
 def is_profit_good(financialdata):
     profit = list(financialdata["ProfitMargin"])
     if profit[0] > profit[4] and profit[1] > profit[5]:
@@ -258,8 +263,9 @@ def ClassifyResults(response_ratio):
     else:
         return [0, 0, 0, 1]
 
+
 def Decode(matrix):
-    matrix = [float(round(x,1)) for x in matrix]
+    matrix = [float(round(x, 1)) for x in matrix]
     if matrix.index(max(matrix)) == 0:
         return 2
     elif matrix.index(max(matrix)) == 1:
@@ -268,3 +274,37 @@ def Decode(matrix):
         return 0.8
     else:
         return 0.2
+
+
+def calculate_score(price_prediction, category_list, supervision_list):
+    total_score = 0
+    if price_prediction >= 1.3:
+        total_score += 5
+    elif price_prediction < 1.1:
+        pass
+    else:
+        total_score += (price_prediction - 1.1) * 25
+    percentage_dif = category_list[0] + category_list[1] - category_list[2] - category_list[3]
+
+    if percentage_dif < 0:
+        pass
+    elif percentage_dif > 40:
+        total_score += 6
+    else:
+        total_score += 6 * percentage_dif / 40
+
+    percentage_dif = supervision_list[0] + supervision_list[1] - supervision_list[2] - supervision_list[3]
+
+    if percentage_dif < -80:
+        total_score *= 0.8
+    elif percentage_dif > 80:
+        total_score *= 1.2
+    else:
+        total_score *= (1 + 0.2 * percentage_dif / 80)
+
+    if total_score < 0:
+        return 0
+    elif total_score > 10:
+        return 10
+    else:
+        return round(total_score, 2)

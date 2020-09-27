@@ -193,7 +193,7 @@ investing_list_of_healthcare = ["TXG", "ABT", "ABBV", "ABMD", "ACIU", "ACHC", "A
                                 "ANPC", "ATRS", "ANTM", "APLS", "APHA", "AMEH", "APLT", "APRE", "APTO", "ARCT", "ARQT",
                                 "ARDX",
                                 "ARNA", "ARWR", "ARVN", "ASDN", "ASMB", "AZN", "ATRA", "ATNZ", "ATHX", "BCEL", "ATRC",
-                                "ATRI", "ACB", "AVDL", "AVNS", "AVTR", "AVGR", "AVRO", "AXGT", "AXNX", "AXGT", "AXSM",
+                                "ATRI", "ACB", "AVDL", "AVNS", "AVTR", "AVGR", "AVRO", "AXNX", "AXGT", "AXSM",
                                 "BXRX", "BHC", "BAX", "BEAM", "BDX", "BGNE", "BLCM", "BYSI", "TECH", "BASI", "BIOC",
                                 "BCRX", "BDSI", "BIIB", "BLFS", "BMRN", "PHGE", "BNTX", "BSTC", "BEAT", "BTAI",
                                 "BLUE", "BPMC", "BSX", "BBIO", "BMY", "BRKR", "BNR", "CABA", "CTST", "CGC", "CARA",

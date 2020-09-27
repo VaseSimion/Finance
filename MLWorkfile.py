@@ -14,13 +14,16 @@ import MailModule as Mm
 
 class PredictedStock:
     def __init__(self, stock_name, close_price, predicted_price_increase, predicted_category_increase,
-                 predicted_category_probabilities, supervised_category_prediction):
+                 predicted_category_probabilities, supervised_category_prediction, supervised_probabilities,
+                 success_score):
         self.name = stock_name
         self.price = close_price
         self.predicted_price_increase = predicted_price_increase
         self.predicted_category_increase = predicted_category_increase
         self.supervised_category_prediction = supervised_category_prediction
         self.predicted_category_probabilities = predicted_category_probabilities
+        self.supervised_probabilities = supervised_probabilities
+        self.success_score = success_score
 
 
 update_reports = True
@@ -49,10 +52,9 @@ for stock in listOfStocksToAnalyze:
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
     #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
-        #weekly = yf.download(tickers=stock, interval="1wk", period="2y")
-        weekly = yf.download(tickers=stock, interval="1d", start=str(date.today() + timedelta(weeks=-53)),
-                             end=str(date.today()))
-        weekly = weekly.resample('7D', label='right', closed='right').pad()
+        weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        # if date.today().weekday() == 6:
+        #    weekly = weekly.drop([date.today() + timedelta(-2)])
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
         if list(weekly["Close"])[-1] <= 1:
@@ -68,19 +70,21 @@ for stock in listOfStocksToAnalyze:
                 total_supervised_predictions_chances = sum(supervision_predicted_value[0])
                 supervision_predicted_value[0] = [round(100 * x / total_supervised_predictions_chances, 2)
                                                   for x in supervision_predicted_value[0]]  # making the prediction chance to be prediction probabilities and sum as 1
-
+                local_score = Ass.calculate_score(price_predicted_value[0][0], predicted_value[0],
+                                                  supervision_predicted_value[0])
                 winners_as_objects.append(PredictedStock(stock_name=stock,
                                                          close_price=list(weekly["Close"])[-1],
                                                          predicted_price_increase=price_predicted_value[0][0],
                                                          predicted_category_increase=Ass.Decode(predicted_value[0]),
                                                          supervised_category_prediction=
                                                          Ass.Decode(supervision_predicted_value[0]),
-                                                         predicted_category_probabilities=predicted_value[0]))
+                                                         predicted_category_probabilities=predicted_value[0],
+                                                         supervised_probabilities=supervision_predicted_value[0],
+                                                         success_score=local_score))
 
-            print("{} prediction is {} and {} with {}".format(stock, round(price_predicted_value[0][0], 2),
-                                                              Ass.Decode(predicted_value[0]), predicted_value[0]))
+                print("{} prediction has a score of {}".format(stock, local_score))
     except:
-        print("Some shit happened")
+        print("Some shit happened with " + stock)
 
 for stocks_predicted in winners_as_objects:
     if stocks_predicted.predicted_price_increase > 1.2 and stocks_predicted.predicted_category_increase > 1:
@@ -110,8 +114,9 @@ for stock in both_methods_winners+category_winners+prediction_winners:
     report_file.write("\"" + stock.name + "\",")
 
 report_file.close()
-# Mm.send_mail([element.name for element in both_methods_winners],
-#              [element.name for element in category_winners],
-#              [element.name for element in prediction_winners],
-#              file=report_name)
+Mm.send_mail([element.name + "(" + str(element.success_score) + ")" for element in both_methods_winners],
+             [element.name + "(" + str(element.success_score) + ")" for element in category_winners],
+             [element.name + "(" + str(element.success_score) + ")" for element in prediction_winners],
+             file=report_name)
+
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

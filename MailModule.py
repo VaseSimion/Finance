@@ -26,10 +26,8 @@ def create_mail_body(name, both, category, priceprediction):
     body = """\
     Hi {},
     
-    This is going to be the last prediction email for a while. It seems the new model is not responding well with real data although in backtest it proved amazing. 
-    After I fix it (if I ever manage to fix it) I will resume sending e-mails. 
-    Thanks for understanding. 
-        
+    Bugs fixed, and a new system that puts a score besides every prediction. The highest the score, the more confidence in the prediction.
+            
 	According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
     The biggest chances to succeed: {} 
     The second priority would be: {}
@@ -38,19 +36,9 @@ def create_mail_body(name, both, category, priceprediction):
     
 	Best regards,
     Simion
-    
-    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    Background:
-	I have designed 2 scripts based on machine learning with different approaches. One predicts if the price will rise over 20% or not (in reality is more than that but this is the short version) and the other one tries to predict the exact price increase and from that I pick some based on backtesting.
-	If both scripts predict one stock as a winner, this will appear in the "biggest chances to succeed". If only the best script predicts one stock is a winner then it appears in the second priority list. And if only the price prediction script predicts for one stock to grow then it appears in the third priority list.
-	According to backtest on the weakest script we still have a 70% chance of growth over the next 3 weeks. The other two are better. 
-    The scripts are actually predicting on what is going to happen over the next three weeks. So the strategy is to buy now and hold for 3 weeks. An increase in price of 1.25 in the raport means the script thinks the price will rise with 25%.
-	I hope this is clear enough, if not please do not hesitate to contact me at sularea.vasile@gmail.com. The e-mail adress I'm sending the e-mails from will most probabily be seen as spam in the future so I use this yahoo one which is basically used for promotions and spam.
-	If you want to see old predictions to check how the script behaved, I have data saved since 23.5.2020. I have more with a variation of this script which are from march but it's not exactly this script so I don't count them as validation.
 	
     *if in some category there are no stocks written (you see this sign [])it means the script doesn't consider any stock to be good enough for that category
     **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
-    ***Penny stocks are more risky then the rest, ignore them if you want to lower your risk 
     All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above.
     """.format(name, both, category, priceprediction)
 

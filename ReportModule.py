@@ -8,7 +8,9 @@ def write_stock(stock_performance, report_file):
                       + " increase predicted by the category one with " +
                       str(stock_performance.predicted_category_probabilities[1]) + "%(" +
                       str(stock_performance.predicted_category_probabilities[2]) + "%)" + " as confidence and " +
-                      str(stock_performance.supervised_category_prediction) +
+                      str(stock_performance.supervised_category_prediction) + "(" +
+                      str(stock_performance.supervised_probabilities[1]) + "% - " +
+                      str(stock_performance.supervised_probabilities[2]) + "% as confidence)" +
                       " increase seen by the supervision model" + "\n")
     try:
         report_file.write(str(yf.Ticker(stock_performance.name).financials.iloc[[2, 6, 15]]))
