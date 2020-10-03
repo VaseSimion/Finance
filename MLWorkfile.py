@@ -53,6 +53,7 @@ for stock in listOfStocksToAnalyze:
             print("*****************************************************************************************")
     #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
         weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        weekly = weekly.drop([date.today() + timedelta(-1)])  # this is because if I just get the data by 1 week I have also the last friday
         # if date.today().weekday() == 6:
         #    weekly = weekly.drop([date.today() + timedelta(-2)])
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)

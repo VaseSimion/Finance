@@ -286,12 +286,12 @@ def calculate_score(price_prediction, category_list, supervision_list):
         total_score += (price_prediction - 1.1) * 25
     percentage_dif = category_list[0] + category_list[1] - category_list[2] - category_list[3]
 
-    if percentage_dif < 0:
+    if percentage_dif < -40:
         pass
     elif percentage_dif > 40:
         total_score += 6
     else:
-        total_score += 6 * percentage_dif / 40
+        total_score += 6 * (percentage_dif + 40) / 80
 
     percentage_dif = supervision_list[0] + supervision_list[1] - supervision_list[2] - supervision_list[3]
 

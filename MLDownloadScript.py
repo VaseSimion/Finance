@@ -4,6 +4,7 @@ from datetime import timedelta
 import csv
 import DatabaseStocks as Ds
 import yfinance as yf
+import math
 
 csvwriter = csv.writer(open('dataset.csv', 'w'), delimiter=',', lineterminator='\n',
                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -15,19 +16,25 @@ listOfStocksToAnalyze = Ds.get_investing_lists()
 for stock in listOfStocksToAnalyze:
     increment += 1
     try:
-        if increment % 10 == 0:
+        if increment % 2 == 0:
             print("*****************************************************************************************")
             print("                                  {} out of {}                                     ".
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
         print(stock)
-        initial_date = "2006-07-22"
+        initial_date = "2006-07-03"
         last_date = "2020-07-04"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
 
         # get the oldest date so I don't run without data
-        weekly = yf.download(tickers=stock, interval="1wk")
+        weekly = yf.download(tickers=stock, interval="1wk", start=initial_date)
+
+        for index, row in weekly.iterrows():
+            if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                #print(index)
+                weekly = weekly.drop([index])
+
         if (list(weekly.index)[0] + timedelta(days=365)) > date:
             date = list(weekly.index)[0] + timedelta(days=365)
 
