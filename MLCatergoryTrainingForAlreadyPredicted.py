@@ -10,7 +10,7 @@ reader = csv.reader(open('dataset_predicted.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
 original_result = []
-number_of_epochs = 30
+number_of_epochs = 50
 
 for row in reader:
     week = ([float(x) for x in row])
@@ -21,10 +21,10 @@ for row in reader:
 input_data = np.array(input_data)
 result = np.array(result)
 print(np.shape(input_data))
-training_data = input_data[:int(0.8*len(input_data))]
-test_data = input_data[int(0.8*len(input_data)):]
-training_results = result[:int(0.8*len(input_data))]
-test_results = result[int(0.8*len(input_data)):]
+training_data = input_data[:int(0.9*len(input_data))]
+test_data = input_data[int(0.9*len(input_data)):]
+training_results = result[:int(0.9*len(input_data))]
+test_results = result[int(0.9*len(input_data)):]
 
 model = tf.keras.models.Sequential()
 

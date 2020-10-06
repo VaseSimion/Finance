@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import DatabaseStocks as Ds
 import yfinance as yf
 import ExtractData as Ed
-import csv
+import math
 import AnalysisModule as Ass
 import winsound
 import MailModule as Mm
@@ -51,11 +51,12 @@ for stock in listOfStocksToAnalyze:
             print("                                  {} out of {}                                     ".
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
-    #        weekly = yf.download(tickers=stock, interval="1wk", start="2019-01-11", end="2020-04-04")
         weekly = yf.download(tickers=stock, interval="1wk", period="2y")
         weekly = weekly.drop([date.today() + timedelta(-1)])  # this is because if I just get the data by 1 week I have also the last friday
-        # if date.today().weekday() == 6:
-        #    weekly = weekly.drop([date.today() + timedelta(-2)])
+        for index, row in weekly.iterrows():
+            if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                weekly = weekly.drop([index])
+
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
         if list(weekly["Close"])[-1] <= 1:

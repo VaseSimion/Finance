@@ -7,15 +7,14 @@ from matplotlib import pyplot as plt
 import ExtractData as ED
 import yfinance as yf
 
-CategoryTest = True
+CategoryTest = False
 
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
 
-csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
-                       quotechar='|', quoting=csv.QUOTE_MINIMAL)
-
 if CategoryTest is False:
+    csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
+                           quotechar='|', quoting=csv.QUOTE_MINIMAL)
     reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
     input_data = []
     result = []
@@ -111,6 +110,8 @@ if CategoryTest is False:
     plt.show()
 
 if CategoryTest is True:
+    csvwriter = csv.writer(open('dataset_predicted_cat.csv', 'w'), delimiter=',', lineterminator='\n',
+                           quotechar='|', quoting=csv.QUOTE_MINIMAL)
     reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
     input_data = []
     result = []
