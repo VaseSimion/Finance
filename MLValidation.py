@@ -6,6 +6,8 @@ import datetime
 from matplotlib import pyplot as plt
 import ExtractData as ED
 import yfinance as yf
+import math
+
 
 CategoryTest = False
 
@@ -15,11 +17,11 @@ list_of_dates_for_predicted = []
 if CategoryTest is False:
     csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
+    reader = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
     input_data = []
     result = []
 
-    verification_reader = csv.reader(open("dataset_verification.csv"), delimiter=',', quotechar='|')
+    verification_reader = csv.reader(open("dataset_verification_test.csv"), delimiter=',', quotechar='|')
     input_data_corresponding_company = []
     dates_list_validation = []
 
@@ -39,11 +41,6 @@ if CategoryTest is False:
     model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
 
     print(model.summary())
-    check_index = 90
-    value = result[check_index]/input_data[check_index][0][0]
-    predicted_value = model.predict(np.array([input_data[check_index]]))/input_data[check_index][0][0]
-    print("Ratio between the value and predicted value is {}, "
-          "with {} as value and {} as predicted value".format(value/predicted_value, value, predicted_value))
 
     invested_sum = 0
     return_sum = 100
@@ -53,7 +50,7 @@ if CategoryTest is False:
     succesfull_cases_1_2 = 0
     wrong_cases_1_2 = 0
 
-    for check_index in range(int(0.8*len(input_data)) + 1, int(1*len(input_data))):
+    for check_index in range(int(len(input_data))):
         value = result[check_index][0] / input_data[check_index][0][0]
         predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
         if predicted_value[0][0] > 2.5:
@@ -67,6 +64,9 @@ if CategoryTest is False:
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
             weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+            for index, row in weekly.iterrows():
+                if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                    weekly = weekly.drop([index])
             [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
             list_to_be_saved = validation + price + volume
             if len(list_to_be_saved) == 103:
@@ -81,6 +81,9 @@ if CategoryTest is False:
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                      value, "o")
             weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+            for index, row in weekly.iterrows():
+                if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                    weekly = weekly.drop([index])
             [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
             list_to_be_saved = validation + price + volume
             if len(list_to_be_saved) == 103:
@@ -112,12 +115,12 @@ if CategoryTest is False:
 if CategoryTest is True:
     csvwriter = csv.writer(open('dataset_predicted_cat.csv', 'w'), delimiter=',', lineterminator='\n',
                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
+    reader = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
     input_data = []
     result = []
     original_result = []
 
-    verification_reader = csv.reader(open("dataset_verification.csv"), delimiter=',', quotechar='|')
+    verification_reader = csv.reader(open("dataset_verification_test.csv"), delimiter=',', quotechar='|')
     input_data_corresponding_company = []
     dates_list_validation = []
 
@@ -135,13 +138,6 @@ if CategoryTest is True:
 
     print(model.summary())
 
-    check_index = 222222
-    predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
-    print(predicted_value[0])
-    print([int(round(x)) for x in predicted_value[0]])
-    print(Ass.Decode(predicted_value[0]))
-    print(original_result[check_index])
-
     succesfull_cases = 0
     wrong_cases = 0
     succesfull_cases_1_2 = 0
@@ -155,7 +151,7 @@ if CategoryTest is True:
     cases_0_8 = 0
     cases_below_0_8 = 0
 
-    for check_index in range(int(0.8 * len(input_data)) + 1, len(input_data)):
+    for check_index in range(len(input_data)):
         value = original_result[check_index] / input_data[check_index][0][0]
         predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
         if Ass.Decode(predicted_value[0]) >= 1 and invested_sum < 1500:
@@ -171,6 +167,9 @@ if CategoryTest is True:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
                 [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
                     dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
                 list_to_be_saved = validation + price + volume
@@ -184,6 +183,9 @@ if CategoryTest is True:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
                 [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
                     dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
                 list_to_be_saved = validation + price + volume

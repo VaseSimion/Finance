@@ -70,24 +70,6 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
     close_values = [round(x, 2) for x in close_values]
     volume = volume[:51]
 
-    for element in close_values:
-        if math.isnan(element):
-            if close_values.index(element) != 0:
-                close_values[close_values.index(element)] = close_values[close_values.index(element) - 1]
-            else:
-                close_values[close_values.index(element)] = close_values[close_values.index(element) + 1]
-        else:
-            continue
-
-    for element in volume:
-        if math.isnan(element):
-            if volume.index(element) != 0:
-                volume[volume.index(element)] = volume[volume.index(element) - 1]
-            else:
-                volume[volume.index(element)] = volume[volume.index(element) + 1]
-        else:
-            continue
-
     max_price = max(close_values)
     close_values = [round(x/max_price, 3) for x in close_values]
     max_volume = max(volume)

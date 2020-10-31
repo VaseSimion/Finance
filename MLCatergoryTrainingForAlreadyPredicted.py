@@ -55,7 +55,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 checkpoint_path = "CategoryChkp/cp_already_predicted.ckpt"
 best_model_path = "SavedModels/BestCategoryAlreadyPredictedModel.h5"
 checkpoint_dir = os.path.dirname(checkpoint_path)
-model.load_weights(checkpoint_path)
+#model.load_weights(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
 model_callback = tf.keras.callbacks.ModelCheckpoint(
     best_model_path, monitor='val_accuracy', verbose=0, save_best_only=True,

@@ -5,22 +5,30 @@ import os
 import matplotlib.pyplot as plt
 
 reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
+reader_test = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
 input_data = []
 result = []
-number_of_epochs = 10
+input_data_test = []
+result_test = []
+number_of_epochs = 30
 
 for row in reader:
     week = ([float(x) for x in row])
     input_data.append([week[1:]])
     result.append(week[:1])
 
+for row in reader_test:
+    week = ([float(x) for x in row])
+    input_data_test.append([week[1:]])
+    result_test.append(week[:1])
+
 input_data = np.array(input_data)
 result = np.array(result)
 print(np.shape(input_data))
-training_data = input_data[:int(0.8*len(input_data))]
-test_data = input_data[int(0.8*len(input_data)):]
-training_results = result[:int(0.8*len(input_data))]
-test_results = result[int(0.8*len(input_data)):]
+training_data = input_data
+test_data = input_data_test
+training_results = result
+test_results = result_test
 
 model = tf.keras.models.Sequential()
 
