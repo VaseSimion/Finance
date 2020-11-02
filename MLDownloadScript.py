@@ -27,8 +27,8 @@ for stock in listOfStocksToAnalyze:
             print("*****************************************************************************************")
         print(stock)
         initial_date = "2006-07-03"
-        last_date = "2020-08-01"
-        test_start_date = "2019-07-06"
+        last_date = "2020-10-03"
+        test_start_date = "2020-05-02"
         last_date = datetime.strptime(last_date, "%Y-%m-%d")
         date = datetime.strptime(initial_date, "%Y-%m-%d")
         test_date = datetime.strptime(test_start_date, "%Y-%m-%d")

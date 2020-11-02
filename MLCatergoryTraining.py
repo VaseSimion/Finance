@@ -24,13 +24,11 @@ for row in reader_test:
     input_data_test.append([week[1:]])
     result_test.append(Ass.ClassifyResults(week[0]/week[1]))
 
-input_data = np.array(input_data)
-result = np.array(result)
+training_data = np.array(input_data)
+training_results = np.array(result)
 print(np.shape(input_data))
-training_data = input_data
-test_data = input_data_test
-training_results = result
-test_results = result_test
+test_data = np.array(input_data_test)
+test_results = np.array(result_test)
 
 model = tf.keras.models.Sequential()
 
@@ -61,7 +59,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 checkpoint_path = "CategoryChkp/cp.ckpt"
 best_model_path = "SavedModels/BestCategoryModel.h5"
 checkpoint_dir = os.path.dirname(checkpoint_path)
-#model.load_weights(checkpoint_path)
+# model.load_weights(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
 model_callback = tf.keras.callbacks.ModelCheckpoint(
     best_model_path, monitor='val_accuracy', verbose=0, save_best_only=True,

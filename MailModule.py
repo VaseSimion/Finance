@@ -27,10 +27,7 @@ def create_mail_body(name, both, category, priceprediction):
     # Create the plain-text and HTML version of your message
     body = """\
     Hi {},
-    
-    Sorry for the spam today, I thought I did something smart but I overlooked something and things went out of control. 
-    Also I retrained my models to avoid some correlation bias I had in the previous ones. It looks like they are still performing well so I will do another series of predictions and these will be the predictions for this week.
-            
+
     According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
 Both scripts recommended to succeed: {} 
 Script no.1 recommended: {}
@@ -102,6 +99,7 @@ def send_mail(both, category, pricepredict, file):
             mails_not_sent.append(name)
     # Terminate the SMTP session and close the connection
     mail.quit()
-    print("The following emails have not been sent")
-    for name in mails_not_sent:
-        print(name)
+    if len(mails_not_sent) > 0:
+        print("The following emails have not been sent")
+        for name in mails_not_sent:
+            print(name)
