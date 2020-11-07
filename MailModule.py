@@ -100,6 +100,7 @@ def send_mail(both, category, pricepredict, file):
     # Terminate the SMTP session and close the connection
     mail.quit()
     if len(mails_not_sent) > 0:
-        print("The following emails have not been sent")
-        for name in mails_not_sent:
-            print(name)
+        with open("log.txt", mode='w+', encoding='utf-8') as file:
+            file.write("The following emails have not been sent")
+            for name in mails_not_sent:
+                file.write(name + "\t")
