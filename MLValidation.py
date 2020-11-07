@@ -53,14 +53,14 @@ if CategoryTest is False:
     for check_index in range(int(len(input_data))):
         value = result[check_index][0] / input_data[check_index][0][0]
         predicted_value = model.predict(np.array([input_data[check_index]])) / input_data[check_index][0][0]
-        if predicted_value[0][0] > 2.5:
+        if predicted_value[0][0] > 3:
             continue
-        if predicted_value[0][0] > 1.2 and invested_sum < 1500:
+        if predicted_value[0][0] > 1.3 and invested_sum < 1500:
             invested_sum += 100
             return_sum *= value
             list_of_trades.append([predicted_value[0][0], value, check_index])
 
-        if 2.5 > predicted_value > 1.2 and value > 1:
+        if 3 > predicted_value > 1.3 and value > 1:
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
             weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
@@ -72,12 +72,11 @@ if CategoryTest is False:
             if len(list_to_be_saved) == 103:
                 csvwriter.writerow(list_to_be_saved)
             if value > 3:
-                value = 3
-            print("Traded " + input_data_corresponding_company[check_index] + " on " +
-                  dates_list_validation[check_index])
+                print("Traded " + input_data_corresponding_company[check_index] + " on " +
+                      dates_list_validation[check_index] + " with predicted " + str(predicted_value) + " and value " + str(value))
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
-        elif 2.5 > predicted_value > 1.2 and value < 1:
+        elif 3 > predicted_value > 1.3 and value < 1:
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                      value, "o")
             weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
@@ -92,9 +91,9 @@ if CategoryTest is False:
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
             wrong_cases += 1
 
-        if 2.5 > predicted_value > 1.2 and value > 1.1:
+        if 3 > predicted_value > 1.4 and value > 1.1:
             succesfull_cases_1_2 += 1
-        elif 2.5 > predicted_value > 1.2 and value < 1.1:
+        elif 3 > predicted_value > 1.4 and value < 1.1:
             wrong_cases_1_2 += 1
 
         if check_index % 1000 == 0 and succesfull_cases != 0:

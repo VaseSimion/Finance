@@ -278,12 +278,12 @@ def Decode(matrix):
 
 def calculate_score(price_prediction, category_list, supervision_list):
     total_score = 0
-    if price_prediction >= 1.3:
+    if price_prediction >= 1.4:
         total_score += 5
-    elif price_prediction < 1.1:
+    elif price_prediction < 1.2:
         pass
     else:
-        total_score += (price_prediction - 1.1) * 25
+        total_score += (price_prediction - 1.2) * 25
     percentage_dif = category_list[0] + category_list[1] - category_list[2] - category_list[3]
 
     if percentage_dif < -40:

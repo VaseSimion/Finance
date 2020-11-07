@@ -31,15 +31,11 @@ def get_latest_1_year_price_weekly(financialdata, data):
     dates.reverse()
     close_values_validation = list(financialdata["Close"])
     close_values_validation.reverse()
-    while dates[0] > data + timedelta(days=21) and len(dates) > 12:
+    while dates[0] > (data + timedelta(days=21)):
         dates.remove(dates[0])
         close_values_validation.remove(close_values_validation[0])
 
-    validation_values = [close_values_validation[0]]
-    if math.isnan(validation_values[0]):
-        value_after_3_weeks = round(close_values_validation[1], 2)
-    else:
-        value_after_3_weeks = round(close_values_validation[0], 2)
+    value_after_3_weeks = round(close_values_validation[0], 2)
 #    print(date)
 #    print(close_values)
 #    print((date + timedelta(days=21)).strftime("%Y-%m-%d"))

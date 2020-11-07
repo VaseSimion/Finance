@@ -67,7 +67,7 @@ for stock in listOfStocksToAnalyze:
             total_predictions_chances = sum(predicted_value[0])
             predicted_value[0] = [round(100*x/total_predictions_chances, 2) for x in predicted_value[0]]  # making the prediction chance to be prediction probabilities and sum as 1
 
-            if 2.5 > price_predicted_value[0][0] > 1.2 or Ass.Decode(predicted_value[0]) > 1:
+            if 3 > price_predicted_value[0][0] > 1.3 or Ass.Decode(predicted_value[0]) > 1:
                 supervision_predicted_value = supervision_model.predict(np.array([[list_to_be_analyzed]]))  # here we calculate the price category for supervision in case we want to predict this and it's where the stock lies in (0 - 0.8 - 1.2 - 2 - inf)
                 total_supervised_predictions_chances = sum(supervision_predicted_value[0])
                 supervision_predicted_value[0] = [round(100 * x / total_supervised_predictions_chances, 2)
