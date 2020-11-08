@@ -60,7 +60,7 @@ if CategoryTest is False:
             return_sum *= value
             list_of_trades.append([predicted_value[0][0], value, check_index])
 
-        if 3 > predicted_value > 1.3 and value > 1:
+        if 3 > predicted_value > 1.3 and 10 > value > 1:
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
             weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
@@ -71,7 +71,7 @@ if CategoryTest is False:
             list_to_be_saved = validation + price + volume
             if len(list_to_be_saved) == 103:
                 csvwriter.writerow(list_to_be_saved)
-            if value > 3:
+            if value > 2:
                 print("Traded " + input_data_corresponding_company[check_index] + " on " +
                       dates_list_validation[check_index] + " with predicted " + str(predicted_value) + " and value " + str(value))
             list_of_values_for_predicted.append(value-1)
@@ -162,7 +162,7 @@ if CategoryTest is True:
 
         if predicted_value_numeric == 2:
             cases_over_2 += 1
-            if value < 3:
+            if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
@@ -178,7 +178,7 @@ if CategoryTest is True:
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
             cases_1_2 += 1
-            if value < 3:
+            if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")

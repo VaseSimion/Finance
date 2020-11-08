@@ -2,6 +2,8 @@ import yfinance as yf
 from datetime import date
 from datetime import timedelta
 
+
+# This is made to write in the txt file the performance predicted by the models
 def write_stock(stock_performance, report_file):
     report_file.write(stock_performance.name + " at " + str(round(stock_performance.price, 2)) + "$ has " +
                       str(round(stock_performance.predicted_price_increase, 2)) +
@@ -21,9 +23,11 @@ def write_stock(stock_performance, report_file):
     report_file.write("\n")
 
 
+# This looks at a file saved 3 weeks ago and returns the stocks that were predicted as a list
 def get_list_of_3_weeks_ago():
     report_name = "Reports/ReportFile " + str(date.today() + timedelta(-21)) + ".txt"
     report_file = open(report_name, "r")
+    line = ""
     for line in report_file:
         pass
     print(line)
@@ -34,6 +38,7 @@ def get_list_of_3_weeks_ago():
     return stocks_list
 
 
+# This returns the performance over 3 weeks of the predicted stocks 3 weeks ago (monday - friday)
 def return_report_from_3_weeks_ago():
     zile_in_trecut = 1  # cate zile o trecut de vineri pana acum:  daca e luni ii 3
     list_of_stocks = []
@@ -42,9 +47,9 @@ def return_report_from_3_weeks_ago():
             weekly = yf.download(tickers=stock, interval="1d", period="6mo")
             closing = list(weekly["Close"])
             closing.reverse()
-            today = weekly.loc[str(date.today() + timedelta(-zile_in_trecut))]
+            today = weekly.loc[str(date.today() + timedelta(-zile_in_trecut))]  # last Friday is considered today
             print(str(date.today() + timedelta(- zile_in_trecut)))
-            old_day = weekly.loc[str(date.today() + timedelta(-18 - zile_in_trecut))]
+            old_day = weekly.loc[str(date.today() + timedelta(-18 - zile_in_trecut))] # 3 weeks ago monday is old day
             print(str(date.today() + timedelta(-18 - zile_in_trecut)))
             print(stock, str(today["Close"] / old_day["Open"]))
             list_of_stocks.append([stock, old_day["Open"], today["Close"] / old_day["Open"]])
@@ -54,4 +59,5 @@ def return_report_from_3_weeks_ago():
     for element in list_of_stocks:
         string_to_output += element[0] + " bought at " + str(round(element[1], 2)) + " had an increase of " + \
                             str(round(100*(element[2] - 1), 2)) + "%\n"
+    # the output of this function is a string so it can be put in the mail module easily
     return string_to_output
