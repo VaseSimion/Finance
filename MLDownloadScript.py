@@ -22,14 +22,7 @@ increment = 0  # this is used to show progress
 listOfStocksToAnalyze = Ds.get_investing_lists()  # getting the stocks that are traded on Trading212
 with tqdm(total=len(listOfStocksToAnalyze)) as pbar:
     for stock in listOfStocksToAnalyze:
-        increment += 1
         try:
-            if increment % 2 == 0:
-                print("*****************************************************************************************")
-                print("                                  {} out of {}                                     ".
-                      format(increment, len(listOfStocksToAnalyze)))
-                print("*****************************************************************************************")
-            # print(stock)
             initial_date = "2006-07-03"  # date from when I start downloading data
             last_date = "2020-10-03"  # last date considered for training
             test_start_date = "2020-05-02"  # date where the training and test datasets are split
@@ -38,7 +31,7 @@ with tqdm(total=len(listOfStocksToAnalyze)) as pbar:
             test_date = datetime.strptime(test_start_date, "%Y-%m-%d")
 
             # Download data
-            weekly = yf.download(tickers=stock, interval="1wk", start=initial_date)
+            weekly = yf.download(tickers=stock, interval="1wk", start=initial_date, threads=False)
 
             # Remove all NaN values
             for index, row in weekly.iterrows():
@@ -69,5 +62,5 @@ with tqdm(total=len(listOfStocksToAnalyze)) as pbar:
                         verification_csvwriter_test.writerow([stock, date])
             pbar.update(1)
         except:
-            print("something went bad")
+            print("something went bad with " + stock)
             pbar.update(1)

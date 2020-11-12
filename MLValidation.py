@@ -10,7 +10,7 @@ import math
 
 
 CategoryTest = False
-
+download_data = True
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
 
@@ -63,14 +63,15 @@ if CategoryTest is False:
         if 3 > predicted_value > 1.3 and 10 > value > 1:
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
-            weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
-            for index, row in weekly.iterrows():
-                if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
-                    weekly = weekly.drop([index])
-            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
-            list_to_be_saved = validation + price + volume
-            if len(list_to_be_saved) == 103:
-                csvwriter.writerow(list_to_be_saved)
+            if download_data:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                list_to_be_saved = validation + price + volume
+                if len(list_to_be_saved) == 103:
+                    csvwriter.writerow(list_to_be_saved)
             if value > 2:
                 print("Traded " + input_data_corresponding_company[check_index] + " on " +
                       dates_list_validation[check_index] + " with predicted " + str(predicted_value) + " and value " + str(value))
@@ -79,14 +80,15 @@ if CategoryTest is False:
         elif 3 > predicted_value > 1.3 and value < 1:
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                      value, "o")
-            weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
-            for index, row in weekly.iterrows():
-                if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
-                    weekly = weekly.drop([index])
-            [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
-            list_to_be_saved = validation + price + volume
-            if len(list_to_be_saved) == 103:
-                csvwriter.writerow(list_to_be_saved)
+            if download_data:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                list_to_be_saved = validation + price + volume
+                if len(list_to_be_saved) == 103:
+                    csvwriter.writerow(list_to_be_saved)
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
             wrong_cases += 1
@@ -165,15 +167,16 @@ if CategoryTest is True:
             if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
-                for index, row in weekly.iterrows():
-                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
-                        weekly = weekly.drop([index])
-                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
-                    dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
-                list_to_be_saved = validation + price + volume
-                if len(list_to_be_saved) == 103:
-                    csvwriter.writerow(list_to_be_saved)
+                if download_data:
+                    weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                    for index, row in weekly.iterrows():
+                        if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                            weekly = weekly.drop([index])
+                    [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
+                        dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                    list_to_be_saved = validation + price + volume
+                    if len(list_to_be_saved) == 103:
+                        csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
@@ -181,15 +184,16 @@ if CategoryTest is True:
             if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                          value, "o")
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
-                for index, row in weekly.iterrows():
-                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
-                        weekly = weekly.drop([index])
-                [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
-                    dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
-                list_to_be_saved = validation + price + volume
-                if len(list_to_be_saved) == 103:
-                    csvwriter.writerow(list_to_be_saved)
+                if download_data:
+                    weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1wk")
+                    for index, row in weekly.iterrows():
+                        if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                            weekly = weekly.drop([index])
+                    [price, validation, volume] = ED.get_latest_1_year_price_weekly(weekly, datetime.datetime.strptime(
+                        dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
+                    list_to_be_saved = validation + price + volume
+                    if len(list_to_be_saved) == 103:
+                        csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 0.8:
