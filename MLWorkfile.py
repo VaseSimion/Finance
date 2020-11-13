@@ -53,7 +53,7 @@ for stock in listOfStocksToAnalyze:
             print("                                  {} out of {}                                     ".
                   format(increment, len(listOfStocksToAnalyze)))
             print("*****************************************************************************************")
-        weekly = yf.download(tickers=stock, interval="1wk", period="2y")
+        weekly = yf.download(tickers=stock, interval="1wk", period="2y", threads=False)
         # this is because if I just get the data by 1 week I have also the last friday so i get rid of the last entry
         weekly = weekly.drop([date.today() + timedelta(-1)])
         # Remove all the NaN values
