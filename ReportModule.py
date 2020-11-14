@@ -8,7 +8,7 @@ def write_stock(stock_performance, report_file):
     report_file.write(stock_performance.name + " at " + str(round(stock_performance.price, 2)) + "$ has " +
                       str(round(stock_performance.predicted_price_increase, 2)) +
                       " predicted as price increase and " + str(stock_performance.predicted_category_increase)
-                      + " increase predicted by the category one with " +
+                      + " increase predicted by second script with " +
                       str(stock_performance.predicted_category_probabilities[1]) + "%(" +
                       str(stock_performance.predicted_category_probabilities[2]) + "%)" + " as confidence and " +
                       str(stock_performance.supervised_category_prediction) + "(" +

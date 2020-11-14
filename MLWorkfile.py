@@ -112,12 +112,12 @@ if update_reports:
         Rm.write_stock(stock_performance, report_file)
 
     report_file.write("\n---------------------------------------------------------------------\n")
-    report_file.write("Category predicted this:\n")
+    report_file.write("Script 1 predicted this:\n")
     for stock_performance in category_winners:
         Rm.write_stock(stock_performance, report_file)
 
     report_file.write("\n---------------------------------------------------------------------\n")
-    report_file.write("Price prediction scripts predicted this:\n")
+    report_file.write("Script 2 predicted this:\n")
     for stock_performance in prediction_winners:
         Rm.write_stock(stock_performance, report_file)
 
