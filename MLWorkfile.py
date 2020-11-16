@@ -99,7 +99,7 @@ for stock in listOfStocksToAnalyze:
 
 # Spit predictions into categories
 for stocks_predicted in winners_as_objects:
-    if stocks_predicted.predicted_price_increase > 1.2 and stocks_predicted.predicted_category_increase > 1:
+    if stocks_predicted.predicted_price_increase > 1.3 and stocks_predicted.predicted_category_increase > 1:
         both_methods_winners.append(stocks_predicted)
     elif stocks_predicted.predicted_category_increase < 1:
         prediction_winners.append(stocks_predicted)

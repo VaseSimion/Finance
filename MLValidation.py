@@ -3,6 +3,7 @@ import numpy as np
 import csv
 import AnalysisModule as Ass
 import datetime
+from datetime import timedelta
 from matplotlib import pyplot as plt
 import ExtractData as ED
 import yfinance as yf
@@ -10,7 +11,7 @@ import math
 
 
 CategoryTest = False
-download_data = True
+download_data = False
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
 
@@ -61,6 +62,17 @@ if CategoryTest is False:
             list_of_trades.append([predicted_value[0][0], value, check_index])
 
         if 3 > predicted_value > 1.3 and 10 > value > 1:
+            try:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                if weekly["Close"].iloc[date_index] < 1:
+                    continue
+            except:
+                print(weekly["Close"])
+                print(dates_list_validation[check_index])
+                print(list(weekly.index))
+                print("ffs")
+                continue
             succesfull_cases += 1
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), value, "o")
             if download_data:
@@ -78,6 +90,17 @@ if CategoryTest is False:
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif 3 > predicted_value > 1.3 and value < 1:
+            try:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                if weekly["Close"].iloc[date_index] < 1:
+                    continue
+            except:
+                print(weekly["Close"])
+                print(dates_list_validation[check_index])
+                print(list(weekly.index))
+                print("ffs")
+                continue
             plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
                      value, "o")
             if download_data:
@@ -163,6 +186,17 @@ if CategoryTest is True:
         predicted_value_numeric = Ass.Decode(predicted_value[0])
 
         if predicted_value_numeric == 2:
+            try:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                if weekly["Close"].iloc[date_index] < 1:
+                    continue
+            except:
+                print(weekly["Close"])
+                print(dates_list_validation[check_index])
+                print(list(weekly.index))
+                print("ffs")
+                continue
             cases_over_2 += 1
             if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
@@ -180,6 +214,17 @@ if CategoryTest is True:
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
+            try:
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                if weekly["Close"].iloc[date_index] < 1:
+                    continue
+            except:
+                print(weekly["Close"])
+                print(dates_list_validation[check_index])
+                print(list(weekly.index))
+                print("ffs")
+                continue
             cases_1_2 += 1
             if value < 10:
                 plt.plot(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"),
