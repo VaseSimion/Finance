@@ -63,7 +63,8 @@ if CategoryTest is False:
 
         if 3 > predicted_value > 1.3 and 10 > value > 1:
             try:
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index],
+                                     interval="1w", start="2020-01-01")
                 date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
@@ -91,7 +92,8 @@ if CategoryTest is False:
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif 3 > predicted_value > 1.3 and value < 1:
             try:
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index],
+                                     interval="1w", start="2020-01-01")
                 date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
@@ -187,7 +189,8 @@ if CategoryTest is True:
 
         if predicted_value_numeric == 2:
             try:
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index],
+                                     interval="1w", start="2020-01-01")
                 date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
@@ -215,7 +218,8 @@ if CategoryTest is True:
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
         elif predicted_value_numeric == 1.2:
             try:
-                weekly = yf.download(tickers=input_data_corresponding_company[check_index], interval="1d")
+                weekly = yf.download(tickers=input_data_corresponding_company[check_index],
+                                     interval="1w", start="2020-01-01")
                 date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
