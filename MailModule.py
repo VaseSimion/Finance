@@ -27,11 +27,14 @@ def create_mail_body(name, both, category, priceprediction):
     # Create the plain-text and HTML version of your message
     body = """\
     Hi {},
-
-    According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
-Both scripts recommended to succeed: {} 
-Script no.1 recommended: {}
-Script no.2 recommended: {}
+        
+            According to my scripts, in order of certainty on my script, here are the predictions for what stock will grow in the next 3 weeks:
+       -Both scripts recommended to succeed- 
+    {} 
+          -Script no.1 recommended- 
+    {}
+          -Script no.2 recommended- 
+    {}
     Hope you make money out of these script predictions.
     
     Results from 3 weeks ago prediction are:
