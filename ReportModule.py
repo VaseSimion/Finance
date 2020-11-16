@@ -10,11 +10,12 @@ def write_stock(stock_performance, report_file):
                       " predicted as price increase and " + str(stock_performance.predicted_category_increase)
                       + " increase predicted by second script with " +
                       str(stock_performance.predicted_category_probabilities[1]) + "%(" +
-                      str(stock_performance.predicted_category_probabilities[2]) + "%)" + " as confidence and " +
-                      str(stock_performance.supervised_category_prediction) + "(" +
-                      str(stock_performance.supervised_probabilities[1]) + "% - " +
-                      str(stock_performance.supervised_probabilities[2]) + "% as confidence)" +
-                      " increase seen by the supervision model" + "\n")
+                      str(stock_performance.predicted_category_probabilities[2]) + "%)" + " as confidence") \
+        #                  and " +
+    #                  str(stock_performance.supervised_category_prediction) + "(" +
+    #                  str(stock_performance.supervised_probabilities[1]) + "% - " +
+    #                  str(stock_performance.supervised_probabilities[2]) + "% as confidence)" +
+    #                  " increase seen by the supervision model" + "\n")
     try:
         report_file.write(str(yf.Ticker(stock_performance.name).financials.iloc[[2, 6, 15]]))
     except:
@@ -63,7 +64,7 @@ def return_report_from_3_weeks_ago():
     string_to_output = ""
     for element in list_of_stocks:
         string_to_output += element[0] + " bought at " + str(round(element[1], 2)) + " had an increase of " + \
-                            str(round(100*(element[2] - 1), 2)) + "%\n"
+                            str(round(100 * (element[2] - 1), 2)) + "%\n"
     # the output of this function is a string so it can be put in the mail module easily
     string_to_output += "Average win for this period was " + str(round(100 * (sum_of_values / stocks - 1), 2)) + "%\n"
     return string_to_output
