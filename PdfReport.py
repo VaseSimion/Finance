@@ -45,7 +45,7 @@ def write_for_one_stock(stock, file):
 
     file.write("""<h1>{}</h1>
     
-    <p>Price is {}$ per share and volume is {} shares in the last week</p>
+    <p>Price is {}$ per share and volume was {} shares in the last week</p>
     <p>First script gives {} increase</p>
     <p>Second script gives {} increase with {}% as confidence</p>
     
@@ -100,24 +100,12 @@ def write_for_one_stock(stock, file):
     <br>
     <br>
     <br>
-    <br>""".format(stock.name + " (" + str(stock.success_score) + ")", round(stock.price, 2), stock.volume, round(stock.predicted_price_increase, 2),
-                   stock.predicted_category_increase,
-                       round(stock.predicted_category_probabilities[0], 2) + round(stock.predicted_category_probabilities[1], 2),
-                       stock.name+".png", columns[0],
-                       columns[1],
-                   columns[2],
-                   columns[3],
-                   income[0],
-                   income[1],
-                   income[2],
-                   income[3],
-                   profit[0],
-                       profit[1],
-                   profit[2],
-                   profit[3],
-                   revenue[0],
-                   revenue[1],
-                   revenue[2],
+    <br>""".format(stock.name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)), stock.volume,
+                   str(round(stock.predicted_price_increase, 2)), stock.predicted_category_increase,
+                   str(round(stock.predicted_category_probabilities[0], 2) +
+                       round(stock.predicted_category_probabilities[1], 2)),
+                   stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
+                   income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
                    revenue[3]))
 
 
@@ -125,11 +113,34 @@ def write_results(file, results):
     list_of_results = results.split("\n")
     file.write("<h1>Results from 3 weeks ago predictions</h1>")
     for item in list_of_results:
+        if "GSPC" in item:
+            item = item.replace("^GSPC", "The SP500 index (which represents the market and we use it as reference)")
         file.write("<p>" + item + "</p>")
 
 def write_end(file):
     file.write(
-        """    </body>
+        """    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>Disclaimer: This is just a financial experiment, I am in no position to give financial advice. I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
+All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above. </p>
+    </body>
     </html>""")
 
 
