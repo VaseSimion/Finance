@@ -1,0 +1,150 @@
+import yfinance as yf
+import GraphFunctions as Gf
+import time
+import pdfkit
+import re
+
+
+def write_start(file):
+    file.write("""<!DOCTYPE html>
+        <html>
+        <head>
+        <title>Test</title>
+        <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        </style>
+        </head>
+        <body>
+        """)
+
+
+def write_for_one_stock(stock, file):
+    try:
+        dataframe_financials = yf.Ticker(stock.name).financials.iloc[[2, 6, 15]]
+        print(dataframe_financials)
+        columns = [str(x)[:10]for x in list(dataframe_financials.columns)]
+        income = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[0])]
+        profit = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[1])]
+        revenue = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[2])]
+        while len(columns) < 4:
+            columns.append("Nan")
+            income.append("Nan")
+            profit.append("Nan")
+            revenue.append("Nan")
+
+    except:
+        columns = ["2020", "2019", "2018", "2017"]
+        income = ["NaN", "NaN", "NaN", "NaN"]
+        profit = ["NaN", "NaN", "NaN", "NaN"]
+        revenue = ["NaN", "NaN", "NaN", "NaN"]
+
+    Gf.save_macd_buy(yf.download(tickers=stock.name, interval="1d", period="6mo", threads=False), stock.name)
+    time.sleep(2)
+
+    file.write("""<h1>{}</h1>
+    
+    <p>Price is {}$ per share and volume is {} shares in the last week</p>
+    <p>First script gives {} increase</p>
+    <p>Second script gives {} increase with {}% as confidence</p>
+    
+    
+    <p><img src="C:/Users/sular/PycharmProjects/Finance/Reports/Support Files For Pdf/{}" width="800" height="600"></p>
+
+    
+    <table style="width:800px">
+      <tr>
+        <th></th>
+        <th>{}</th>
+        <th>{}</th>
+        <th>{}</th>
+        <th>{}</th>
+      </tr>
+      <tr>
+        <td>Income before tax</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+      </tr>
+      <tr>
+        <td>Gross profit</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+      </tr>
+      <tr>
+        <td>Total revenue</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+        <td>{}</td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>""".format(stock.name + " (" + str(stock.success_score) + ")", round(stock.price, 2), stock.volume, round(stock.predicted_price_increase, 2),
+                   stock.predicted_category_increase,
+                       round(stock.predicted_category_probabilities[0], 2) + round(stock.predicted_category_probabilities[1], 2),
+                       stock.name+".png", columns[0],
+                       columns[1],
+                   columns[2],
+                   columns[3],
+                   income[0],
+                   income[1],
+                   income[2],
+                   income[3],
+                   profit[0],
+                       profit[1],
+                   profit[2],
+                   profit[3],
+                   revenue[0],
+                   revenue[1],
+                   revenue[2],
+                   revenue[3]))
+
+
+def write_results(file, results):
+    list_of_results = results.split("\n")
+    file.write("<h1>Results from 3 weeks ago predictions</h1>")
+    for item in list_of_results:
+        file.write("<p>" + item + "</p>")
+
+def write_end(file):
+    file.write(
+        """    </body>
+    </html>""")
+
+
+def write_the_report(list_of_stocks, results):
+    report_name = "Reports/Support Files For Pdf/Temporary.html"
+    report_file = open(report_name, "w+")
+    write_start(report_file)
+    for stock in list_of_stocks:
+        write_for_one_stock(stock, report_file)
+    write_results(report_file, results)
+    write_end(report_file)
+    report_file.close()
+
+    path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    options = {'enable-local-file-access': None}
+    pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Reports\Support Files For Pdf\Report.pdf',
+                     configuration=config, options=options)

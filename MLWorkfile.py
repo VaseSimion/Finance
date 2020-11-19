@@ -10,14 +10,16 @@ import math
 import AnalysisModule as Ass
 import winsound
 import MailModule as Mm
+import PdfReport as Pr
 
 
 class PredictedStock:  # Class to save all predictions
-    def __init__(self, stock_name, close_price, predicted_price_increase, predicted_category_increase,
+    def __init__(self, stock_name, close_price, last_volume, predicted_price_increase, predicted_category_increase,
                  predicted_category_probabilities, supervised_category_prediction, supervised_probabilities,
                  success_score):
         self.name = stock_name
         self.price = close_price
+        self.volume = last_volume
         self.predicted_price_increase = predicted_price_increase
         self.predicted_category_increase = predicted_category_increase
         self.supervised_category_prediction = supervised_category_prediction
@@ -85,6 +87,7 @@ for stock in listOfStocksToAnalyze:
                                                   supervision_predicted_value[0])
                 winners_as_objects.append(PredictedStock(stock_name=stock,
                                                          close_price=list(weekly["Close"])[-1],
+                                                         last_volume=list(weekly["Volume"])[-1],
                                                          predicted_price_increase=price_predicted_value[0][0],
                                                          predicted_category_increase=Ass.Decode(predicted_value[0]),
                                                          supervised_category_prediction=
@@ -127,10 +130,12 @@ for stock in both_methods_winners + category_winners + prediction_winners:
 
 report_file.close()
 
+Pr.write_the_report(both_methods_winners+category_winners+prediction_winners, Rm.return_report_from_3_weeks_ago())
+
 # Send the email
 Mm.send_mail([element.name + "(" + str(element.success_score) + ")" for element in both_methods_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in category_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in prediction_winners],
-             file=report_name)
+             file="Reports\Support Files For Pdf\Report.pdf")
 
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)
