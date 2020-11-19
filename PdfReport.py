@@ -47,7 +47,7 @@ def write_for_one_stock(stock, file):
     
     <p>Price is {}$ per share and volume was {} shares in the last week</p>
     <p>First script gives {} increase</p>
-    <p>Second script gives {} increase with {}% as confidence</p>
+    <p>Second script gives {} increase and it has {}% confidence of making profit</p>
     
     
     <p><img src="C:/Users/sular/PycharmProjects/Finance/Reports/Support Files For Pdf/{}" width="800" height="600"></p>
@@ -102,8 +102,7 @@ def write_for_one_stock(stock, file):
     <br>
     <br>""".format(stock.name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)), stock.volume,
                    str(round(stock.predicted_price_increase, 2)), stock.predicted_category_increase,
-                   str(round(stock.predicted_category_probabilities[0], 2) +
-                       round(stock.predicted_category_probabilities[1], 2)),
+                   str(round(stock.predicted_category_probabilities[0] + stock.predicted_category_probabilities[1], 2)),
                    stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
                    income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
                    revenue[3]))
