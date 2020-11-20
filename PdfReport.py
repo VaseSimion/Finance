@@ -84,7 +84,7 @@ def write_for_one_stock(stock, file):
       </tr>
     </table>
     <br>
-    <br>
+    <p> You can find more information on stock at https://finance.yahoo.com/quote/{} </p>
     <br>
     <br>
     <br>
@@ -105,7 +105,7 @@ def write_for_one_stock(stock, file):
                    str(round(stock.predicted_category_probabilities[0] + stock.predicted_category_probabilities[1], 2)),
                    stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
                    income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
-                   revenue[3]))
+                   revenue[3], stock.name))
 
 
 def write_results(file, results):
