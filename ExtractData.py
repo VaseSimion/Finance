@@ -42,9 +42,13 @@ def get_latest_1_year_price_weekly(financialdata, data):
 #    print(value_after_3_weeks)
 
     max_price = max(close_values+[value_after_3_weeks])
+    if max_price < 1:
+        return [[], [], []]
     close_values = [round(x/max_price, 3) for x in close_values]
     value_after_3_weeks = round(value_after_3_weeks/max_price, 3)
     max_volume = max(volume)
+    if max_volume < 100:
+        return [[], [], []]
     volume = [round(x/max_volume, 3) for x in volume]
     if 0.0 in close_values:
         return [[], [], []]
@@ -67,8 +71,12 @@ def get_latest_1_year_price_weekly_from_today(financialdata):
     volume = volume[:51]
 
     max_price = max(close_values)
+    if max_price < 1:
+        return [[], []]
     close_values = [round(x/max_price, 3) for x in close_values]
     max_volume = max(volume)
+    if max_volume < 100:
+        return [[], []]
     volume = [round(x/max_volume, 3) for x in volume]
     if 0.0 in close_values:
         return [[], []]
