@@ -58,6 +58,8 @@ for stock in listOfStocksToAnalyze:
         weekly = yf.download(tickers=stock, interval="1wk", period="2y", threads=False)
         # this is because if I just get the data by 1 week I have also the last friday so i get rid of the last entry
         weekly = weekly.drop([date.today() + timedelta(-1)])
+        # Remove duplicates in so that in the days with splits/ dividents we dont remove them with the drop function
+        weekly.index = weekly.index.where(~weekly.index.duplicated(), weekly.index + timedelta(1))
         # Remove all the NaN values
         for index, row in weekly.iterrows():
             if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
