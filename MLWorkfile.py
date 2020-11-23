@@ -72,7 +72,7 @@ for stock in listOfStocksToAnalyze:
 
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
-        if list(weekly["Close"])[-1] <= 1:  # Ignoring all stocks with a price smaller than 1$
+        if (list(weekly["Close"])[-1] <= 1) or (list(weekly["Volume"])[-1] <= 1000):  # Ignoring all stocks with a price smaller than 1$
             continue
         if len(list_to_be_analyzed) == 102:
             # here we predict the price increase and it needs to be calculated as a ratio of the last price

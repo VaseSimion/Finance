@@ -66,6 +66,7 @@ def save_macd_buy(stock, name):
     ax1.tick_params(rotation=30)
     ax2.tick_params(rotation=30)
     plt.savefig("Reports/Support Files For Pdf/" + name + ".png")
+    plt.close()
 
 
 def draw_macd_sell(stock, name):
