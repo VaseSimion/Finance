@@ -36,7 +36,7 @@ list_of_utilities_and_real_estate = ["AES", "AEE", "AEP", "AWK", "WTR", "ATO", "
 
 list_of_energy = ["LNT", "AR", "APA", "BKR", "COG", "CNP", "CHK", "CVX", "SNP", "CNX", "CXO", "COP",
                   "CLB", "DCP", "DVN", "DO", "D", "DRQ", "DTE", "ENS", "EPD", "EOG", "EQT", "XOM", "FSLR", "GPOR",
-                  "HAL", "HP", "HES", "HFC", "KMI", "LPI", "MMP", "MRO", "MPC", "MUR", "NBR", "NOV", "NBL",
+                  "HAL", "HP", "HES", "HFC", "KMI", "LPI", "MMP", "MRO", "MPC", "MUR", "NBR", "NOV",
                   "NS", "OAS", "OXY", "OII", "OKE", "PBR", "PSX", "PXD", "QEP", "RRC", "RES", "SSL", "SLB", "SM",
                   "SWN", "SPWR", "TRGP", "FTI", "VAL", "VLO", "VSLR", "WLL", "WMB", "WEC", "INT"]
 
@@ -112,7 +112,7 @@ investing_list_of_energy = ["ADES", "AES", "ARPL", "AMRC", "AMSC", "APA", "ARCH"
                             "ETR", "EPD", "EVA", "EOG", "EQT", "EQNR", "ES", "EXC", "EXTN",
                             "XOM", "FSLR", "FCEL", "GEOS", "HAL", "HP", "HES", "HEP", "JKS", "KMI", "KOS", "MMP", "MRO",
                             "MPC", "MPLX", "MUR",
-                            "MUSA", "NC", "NOV", "NGS", "NEE", "NBL", "DNOW", "OMP", "OXY", "OKE", "PBF", "BTU", "PBA",
+                            "MUSA", "NC", "NOV", "NGS", "NEE", "DNOW", "OMP", "OXY", "OKE", "PBF", "BTU", "PBA",
                             "PBR", "PSX", "PSXP", "PXD", "PAA", "PLUG", "RRC",
                             "SLB", "SHLX", "SEDG", "SO", "SWN", "SPI", "SPWR", "RUN", "TRGP", "TRNX", "TRP", "FTI",
                             "TOT", "RIG", "VAL", "VLO", "VET", "VNOM", "VSLR", "VOC", "WES", "WMB", "WPX"]
