@@ -23,7 +23,7 @@ def get_contacts(filename):
     return names, emails
 
 
-def create_mail_body(name, both, category, priceprediction):
+def create_mail_body(name, both, category, priceprediction, old_report):
     # Create the plain-text and HTML version of your message
     body = """\
     Hi {},
@@ -45,7 +45,7 @@ Simion
 *if in some category there are no stocks written (you see this sign [])it means the script doesn't consider any stock to be good enough for that category
 **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
 All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above.
-""".format(name, both, category, priceprediction, Rm.return_report_from_3_weeks_ago())
+""".format(name, both, category, priceprediction, old_report)
 
     print(body)
     return body
@@ -53,6 +53,7 @@ All this recommendation should be taken with a grain a salt and a critical mind.
 
 def send_mail(both, category, pricepredict, file):
     names, emails = get_contacts('mycontacts.txt')  # read contacts
+    results = Rm.return_report_from_3_weeks_ago()
 
     # set up the SMTP server
     mail = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
@@ -71,7 +72,7 @@ def send_mail(both, category, pricepredict, file):
             msg['To'] = email
             msg['Subject'] = "Predictions of the week"
 
-            text = create_mail_body(name, both, category, pricepredict)
+            text = create_mail_body(name, both, category, pricepredict, results)
 
             # Turn these into plain/html MIMEText objects
             part1 = MIMEText(text, "plain")
@@ -107,3 +108,4 @@ def send_mail(both, category, pricepredict, file):
             file.write("The following emails have not been sent")
             for name in mails_not_sent:
                 file.write(name + "\t")
+        file.close()

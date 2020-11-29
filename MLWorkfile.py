@@ -11,6 +11,7 @@ import AnalysisModule as Ass
 import winsound
 import MailModule as Mm
 import PdfReport as Pr
+import time
 
 
 class PredictedStock:  # Class to save all predictions
@@ -138,6 +139,8 @@ for stock in both_methods_winners + category_winners + prediction_winners:
 report_file.close()
 
 Pr.write_the_report(both_methods_winners+category_winners+prediction_winners, Rm.return_report_from_3_weeks_ago())
+print("Wait for the report to be written")
+time.sleep(30)
 
 # Send the email
 Mm.send_mail([element.name + "(" + str(element.success_score) + ")" for element in both_methods_winners],
