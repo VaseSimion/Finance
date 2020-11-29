@@ -9,7 +9,7 @@ def write_start(file):
     file.write("""<!DOCTYPE html>
         <html>
         <head>
-        <title>Test</title>
+        <title>Stocks for the next 3 weeks</title>
         <style>
         table, th, td {
           border: 1px solid black;
@@ -156,5 +156,5 @@ def write_the_report(list_of_stocks, results):
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     options = {'enable-local-file-access': None}
-    pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Reports\Support Files For Pdf\Report.pdf',
+    pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Report.pdf',
                      configuration=config, options=options)
