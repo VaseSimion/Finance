@@ -35,14 +35,14 @@ def create_mail_body(name, both, category, priceprediction, old_report):
     {}
           -Script no.2 recommended- 
     {}
-    Hope you make money out of these script predictions.
+    Hope you have fun with these script predictions.
     
     Results from 3 weeks ago prediction are:
 {}
 Best regards,
 Simion
 
-*if in some category there are no stocks written (you see this sign [])it means the script doesn't consider any stock to be good enough for that category
+*if in some section there are no stocks written (you see this sign [])it means the scripts don't consider any stock to be good enough for that section
 **Disclaimer: I have no education in finance and you should do your investing and trading based on your own due dilligence and research.
 All this recommendation should be taken with a grain a salt and a critical mind. I will invest in some of the positions mentioned above.
 """.format(name, both, category, priceprediction, old_report)
