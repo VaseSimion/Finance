@@ -134,8 +134,12 @@ if update_reports:
     for stock_performance in prediction_winners:
         Rm.write_stock(stock_performance, report_file)
 
-report_file.write("\nFor validation purposes this is the list to use:\n")
-for stock in both_methods_winners + category_winners + prediction_winners:
+report_file.write("\nFor validation purposes this is the price list to use:\n")
+for stock in both_methods_winners + prediction_winners:
+    report_file.write("\"" + stock.name + "\",")
+
+report_file.write("\nFor validation purposes this is the category list to use:\n")
+for stock in both_methods_winners + category_winners:
     report_file.write("\"" + stock.name + "\",")
 
 report_file.close()

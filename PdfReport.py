@@ -40,7 +40,25 @@ def write_for_one_stock(stock, file):
         profit = ["NaN", "NaN", "NaN", "NaN"]
         revenue = ["NaN", "NaN", "NaN", "NaN"]
 
-    Gf.save_macd_buy(yf.download(tickers=stock.name, interval="1d", period="6mo", threads=False), stock.name)
+    try:
+        stock_details = yf.Ticker(stock.name)
+        full_name = stock_details.info["shortName"]
+    except:
+        full_name = stock.name
+
+    try:
+        stock_details = yf.Ticker(stock.name)
+        sector = stock_details.info["sector"]
+    except:
+        sector = "Unknown"
+
+    try:
+        stock_details = yf.Ticker(stock.name)
+        industry = stock_details.info["industry"]
+    except:
+        industry = "Unknown"
+
+    Gf.save_macd_buy(yf.download(tickers=stock.name, interval="1d", period="6mo", threads=True), stock.name)
     time.sleep(2)
 
     file.write("""<h1>{}</h1>
@@ -84,6 +102,7 @@ def write_for_one_stock(stock, file):
       </tr>
     </table>
     <br>
+    <p> It operates in the {} sector, part of the {} industry</p>
     <p> You can find more information on stock at https://finance.yahoo.com/quote/{} </p>
     <br>
     <br>
@@ -99,13 +118,12 @@ def write_for_one_stock(stock, file):
     <br>
     <br>
     <br>
-    <br>
-    <br>""".format(stock.name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)), stock.volume,
+    <br>""".format(full_name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)), stock.volume,
                    str(round(stock.predicted_price_increase, 2)), stock.predicted_category_increase,
                    str(round(stock.predicted_category_probabilities[0] + stock.predicted_category_probabilities[1], 2)),
                    stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
                    income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
-                   revenue[3], stock.name))
+                   revenue[3], sector, industry, stock.name))
 
 
 def write_results(file, results):

@@ -1,5 +1,7 @@
 import numpy as np
 import tulipy as ti
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
