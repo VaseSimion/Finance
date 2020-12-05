@@ -4,6 +4,9 @@ import time
 import pdfkit
 import re
 import os
+from datetime import date
+import pandas as pd
+import numpy as np
 
 
 def write_start(file):
@@ -21,14 +24,17 @@ def write_start(file):
         """)
 
 
-def write_for_one_stock(stock, file):
+def write_data_for_one_stock(file, stock):
     try:
         dataframe_financials = yf.Ticker(stock.name).financials.iloc[[2, 6, 15]]
         print(dataframe_financials)
         columns = [str(x)[:10]for x in list(dataframe_financials.columns)]
-        income = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[0])]
-        profit = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[1])]
-        revenue = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[2])]
+        income = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else
+                  (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[0])]
+        profit = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else
+                  (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[1])]
+        revenue = [("-" + re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) if x < 0 else
+                   (re.sub(r'(?<!^)(?=(\d{3})+$)', r'.',  str(abs(int(x))))) for x in list(dataframe_financials.iloc[2])]
         while len(columns) < 4:
             columns.append("Nan")
             income.append("Nan")
@@ -66,7 +72,7 @@ def write_for_one_stock(stock, file):
     
     <p>Price is {}$ per share and volume was {} shares in the last week</p>
     <p>First script gives {} increase</p>
-    <p>Second script gives {} increase and it has {}% confidence of making profit</p>
+    <p>Second script gives a chance of making profit of {}%</p>
     
     
     <p><img src="C:/Users/sular/PycharmProjects/Finance/Reports/Support Files For Pdf/{}" width="800" height="600"></p>
@@ -104,7 +110,7 @@ def write_for_one_stock(stock, file):
     </table>
     <br>
     <p> It operates in the {} sector, part of the {} industry</p>
-    <p> You can find more information on stock at https://finance.yahoo.com/quote/{} </p>
+    <p> You can find more information on stock at <a href=https://finance.yahoo.com/quote/{}>{}</a> </p>
     <br>
     <br>
     <br>
@@ -119,12 +125,13 @@ def write_for_one_stock(stock, file):
     <br>
     <br>
     <br>
-    <br>""".format(full_name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)), stock.volume,
-                   str(round(stock.predicted_price_increase, 2)), stock.predicted_category_increase,
+    <br>""".format(full_name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)),
+                   stock.volume,
+                   str(round(100*(stock.predicted_price_increase - 1), 2))+"%",
                    str(round(stock.predicted_category_probabilities[0] + stock.predicted_category_probabilities[1], 2)),
                    stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
                    income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
-                   revenue[3], sector, industry, stock.name))
+                   revenue[3], sector, industry, stock.name, stock.name))
 
 
 def write_results(file, results):
@@ -134,6 +141,46 @@ def write_results(file, results):
         if "GSPC" in item:
             item = item.replace("^GSPC", "The SP500 index (which represents the market and we use it as reference)")
         file.write("<p>" + item + "</p>")
+
+
+def write_dataframe(file, list_of_stocks):
+    dframe = pd.DataFrame(data=np.transpose(np.array([[str(round(100 * (stock.predicted_price_increase - 1), 2))
+                                                       for stock in list_of_stocks],
+                                                      [str(round(stock.predicted_category_probabilities[0] +
+                                                                 stock.predicted_category_probabilities[1], 2))
+                                                       for stock in list_of_stocks],
+                                                      [str(round(stock.price, 2)) for stock in list_of_stocks],
+                                                      [stock.volume for stock in list_of_stocks],
+                                                      [stock.success_score for stock in list_of_stocks]])),
+                          columns=["Predicted script 1", "Predicted confidence script 2", "Price", "Volume", "Score"],
+                          index=[stock.name for stock in list_of_stocks])
+
+    file.write("<h1>Overall view on the predictions</h1>")
+    file.write("<table style=\"width:800px\">")
+    file.write("""
+      <tr>
+        <th>Ticker</th>
+        <th>Predicted increase script 1</th>
+        <th>Predicted confidence script 2</th>
+        <th>Price</th>
+        <th>Volume</th>
+        <th>Score</th>
+      </tr>
+      """)
+    for index, row in dframe.iterrows():
+        file.write("""
+          <tr>
+            <td>{}</td>
+            <td>{} %</td>
+            <td>{} %</td>
+            <td>{} $</td>
+            <td>{}</td>
+            <td>{}</td>
+          </tr>
+        """.format(index, row["Predicted script 1"], row["Predicted confidence script 2"],
+                   row["Price"], row["Volume"], row["Score"]))
+    file.write("</table>")
+
 
 def write_end(file):
     file.write(
@@ -164,18 +211,19 @@ All this recommendation should be taken with a grain a salt and a critical mind.
 
 def write_the_report(list_of_stocks, results):
     report_name = "Reports/Support Files For Pdf/Temporary.html"
-    report_file = open(report_name, "w+")
-    write_start(report_file)
+    template_file = open(report_name, "w+")
+    write_start(template_file)
     for stock in list_of_stocks:
-        write_for_one_stock(stock, report_file)
-    write_results(report_file, results)
-    write_end(report_file)
-    report_file.close()
+        write_data_for_one_stock(template_file, stock)
+    write_dataframe(template_file, list_of_stocks)
+    write_results(template_file, results)
+    write_end(template_file)
+    template_file.close()
 
     path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     options = {'enable-local-file-access': None}
-    pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Report.pdf',
+    pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Report ' + str(date.today()) + '.pdf',
                      configuration=config, options=options)
 
     supportdir = "Reports/Support Files For Pdf"

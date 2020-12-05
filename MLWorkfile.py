@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import ReportModule as Rm
 from datetime import date
-from datetime import datetime, timedelta
+from datetime import timedelta
 import DatabaseStocks as Ds
 import yfinance as yf
 import ExtractData as Ed
@@ -152,6 +152,6 @@ time.sleep(30)
 Mm.send_mail([element.name + "(" + str(element.success_score) + ")" for element in both_methods_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in category_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in prediction_winners],
-             file="Report.pdf")
+             file="Report " + str(date.today()) + ".pdf")
 
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

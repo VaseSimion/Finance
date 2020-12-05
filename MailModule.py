@@ -5,6 +5,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 import ReportModule as Rm
 import time
+from datetime import date
 
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
@@ -70,7 +71,7 @@ def send_mail(both, category, pricepredict, file):
             # setup the parameters of the message
             msg['From'] = EMAIL_FROM
             msg['To'] = email
-            msg['Subject'] = "Predictions of the week"
+            msg['Subject'] = "Predictions of the week " + str(date.today())
 
             text = create_mail_body(name, both, category, pricepredict, results)
 
@@ -105,7 +106,7 @@ def send_mail(both, category, pricepredict, file):
     mail.quit()
     if len(mails_not_sent) > 0:
         with open("log.txt", mode='w+', encoding='utf-8') as file:
-            file.write("The following emails have not been sent")
+            file.write("The following emails have not been sent\n")
             for name in mails_not_sent:
                 file.write(name + "\t")
         file.close()
