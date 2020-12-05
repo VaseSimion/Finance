@@ -3,6 +3,7 @@ import GraphFunctions as Gf
 import time
 import pdfkit
 import re
+import os
 
 
 def write_start(file):
@@ -176,3 +177,10 @@ def write_the_report(list_of_stocks, results):
     options = {'enable-local-file-access': None}
     pdfkit.from_file('Reports\Support Files For Pdf\\Temporary.html', 'Report.pdf',
                      configuration=config, options=options)
+
+    supportdir = "Reports/Support Files For Pdf"
+
+    for subdir, dirs, files in os.walk(supportdir):
+        for file in files:
+            print(os.path.join(subdir, file))
+            os.remove(os.path.join(subdir, file))

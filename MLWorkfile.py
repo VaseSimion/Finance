@@ -74,7 +74,7 @@ for stock in listOfStocksToAnalyze:
 
         [price, volume] = Ed.get_latest_1_year_price_weekly_from_today(weekly)
         list_to_be_analyzed = price + volume
-        if (list(weekly["Close"])[-1] <= 1) or (list(weekly["Volume"])[-1] <= 1000) or stock in blacklist:
+        if (list(weekly["Close"])[-1] <= 1) or (list(weekly["Volume"])[-1] <= 100000) or stock in blacklist:
             # Ignoring all stocks with a price smaller than 1$ low volume or blacklisted (not tradable)
             continue
         if len(list_to_be_analyzed) == 102:
