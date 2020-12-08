@@ -85,8 +85,12 @@ def return_report_from_3_weeks_ago():
         sum_of_values = 1
         stocks = 1
     for element in list_of_stocks:
-        string_to_output += element[0] + " bought at " + str(round(element[1], 2)) + " had an increase of " + \
-                            str(round(100 * (element[2] - 1), 2)) + "%\n"
+        if element[2] >= 1:
+            string_to_output += element[0] + " bought at " + str(round(element[1], 2)) + " had an increase of " + \
+                                str(round(100 * (element[2] - 1), 2)) + "%\n"
+        else:
+            string_to_output += element[0] + " bought at " + str(round(element[1], 2)) + " had an decrease of " + \
+                                str(round(100 * (element[2] - 1), 2)) + "%\n"
     # the output of this function is a string so it can be put in the mail module easily
     string_to_output += "Average win for this period for script 1 prediction was " + \
                         str(round(100 * (sum_of_values / stocks - 1), 2)) + "%\n\n"
