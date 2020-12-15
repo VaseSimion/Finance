@@ -56,12 +56,18 @@ def send_mail(both, category, pricepredict, file):
     names, emails = get_contacts('mycontacts.txt')  # read contacts
     results = Rm.return_report_from_3_weeks_ago()
 
-    # set up the SMTP server
-    mail = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-    mail.set_debuglevel(True)
-    mail.starttls()
-    mail.login(SMTP_USERNAME, SMTP_PASSWORD)
-
+    for i in range(10):
+        try:
+            # set up the SMTP server
+            mail = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+            mail.set_debuglevel(True)
+            mail.starttls()
+            mail.login(SMTP_USERNAME, SMTP_PASSWORD)
+            break
+        except:
+            print("Could not connect")
+            time.sleep(30)
+            continue
     mails_not_sent = []
     # For each contact, send the email:
     for name, email in zip(names, emails):

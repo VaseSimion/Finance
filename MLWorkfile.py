@@ -40,7 +40,7 @@ model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
 supervision_model = tf.keras.models.load_model("SavedModels/BestCategoryAlreadyPredictedModel.h5")
 
 # Initializing all necessary lists
-date = date.today()
+date_azi = date.today()
 increment = 0
 category_winners = []
 prediction_winners = []
@@ -66,9 +66,9 @@ for stock in listOfStocksToAnalyze:
                 weekly = weekly.drop([index])
 
         # this is because if I just get the data by 1 week I have also the last friday so i get rid of the last entry
-        if weekly.index.tolist()[-1] > (date.today() + timedelta(-5)):
+        if weekly.index.tolist()[-1] > (date_azi + timedelta(-date.weekday(date_azi))):
             weekly = weekly.drop([weekly.index.tolist()[-1]])
-        if weekly.index.tolist()[-1] != (date.today() + timedelta(-5)):
+        if weekly.index.tolist()[-1] != (date_azi + timedelta(-date.weekday(date_azi))):
             print("Last date is not the last monday for " + stock)
             continue
 
@@ -152,6 +152,6 @@ time.sleep(30)
 Mm.send_mail([element.name + "(" + str(element.success_score) + ")" for element in both_methods_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in category_winners],
              [element.name + "(" + str(element.success_score) + ")" for element in prediction_winners],
-             file="Report " + str(date.today()) + ".pdf")
+             file="Report " + str(date_azi) + ".pdf")
 
 winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)

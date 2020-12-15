@@ -71,8 +71,8 @@ def write_data_for_one_stock(file, stock):
     file.write("""<h1>{}</h1>
     
     <p>Price is {}$ per share and volume was {} shares in the last week</p>
-    <p>First script gives {} increase</p>
-    <p>Second script gives a chance of making profit of {}%</p>
+    <p>First script predicts {} increase in value</p>
+    <p>Second script gives a chance of making significant profit of {}%</p>
     
     
     <p><img src="C:/Users/sular/PycharmProjects/Finance/Reports/Support Files For Pdf/{}" width="800" height="600"></p>
