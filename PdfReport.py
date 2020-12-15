@@ -71,9 +71,8 @@ def write_data_for_one_stock(file, stock):
     file.write("""<h1>{}</h1>
     
     <p>Price is {}$ per share and volume was {} shares in the last week</p>
-    <p>First script predicts {} increase in value</p>
-    <p>Second script gives a chance of making significant profit of {}%</p>
-    
+    <p>First script gives a chance of making significant profit of {}%</p>
+    <p>Second script predicts {} increase in value</p>
     
     <p><img src="C:/Users/sular/PycharmProjects/Finance/Reports/Support Files For Pdf/{}" width="800" height="600"></p>
 
@@ -127,8 +126,8 @@ def write_data_for_one_stock(file, stock):
     <br>
     <br>""".format(full_name + " (score " + str(stock.success_score) + ")", str(round(stock.price, 2)),
                    stock.volume,
-                   str(round(100*(stock.predicted_price_increase - 1), 2))+"%",
                    str(round(stock.predicted_category_probabilities[0] + stock.predicted_category_probabilities[1], 2)),
+                   str(round(100 * (stock.predicted_price_increase - 1), 2)) + "%",
                    stock.name+".png", columns[0], columns[1], columns[2], columns[3], income[0], income[1], income[2],
                    income[3], profit[0], profit[1], profit[2], profit[3], revenue[0], revenue[1], revenue[2],
                    revenue[3], sector, industry, stock.name, stock.name))
