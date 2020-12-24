@@ -60,7 +60,7 @@ def get_list_of_3_weeks_ago():
 # This returns the performance over 3 weeks of the predicted stocks 3 weeks ago (monday - friday)
 def return_report_from_3_weeks_ago():
     zile_in_trecut = 1  # cate zile o trecut de vineri pana acum:  daca e luni ii 3
-    zile_de_la_open = 18
+    zile_de_la_open = 19
     list_of_stocks = []
     list_of_stocks_cat = []
     sum_of_values = 0
@@ -68,11 +68,19 @@ def return_report_from_3_weeks_ago():
 
     try:
         weekly = yf.download(tickers="MSFT", interval="1d", period="6mo")
-        old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open - zile_in_trecut))]
+        old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open))]
         # 3 weeks ago monday is old day
     except:
         print("That monday there were no trades, considering buy on Tuesday")
-        zile_de_la_open = 17
+        zile_de_la_open = 18
+
+    try:
+        weekly = yf.download(tickers="MSFT", interval="1d", period="6mo")
+        today = weekly.loc[str(date.today() + timedelta(-zile_in_trecut))]  # last Friday is considered today
+        # 3 weeks ago monday is old day
+    except:
+        print("Last Friday the market was closed so we consider closing price of Thursday")
+        zile_in_trecut = 2
 
     for stock in ["^GSPC"] + get_list_of_3_weeks_ago()[0]:
         try:
@@ -81,8 +89,8 @@ def return_report_from_3_weeks_ago():
             closing.reverse()
             today = weekly.loc[str(date.today() + timedelta(-zile_in_trecut))]  # last Friday is considered today
             print(str(date.today() + timedelta(- zile_in_trecut)))
-            old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open - zile_in_trecut))]  # 3 weeks ago monday is old day
-            print(str(date.today() + timedelta(-zile_de_la_open - zile_in_trecut)))
+            old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open))]  # 3 weeks ago monday is old day
+            print(str(date.today() + timedelta(-zile_de_la_open)))
             print(stock, str(today["Close"] / old_day["Open"]))
             list_of_stocks.append([stock, old_day["Open"], today["Close"] / old_day["Open"]])
             if stock != "^GSPC":
@@ -114,8 +122,8 @@ def return_report_from_3_weeks_ago():
             closing.reverse()
             today = weekly.loc[str(date.today() + timedelta(-zile_in_trecut))]  # last Friday is considered today
             print(str(date.today() + timedelta(- zile_in_trecut)))
-            old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open - zile_in_trecut))]  # 3 weeks ago monday is old day
-            print(str(date.today() + timedelta(-zile_de_la_open - zile_in_trecut)))
+            old_day = weekly.loc[str(date.today() + timedelta(-zile_de_la_open))]  # 3 weeks ago monday is old day
+            print(str(date.today() + timedelta(-zile_de_la_open)))
             print(stock, str(today["Close"] / old_day["Open"]))
             list_of_stocks_cat.append([stock, old_day["Open"], today["Close"] / old_day["Open"]])
             if stock != "^GSPC":
