@@ -16,16 +16,13 @@ import time
 
 class PredictedStock:  # Class to save all predictions
     def __init__(self, stock_name, close_price, last_volume, predicted_price_increase, predicted_category_increase,
-                 predicted_category_probabilities, supervised_category_prediction, supervised_probabilities,
-                 success_score):
+                 predicted_category_probabilities, success_score):
         self.name = stock_name
         self.price = close_price
         self.volume = last_volume
         self.predicted_price_increase = predicted_price_increase
         self.predicted_category_increase = predicted_category_increase
-        self.supervised_category_prediction = supervised_category_prediction
         self.predicted_category_probabilities = predicted_category_probabilities
-        self.supervised_probabilities = supervised_probabilities
         self.success_score = success_score
 
 
@@ -37,7 +34,6 @@ report_file = open(report_name, "w+")
 # Loading models
 category_model = tf.keras.models.load_model("SavedModels/BestCategoryModel.h5")
 model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
-supervision_model = tf.keras.models.load_model("SavedModels/BestCategoryAlreadyPredictedModel.h5")
 
 # Initializing all necessary lists
 date_azi = date.today()
@@ -88,22 +84,14 @@ for stock in listOfStocksToAnalyze:
 
             if 3 > price_predicted_value[0][0] > 1.3 or Ass.Decode(predicted_value[0]) > 1:
                 # here we calculate the price category for supervision (0 - 0.8 - 1.2 - 2 - inf)
-                supervision_predicted_value = supervision_model.predict(np.array([[list_to_be_analyzed]]))
-                total_supervised_predictions_chances = sum(supervision_predicted_value[0])
-                supervision_predicted_value[0] = [round(100 * x / total_supervised_predictions_chances, 2)
-                                                  for x in supervision_predicted_value[0]]
                 # Calculating local score based on the predictions
-                local_score = Ass.calculate_score(price_predicted_value[0][0], predicted_value[0],
-                                                  supervision_predicted_value[0])
+                local_score = Ass.calculate_score(price_predicted_value[0][0], predicted_value[0])
                 winners_as_objects.append(PredictedStock(stock_name=stock,
                                                          close_price=list(weekly["Close"])[-1],
                                                          last_volume=list(weekly["Volume"])[-1],
                                                          predicted_price_increase=price_predicted_value[0][0],
                                                          predicted_category_increase=Ass.Decode(predicted_value[0]),
-                                                         supervised_category_prediction=
-                                                         Ass.Decode(supervision_predicted_value[0]),
                                                          predicted_category_probabilities=predicted_value[0],
-                                                         supervised_probabilities=supervision_predicted_value[0],
                                                          success_score=local_score))
 
                 print("{} prediction has a score of {}".format(stock, local_score))

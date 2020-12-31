@@ -45,21 +45,22 @@ with tqdm(total=len(listOfStocksToAnalyze)) as pbar:
             # Go through all dates bi/weekly and get the scaled data
             while date < last_date:
                 [price, validation, volume] = Ed.get_latest_1_year_price_weekly(weekly, date)
-                if date < datetime.strptime("2017-06-17", "%Y-%m-%d"):  # this is to increment the data taken weekly
-                    date = date + timedelta(days=14)
-                else:
-                    date = date + timedelta(days=7)
 
                 if date < test_date:  # this is to save in test folder not in validation folder
                     list_to_be_saved = validation + price + volume
                     if len(list_to_be_saved) == 103:
                         csvwriter.writerow(list_to_be_saved)
-                        verification_csvwriter.writerow([stock, date])
+                        verification_csvwriter.writerow([stock, date + timedelta(days=-1)])
                 else:
                     list_to_be_saved = validation + price + volume
                     if len(list_to_be_saved) == 103:
                         csvwriter_test.writerow(list_to_be_saved)
-                        verification_csvwriter_test.writerow([stock, date])
+                        verification_csvwriter_test.writerow([stock, date + timedelta(days=-1)])
+
+                if date < datetime.strptime("2017-06-17", "%Y-%m-%d"):  # this is to increment the data taken weekly
+                    date = date + timedelta(days=14)
+                else:
+                    date = date + timedelta(days=7)
             pbar.update(1)
         except:
             print("something went bad with " + stock)

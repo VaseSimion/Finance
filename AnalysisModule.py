@@ -276,7 +276,7 @@ def Decode(matrix):
         return 0.2
 
 
-def calculate_score(price_prediction, category_list, supervision_list):
+def calculate_score(price_prediction, category_list):
     total_score = 0
     if price_prediction >= 1.4:
         total_score += 6
