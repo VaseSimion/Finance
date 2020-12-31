@@ -16,6 +16,7 @@ download_data = False
 custom_dataset = False
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
+dictionary_of_results = {}
 
 if CategoryTest is False:
     if not custom_dataset:
@@ -78,7 +79,7 @@ if CategoryTest is False:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
@@ -103,11 +104,14 @@ if CategoryTest is False:
                       dates_list_validation[check_index] + " with predicted " + str(predicted_value) + " and value " + str(value))
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
+            if dates_list_validation[check_index] not in dictionary_of_results.keys():
+                dictionary_of_results[dates_list_validation[check_index]] = []
+            dictionary_of_results[dates_list_validation[check_index]].append(value)
         elif 3 > predicted_value > 1.3 and value < 1:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
@@ -130,6 +134,9 @@ if CategoryTest is False:
             list_of_values_for_predicted.append(value-1)
             list_of_dates_for_predicted.append(dates_list_validation[check_index])
             wrong_cases += 1
+            if dates_list_validation[check_index] not in dictionary_of_results.keys():
+                dictionary_of_results[dates_list_validation[check_index]] = []
+            dictionary_of_results[dates_list_validation[check_index]].append(value)
 
         if 3 > predicted_value > 1.4 and value > 1.1:
             succesfull_cases_1_2 += 1
@@ -204,7 +211,7 @@ if CategoryTest is True:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
@@ -229,11 +236,14 @@ if CategoryTest is True:
                         csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
+            if dates_list_validation[check_index] not in dictionary_of_results.keys():
+                dictionary_of_results[dates_list_validation[check_index]] = []
+            dictionary_of_results[dates_list_validation[check_index]].append(value)
         elif predicted_value_numeric == 1.2:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S") + timedelta(-8), method="nearest")
+                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
@@ -258,6 +268,9 @@ if CategoryTest is True:
                         csvwriter.writerow(list_to_be_saved)
                 list_of_values_for_predicted.append(value-1)
                 list_of_dates_for_predicted.append(dates_list_validation[check_index])
+            if dates_list_validation[check_index] not in dictionary_of_results.keys():
+                dictionary_of_results[dates_list_validation[check_index]] = []
+            dictionary_of_results[dates_list_validation[check_index]].append(value)
         elif predicted_value_numeric == 0.8:
             cases_0_8 += 1
         elif predicted_value_numeric == 0.2:
@@ -290,6 +303,10 @@ if CategoryTest is True:
 
 list_of_values_for_predicted = [100*x for x in list_of_values_for_predicted]
 list_of_dates_for_predicted = [datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S") for x in list_of_dates_for_predicted]
+
+for element in dictionary_of_results:
+    medie = sum(dictionary_of_results[element])/len(dictionary_of_results[element])
+    print(str(element) + " : " + str(medie))
 
 print("Average gain is: " + str(np.average(list_of_values_for_predicted)))
 print("Standard deviation is: " + str(np.std(list_of_values_for_predicted)) + "%")
