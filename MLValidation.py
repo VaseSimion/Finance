@@ -10,21 +10,34 @@ import yfinance as yf
 import math
 
 
+tf.compat.v1.disable_eager_execution()
 CategoryTest = False
 download_data = False
+custom_dataset = False
 list_of_values_for_predicted = []
 list_of_dates_for_predicted = []
 
 if CategoryTest is False:
-    csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
-                           quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    reader = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
-    input_data = []
-    result = []
+    if not custom_dataset:
+        csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
+                               quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        reader = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
+        input_data = []
+        result = []
 
-    verification_reader = csv.reader(open("dataset_verification_test.csv"), delimiter=',', quotechar='|')
-    input_data_corresponding_company = []
-    dates_list_validation = []
+        verification_reader = csv.reader(open("dataset_verification_test.csv"), delimiter=',', quotechar='|')
+        input_data_corresponding_company = []
+        dates_list_validation = []
+    else:
+        csvwriter = csv.writer(open('dataset_predicted.csv', 'w'), delimiter=',', lineterminator='\n',
+                               quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        reader = csv.reader(open('dataset_custom.csv'), delimiter=',', quotechar='|')
+        input_data = []
+        result = []
+
+        verification_reader = csv.reader(open("dataset_verification_custom.csv"), delimiter=',', quotechar='|')
+        input_data_corresponding_company = []
+        dates_list_validation = []
 
     for row in reader:
         week = ([float(x) for x in row])
