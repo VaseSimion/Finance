@@ -41,7 +41,7 @@ def get_latest_1_year_price_weekly(financialdata, data):
 #    print((date + timedelta(days=21)).strftime("%Y-%m-%d"))
 #    print(value_after_3_weeks)
 
-    max_price = max(close_values+[value_after_3_weeks])
+    max_price = max(close_values)
     if max_price < 1:
         return [[], [], []]
     close_values = [round(x/max_price, 3) for x in close_values]
