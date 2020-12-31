@@ -5,7 +5,7 @@ import os
 import matplotlib.pyplot as plt
 import AnalysisModule as Ass
 
-
+tf.compat.v1.disable_eager_execution()
 reader = csv.reader(open('dataset.csv'), delimiter=',', quotechar='|')
 reader_test = csv.reader(open('dataset_test.csv'), delimiter=',', quotechar='|')
 input_data = []

@@ -49,10 +49,6 @@ if CategoryTest is False:
         input_data_corresponding_company.append(row[0])
         dates_list_validation.append(row[1])
 
-    input_data = np.array(input_data)
-    result = np.array(result)
-    print(np.shape(input_data))
-
     model = tf.keras.models.load_model("SavedModels/BestPredictionModel.h5")
 
     print(model.summary())
@@ -79,12 +75,17 @@ if CategoryTest is False:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
+                weekly.index = weekly.index.where(~weekly.index.duplicated(), weekly.index + timedelta(1))
+                # Remove all the NaN values
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                date_index = weekly.index.get_loc(dates_list_validation[check_index], method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
                 print(weekly["Close"])
-                print(dates_list_validation[check_index])
+                print(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
                 print(list(weekly.index))
                 print("ffs")
                 continue
@@ -111,12 +112,17 @@ if CategoryTest is False:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
+                weekly.index = weekly.index.where(~weekly.index.duplicated(), weekly.index + timedelta(1))
+                # Remove all the NaN values
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                date_index = weekly.index.get_loc(dates_list_validation[check_index], method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
                 print(weekly["Close"])
-                print(dates_list_validation[check_index])
+                print(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"))
                 print(list(weekly.index))
                 print("ffs")
                 continue
@@ -211,7 +217,12 @@ if CategoryTest is True:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
+                weekly.index = weekly.index.where(~weekly.index.duplicated(), weekly.index + timedelta(1))
+                # Remove all the NaN values
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                date_index = weekly.index.get_loc(dates_list_validation[check_index], method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
@@ -243,7 +254,12 @@ if CategoryTest is True:
             try:
                 weekly = yf.download(tickers=input_data_corresponding_company[check_index],
                                      interval="1wk", start="2020-01-01")
-                date_index = weekly.index.get_loc(datetime.datetime.strptime(dates_list_validation[check_index], "%Y-%m-%d %H:%M:%S"), method="nearest")
+                weekly.index = weekly.index.where(~weekly.index.duplicated(), weekly.index + timedelta(1))
+                # Remove all the NaN values
+                for index, row in weekly.iterrows():
+                    if math.isnan(row["Close"]) or math.isnan(row["Volume"]):
+                        weekly = weekly.drop([index])
+                date_index = weekly.index.get_loc(dates_list_validation[check_index], method="nearest")
                 if weekly["Close"].iloc[date_index] < 1:
                     continue
             except:
