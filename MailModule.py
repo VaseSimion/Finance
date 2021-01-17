@@ -10,7 +10,7 @@ from datetime import date
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
 SMTP_USERNAME = 'sularea.vasile@yahoo.com'
-SMTP_PASSWORD = 'jaxulohkfyajzajp'
+SMTP_PASSWORD = 'your password here'
 EMAIL_FROM = 'sularea.vasile@yahoo.com'
 
 
